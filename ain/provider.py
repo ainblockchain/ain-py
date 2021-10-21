@@ -9,7 +9,6 @@ if TYPE_CHECKING:
 
 JSON_RPC_ENDPOINT = "json-rpc"
 
-
 class Provider:
     def __init__(self, ain: "Ain", endpoint: str):
         self.ain = ain

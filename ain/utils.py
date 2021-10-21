@@ -6,39 +6,32 @@ from Crypto.Hash import keccak as _keccak
 from coincurve import PrivateKey
 from ain.types import ECDSASignature, TransactionBody
 
-
 def getTimestamp() -> int:
     """
     Gets a current timestamp.
     """
     return int(time.time() * 1000)
 
-
 def isValidAddress(address: str) -> bool:
     pattern = re.compile("0x[0-9a-fA-F]{40}")
     return pattern.fullmatch(address) is not None
-
 
 def isHexString(value: str) -> bool:
     pattern = re.compile("0x[0-9a-fA-F]*")
     return pattern.fullmatch(value) is not None
 
-
 def isHexPrefixed(value: str) -> bool:
     return value[0:2] == "0x"
-
 
 def stripHexPrefix(value: str) -> str:
     if isHexPrefixed(value):
         value = value[2:]
     return value
 
-
 def padToEven(value: str) -> str:
     if len(value) % 2 == 1:
         value = "0" + value
     return value
-
 
 def toBuffer(input: Any) -> bytes:
     if type(input) is bytes:
@@ -52,10 +45,8 @@ def toBuffer(input: Any) -> bytes:
         input = bytes.fromhex(padToEven(stripHexPrefix(hex(input))))
     return input
 
-
 def bufferToHex(input: bytes) -> str:
     return "0x" + input.hex()
-
 
 def toChecksumAddress(address: str) -> str:
     if not isValidAddress(address):
@@ -73,17 +64,14 @@ def toChecksumAddress(address: str) -> str:
 
     return ret
 
-
 def keccak(input: Any, bits: int = 256) -> bytes:
     input = toBuffer(input)
     k = _keccak.new(digest_bits=bits)
     k.update(input)
     return k.digest()
 
-
 def pubToAddress(publicKey: Union[bytes, str]) -> bytes:
     return keccak(toBuffer(publicKey))[-20:]
-
 
 def hashTransaction(transaction: Union[TransactionBody, str]):
     """
@@ -92,7 +80,6 @@ def hashTransaction(transaction: Union[TransactionBody, str]):
     if type(transaction) is not str:
         transaction = json.dumps(transaction, separators=(",", ":"), sort_keys=True)
     return keccak(keccak(transaction))
-
 
 def ecSignHash(msgHash: bytes, privateKey: PrivateKey, chainId: int = None) -> ECDSASignature:
     """
@@ -103,7 +90,6 @@ def ecSignHash(msgHash: bytes, privateKey: PrivateKey, chainId: int = None) -> E
     s = sig[32:64]
     v = sig[64] + (27 if chainId is None else chainId * 2 + 35)
     return {"r": r, "s": s, "v": v}
-
 
 def ecSignTransaction(txData: TransactionBody, privateKey: PrivateKey, chainId: int = None) -> str:
     """

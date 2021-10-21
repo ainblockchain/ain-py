@@ -4,7 +4,6 @@ from ain.wallet import Wallet
 from ain.db import Database
 from ain.utils import ecSignTransaction, getTimestamp
 
-
 class Ain:
     def __init__(self, providerUrl: str, chainId: int = 0):
         self.provider = Provider(self, providerUrl)

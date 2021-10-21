@@ -1,12 +1,10 @@
 from typing import Any
 from typing_extensions import TypedDict
 
-
 class ECDSASignature(TypedDict):
     r: bytes
     s: bytes
     v: int
-
 
 class TransactionBody(TypedDict):
     operation: Any

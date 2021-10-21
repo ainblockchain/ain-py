@@ -5,7 +5,6 @@ from ain.utils import toChecksumAddress, bufferToHex, pubToAddress
 if TYPE_CHECKING:
     from ain.ain import Ain
 
-
 class Account:
     def __init__(self, privateKey: Union[bytes, str] = None):
         privateKeyBytes: Optional[bytes] = None
@@ -27,9 +26,7 @@ class Account:
             )
         )
 
-
 Accounts = Dict[str, Account]
-
 
 class Wallet:
     def __init__(self, ain: "Ain", chainId: int):
