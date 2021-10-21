@@ -43,6 +43,7 @@ def toBuffer(input: Any) -> bytes:
             input = bytes(input, "utf-8")
     elif type(input) is int:
         input = bytes.fromhex(padToEven(stripHexPrefix(hex(input))))
+    # TODO(kriii) : complete `toBuffer`
     return input
 
 def bufferToHex(input: bytes) -> str:
@@ -81,6 +82,7 @@ def hashTransaction(transaction: Union[TransactionBody, str]):
         transaction = json.dumps(transaction, separators=(",", ":"), sort_keys=True)
     return keccak(keccak(transaction))
 
+# TODO(kri) : implement code for string `privateKey`
 def ecSignHash(msgHash: bytes, privateKey: PrivateKey, chainId: int = None) -> ECDSASignature:
     """
     Returns the ECDSA signature of a message hash.
