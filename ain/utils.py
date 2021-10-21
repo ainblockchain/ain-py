@@ -1,11 +1,9 @@
 import re
 import json
 import time
-
 from typing import Any, Union
 from Crypto.Hash import keccak as _keccak
 from coincurve import PrivateKey
-
 from ain.types import ECDSASignature, TransactionBody
 
 

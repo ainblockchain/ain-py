@@ -13,4 +13,4 @@ class TransactionBody(TypedDict):
     nonce: int
     timestamp: int
     # parent_tx_hash: str
-    # TODO : find a method to substitute `NotRequired` or use python 3.11
+    # TODO(kriii): find a method to substitute `NotRequired` or use python 3.11

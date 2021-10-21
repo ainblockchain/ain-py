@@ -13,8 +13,7 @@ class Ain:
         self.wallet = Wallet(self, self.chainId)
         self.db = Database(self, self.provider)
 
-    # TODO : specify type `TransactionInput`
-
+    # TODO(kriii): specify type `TransactionInput`
     async def buildTransactionBody(self, transactionInput):
         txBody = {"operation": transactionInput["operation"]}
 
@@ -24,7 +23,7 @@ class Ain:
         if "nonce" in transactionInput:
             txBody["nonce"] = transactionInput["nonce"]
             """
-            TODO : implement `getNonce`
+            TODO(kriii): implement `getNonce`
         else:
             txBody['nonce'] = await getNonce({'address': a.address, 'from': 'pending'})
             """

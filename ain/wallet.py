@@ -1,12 +1,9 @@
-from typing import Optional, Union, Dict
-
+from typing import Optional, Union, Dict, TYPE_CHECKING
 from coincurve import PrivateKey
-
-from typing import TYPE_CHECKING
+from ain.utils import toChecksumAddress, bufferToHex, pubToAddress
 
 if TYPE_CHECKING:
     from ain.ain import Ain
-from ain.utils import toChecksumAddress, bufferToHex, pubToAddress
 
 
 class Account:

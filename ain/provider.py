@@ -2,7 +2,6 @@ import aiohttp
 import asyncio
 from urllib.parse import urlparse, urljoin
 from jsonrpcclient import request, parse, Ok
-
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -26,5 +25,5 @@ class Provider:
                 parsed = parse(await response.json())
                 if isinstance(parsed, Ok):
                     print(parsed.result)
-                # TODO : match return value to js
+                # TODO(kriii):  match return value to js
                 return parsed.result
