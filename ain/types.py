@@ -1,14 +1,224 @@
-from typing import Any
-from typing_extensions import TypedDict
+from typing import Any, Literal, Optional, List, Union
 
-class ECDSASignature(TypedDict):
+class ECDSASignature:
     r: bytes
     s: bytes
     v: int
 
-class TransactionBody(TypedDict):
-    operation: Any
+    def __init__(self, r: bytes, s: bytes, v: int):
+        if len(r) != 32:
+            raise ValueError("Invalid signature length: r")
+        if len(s) != 32:
+            raise ValueError("Invalid signature length: s")
+        if v < 0 or v > 255:
+            raise ValueError("Invalid signature: v")
+
+        self.r = r
+        self.s = s
+        self.v = v
+
+    @classmethod
+    def fromSignature(cls, signature: bytes):
+        """
+        Converts signature format of the `eth_sign` RPC method to signature parameters.
+        """
+        if len(signature) != 65:
+            raise ValueError("Invalid signature length: r")
+
+        r = signature[0:32]
+        s = signature[32:64]
+        v = signature[64]
+        return cls(r, s, v)
+
+SetMultiOperationType = Literal["SET"]
+
+GetMultiOperationType = Literal["GET"]
+
+SetOperationType = Literal["SET_VALUE", "INC_VALUE", "DEC_VALUE", "SET_RULE", "SET_OWNER", "SET_FUNCTION"]
+
+GetOperationType = Literal["GET_VALUE", "GET_RULE", "GET_OWNER", "GET_FUNCTION"]
+
+OwnerPermission = Literal["branch_owner", "write_function", "write_owner", "write_rule"]
+
+class SetOperation():
+    type: SetOperationType
+    ref: str
+    value: Optional[Any]
+    is_global: Optional[bool]
+
+    def __init__(
+        self,
+        type: SetOperationType,
+        ref: str,
+        value: Any = None,
+        is_global: bool = None,
+    ):
+        self.type = type
+        self.ref = ref
+        if value is not None:
+            self.value = value
+        if is_global is not None:
+            self.is_global = is_global
+
+class SetMultiOperation():
+    type: SetMultiOperationType
+    op_list: List[SetOperation]
+
+    def __init__(
+        self,
+        type: SetMultiOperationType,
+        op_list: List[SetOperation]
+    ):
+        self.type = type
+        self.op_list = op_list
+
+class GetOperation():
+    type: GetOperationType
+    ref: Optional[str]
+    is_global: Optional[bool]
+
+    def __init__(
+        self,
+        type: GetOperationType,
+        ref: str = None,
+        is_global: bool = None,
+    ):
+        self.type = type
+        if ref is not None:
+            self.ref = ref
+        if is_global is not None:
+            self.is_global = is_global
+
+class GetMultiOperation():
+    type: GetMultiOperationType
+    op_list: List[GetOperation]
+
+    def __init__(
+        self,
+        type: GetMultiOperationType,
+        op_list: List[GetOperation]
+    ):
+        self.type = type
+        self.op_list = op_list
+
+class TransactionBodyBase:
+    parent_tx_hash: Optional[str]
+    operation: Union[SetOperation, SetMultiOperation]
+
+class ValueOnlyTransactionBodyBase:
+    parent_tx_hash: Optional[str]
+    value: Optional[Any]
+    ref: Optional[str]
+    is_global: Optional[bool]
+
+class TransactionInputBase:
+    nonce: Optional[int]
+    address: Optional[str]
+    timestamp: Optional[int]
+
+class TransactionBody(TransactionBodyBase):
     nonce: int
     timestamp: int
-    # parent_tx_hash: str
-    # TODO(kriii): find a method to substitute `NotRequired` or use python 3.11
+    def __init__(
+        self,
+        operation: Union[SetOperation, SetMultiOperation],
+        nonce: int,
+        timestamp: int,
+        parent_tx_hash: str = None,
+    ):
+        self.operation = operation
+        self.nonce = nonce
+        self.timestamp = timestamp
+        if parent_tx_hash is not None:
+            self.parent_tx_hash = parent_tx_hash
+
+
+class TransactionInput(TransactionBodyBase, TransactionInputBase):
+    def __init__(
+        self,
+        operation: Union[SetOperation, SetMultiOperation],
+        parent_tx_hash: str = None,
+        nonce: int = None,
+        address: str = None,
+        timestamp: int = None,
+    ):
+        self.operation = operation
+        if parent_tx_hash is not None:
+            self.parent_tx_hash = parent_tx_hash
+        if nonce is not None:
+            self.nonce = nonce
+        if address is not None:
+            self.address = address
+        if timestamp is not None:
+            self.timestamp = timestamp
+
+class ValueOnlyTransactionInput(ValueOnlyTransactionBodyBase, TransactionInputBase):
+    def __init__(
+        self,
+        parent_tx_hash: str = None,
+        value: Any = None,
+        ref: str = None,
+        is_global: bool = None,
+        nonce: int = None,
+        address: str = None,
+        timestamp: int = None,
+    ):
+        if parent_tx_hash is not None:
+            self.parent_tx_hash = parent_tx_hash
+        if value is not None:
+            self.value = value
+        if ref is not None:
+            self.ref = ref
+        if is_global is not None:
+            self.is_global = is_global
+        if nonce is not None:
+            self.nonce = nonce
+        if address is not None:
+            self.address = address
+        if timestamp is not None:
+            self.timestamp = timestamp
+
+class SetMultiTransactionInput(TransactionInputBase):
+    parent_tx_hash: Optional[str]
+    op_list: List[SetOperation]
+
+    def __init__(
+        self,
+        op_list: List[SetOperation],
+        parent_tx_hash: str = None,
+        nonce: int = None,
+        address: str = None,
+        timestamp: int = None,
+    ):
+        self.op_list = op_list
+        if parent_tx_hash is not None:
+            self.parent_tx_hash = parent_tx_hash
+        if nonce is not None:
+            self.nonce = nonce
+        if address is not None:
+            self.address = address
+        if timestamp is not None:
+            self.timestamp = timestamp
+
+class Transaction():
+    tx_body: TransactionBody
+    signature: str
+    hash: str
+    address: str
+
+class EvalRuleInput:
+    value: Any
+    ref: Optional[str]
+    address: Optional[str]
+    timestamp: Optional[int]
+    is_global: Optional[bool]
+
+class EvalOwnerInput:
+    ref: Optional[str]
+    address: Optional[str]
+    permission: OwnerPermission
+    is_global: Optional[bool]
+
+class MatchInput:
+    ref: Optional[str]
+    is_global: Optional[bool]

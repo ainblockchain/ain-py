@@ -2,4 +2,3 @@ pycryptodome
 coincurve
 aiohttp[speedups]
 jsonrpcclient
-typing_extensions
