@@ -136,18 +136,21 @@ class Ain:
             "ain_sendSignedTransaction", {"signature": signature, "tx_body": txBody}
         )
 
+    # TODO(kriii): implement this function
     async def sendTransactionBatch(self):
         """
         Sends signed transactions to the network.
         """
         pass
 
+    # TODO(kriii): implement this function
     def depositConsensusStake(self):
         """
         Sends a transaction that deposits AIN for consensus staking.
         """
         pass
 
+    # TODO(kriii): implement this function
     def withdrawConsensusStake(self):
         """
         Sends a transaction that withdraws AIN for consensus staking.
@@ -211,6 +214,7 @@ class Ain:
             timestamp=timestamp,
         )
 
+    # TODO(kriii): implement this function
     def __stakeFunction(self):
         """
         A base function for all staking related database changes. It builds a

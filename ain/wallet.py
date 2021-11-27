@@ -75,6 +75,7 @@ class Wallet:
             return ''
         return self.accounts[checksummed].public_key
 
+    # TODO(kriii): implement this function
     def create(self):
         """
         Creates {numberOfAccounts} new accounts and add them to the wallet.
@@ -103,6 +104,7 @@ class Wallet:
         self.setDefaultAccount(address)
         return address
 
+    # TODO(kriii): implement this function
     def addFromHDWallet(self):
         """
         Adds an account from a seed phrase. Only the account at the given
@@ -110,6 +112,7 @@ class Wallet:
         """
         pass
 
+    # TODO(kriii): implement this function
     def addFromV3Keystore(self):
         """
         Adds an account from a V3 Keystore.
@@ -234,12 +237,14 @@ class Wallet:
     def verifySignature(self, data: Any, signature: str, address: str) -> bool:
         return ecVerifySig(data, signature, address, self.chainId)
 
+    # TODO(kriii): implement this function
     def toV3Keystore(self):
         """
         Save the accounts in the wallet as V3 Keystores, locking them with the password.
         """
         pass
     
+    # TODO(kriii): implement this function
     def accountToV3Keystore(self):
         """
         Converts an account into a V3 Keystore and encrypts it with a password.
