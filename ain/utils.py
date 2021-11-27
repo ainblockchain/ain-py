@@ -241,7 +241,7 @@ def isValidPublic(publicKey: bytes, isSEC1: bool = False):
     Checks whether the `publicKey` is a valid public key (follows the rules of the
     curve secp256k1 and meets the AIN requirements).
 
-    args:ß
+    args:
         publicKey (bytes): The two points of an uncompressed key, unless sanitize is enabled
         isSEC1 (bool): Accept public keys in other formats
     """
