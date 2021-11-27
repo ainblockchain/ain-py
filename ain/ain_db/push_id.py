@@ -64,4 +64,4 @@ class PushId:
             raise AssertionError("Length should be 20.")
         return id
 
-    # TODO(kriii) : Timestamp
+    # TODO(kriii): Implement `Timestamp`.

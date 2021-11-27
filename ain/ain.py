@@ -30,7 +30,7 @@ class Ain:
         self.wallet = Wallet(self, self.chainId)
         self.db = Database(self, self.provider)
 
-    # TODO(kriii) : return objects typing
+    # TODO(kriii): Return objects typing.
 
     async def getBlock(
         self,

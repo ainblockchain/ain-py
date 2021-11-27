@@ -161,7 +161,6 @@ def hashMessage(message: Any):
     )
     return keccak(keccak(dataBytes))
 
-# TODO(kri) : implement code for string `privateKey`
 def ecSignHash(msgHash: bytes, privateKey: bytes, chainId: int = None) -> ECDSASignature:
     """
     Returns the ECDSA signature of a message hash.
@@ -201,7 +200,7 @@ def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = None)
     senderPubKey = PublicKey.from_signature_and_message(concat, msgHash, hasher=None)
     return senderPubKey.format(False)
 
-# TODO(kriii) : implement `isTransactionBody` rather than check type
+# TODO(kriii): Implement `isTransactionBody` rather than check type.
 def ecVerifySig(data: Any, signature: str, address: str, chainId: int = None):
     """
     Checks if the signature is valid.
@@ -263,7 +262,7 @@ def privateToPublic(privateKey: bytes) -> bytes:
     prK = PrivateKey(privateKey)
     return prK.public_key.format(False)[1:]
 
-# TODO(kriii): support isSEC1
+# TODO(kriii): Support `isSEC1`.
 def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
     return keccak(toBytes(publicKey))[-20:]
 
