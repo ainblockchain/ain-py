@@ -87,7 +87,7 @@ def padToEven(string: str) -> str:
 def toBytes(input: Any) -> bytes:
     """
     Attempts to turn a value into a bytes,
-    As input it supports bytes, string, int, null/undefined.
+    As input it supports bytes, list(of ints), string, int, None.
     """
     if type(input) is bytes:
         pass
