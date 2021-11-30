@@ -63,7 +63,7 @@ class TestIsValidPrivate(TestCase):
     def testIsValidPrivateWork(self):
         self.assertTrue(isValidPrivate((self.SECP256K1_N - 1).to_bytes(32, "big")))
 
-# TODO(kriii): Add tests after implement `isValidPrivate`
+# TODO(kriii): Add tests after implement `isValidPrivate`.
 # class TestIsValidPrivate(TestCase):
 
 class TestIsValidAddress(TestCase):
@@ -86,7 +86,7 @@ class TestPubToAddress(TestCase):
         address = "2f015c60e0be116b1f0cd534704db9c92118fb6a"
         self.assertEqual(pubToAddress(pubKey).hex(), address)
 
-    # TODO(kriii): Add tests after support `SEC1`
+    # TODO(kriii): Add tests after support `SEC1`.
 
     def testPubToAddressInvalid(self):
         pubKey = bytes.fromhex("3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae744")
@@ -113,13 +113,13 @@ class TestPrivateToAddress(TestCase):
     def testPrivateToAddress(self):
         self.assertEqual(privateToAddress(sk), address)
 
-# TODO(kriii): Add tests after implement `mnemonicToPrivatekey`
+# TODO(kriii): Add tests after implement `mnemonicToPrivatekey`.
 # class TestMnemonicToPrivatekey(TestCase):
 
-# TODO(kriii): Add tests after implement `mnemonicToAccount`
+# TODO(kriii): Add tests after implement `mnemonicToAccount`.
 # class TestMnemonicToAccount(TestCase):
 
-# TODO(kriii): Add tests after implement `V3Keystore` methods
+# TODO(kriii): Add tests after implement `V3Keystore` methods.
 # class TestV3KeyStore(TestCase):
 
 class TestToBytes(TestCase):
@@ -182,15 +182,15 @@ class TestEcVerifySig(TestCase):
     def testEcVerifySigDifferentMessage(self):
         self.assertFalse(ecVerifySig("Hello World", correctSignature, address))
 
-# TODO(kriii): Add tests after implement `encryptWithPublicKey` and `decryptWithPrivateKey`
+# TODO(kriii): Add tests after implement `encryptWithPublicKey` and `decryptWithPrivateKey`.
 # class TestEncryption(TestCase):
 
-# TODO(kriii): Add tests after implement `createAccount`
+# TODO(kriii): Add tests after implement `createAccount`.
 # class TestCreateAccount(TestCase):
 
-# TODO(kriii): Add tests after implement `encode`
+# TODO(kriii): Add tests after implement `encode`.
 # class TestEncode(TestCase):
 
-# TODO(kriii): Add tests after implement `decode`
+# TODO(kriii): Add tests after implement `decode`.
 # class TestDecode(TestCase):
 

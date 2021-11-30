@@ -240,7 +240,7 @@ def isValidPrivate(privateKey: bytes) -> bool:
     except:
         return False
 
-# TODO(kriii): implement this function
+# TODO(kriii): implement this function.
 def isValidPublic(publicKey: bytes, isSEC1: bool = False):
     """
     Checks whether the `publicKey` is a valid public key (follows the rules of the
@@ -296,22 +296,22 @@ def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
 def privateToAddress(privateKey: bytes) -> str:
     return toChecksumAddress(bytesToHex(pubToAddress(privateToPublic(privateKey))))
 
-# TODO(kriii): implement this function
+# TODO(kriii): implement this function.
 def encryptWithPublicKey():
     pass
 
-# TODO(kriii): implement this function
+# TODO(kriii): implement this function.
 def decryptWithPrivateKey():
     pass
 
-# TODO(kriii): implement this function
+# TODO(kriii): implement this function.
 def createAccount():
     pass
 
-# TODO(kriii): implement this function
+# TODO(kriii): implement this function.
 def privateToV3Keystore():
     pass
 
-# TODO(kriii): implement this function
+# TODO(kriii): implement this function.
 def v3KeystoreToPrivate():
     pass
