@@ -4,6 +4,7 @@ import time
 from typing import Any, Union
 from Crypto.Hash import keccak as _keccak
 from coincurve import PrivateKey, PublicKey
+from coincurve.ecdsa import deserialize_recoverable, recoverable_convert, cdata_to_der
 from coincurve.utils import verify_signature, validate_secret
 from ain.types import ECDSASignature, TransactionBody
 
@@ -100,7 +101,7 @@ def toBytes(input: Any) -> bytes:
     elif type(input) is int:
         input = bytes.fromhex(padToEven(stripHexPrefix(hex(input))))
     elif input is None:
-        input = bytes([0])
+        input = bytes(0)
     else:
         raise TypeError("Invalid type")
     return input
@@ -156,8 +157,8 @@ def hashMessage(message: Any):
     dataBytes = bytes(
         bytearray(SIGNED_MESSAGE_PREFIX_LENGTH)
         + bytearray(SIGNED_MESSAGE_PREFIX_BYTES)
-        + bytearray(msgBytes)
         + bytearray(msgLenBytes)
+        + bytearray(msgBytes)
     )
     return keccak(keccak(dataBytes))
 
@@ -196,18 +197,20 @@ def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = None)
     recovery = signature.v - (27 if chainId is None else chainId * 2 + 35)
     if recovery != 0 and recovery != 1:
         raise ValueError("Invalid signature v value")
-    concat = bytes(bytearray(signature.r) + bytearray(signature.s) + bytearray([recovery]))
-    senderPubKey = PublicKey.from_signature_and_message(concat, msgHash, hasher=None)
+    cSig = bytes(bytearray(signature.r) + bytearray(signature.s) + bytearray([recovery]))
+    senderPubKey = PublicKey.from_signature_and_message(cSig, msgHash, hasher=None)
+    nSig = cdata_to_der(recoverable_convert(deserialize_recoverable(cSig)))
+    if not senderPubKey.verify(nSig, msgHash, hasher=None):
+        raise ValueError('Public key verify failed')
     return senderPubKey.format(False)
 
-# TODO(kriii): Implement `isTransactionBody` rather than check type.
 def ecVerifySig(data: Any, signature: str, address: str, chainId: int = None):
     """
     Checks if the signature is valid.
     """
     sigBytes = toBytes(signature)
     lenHash = len(sigBytes) - 65
-    hashedData = sigBytes[0:lenHash]
+    hashedData = sigBytes[:lenHash]
     if type(data) is TransactionBody:
         if hashedData != hashTransaction(data):
             return False
@@ -216,11 +219,11 @@ def ecVerifySig(data: Any, signature: str, address: str, chainId: int = None):
             return False
 
     sig = ECDSASignature.fromSignature(sigBytes[lenHash:])
-    pub = ecRecoverPub(hashedData, sig, chainId)
-
-    if not verify_signature(sigBytes[lenHash:-1], hashedData, pub, hasher=None):
+    try:
+        pub = ecRecoverPub(hashedData, sig, chainId)
+    except ValueError:
         return False
-    
+
     addr = bytesToHex(pubToAddress(pub[1:]))
     return areSameAddresses(address, addr)
 
@@ -230,6 +233,8 @@ def isValidPrivate(privateKey: bytes) -> bool:
     curve secp256k1).
     """
     try:
+        if len(privateKey) != 32:
+            return False
         validate_secret(privateKey)
         return True
     except:
@@ -265,7 +270,28 @@ def privateToPublic(privateKey: bytes) -> bytes:
 
 # TODO(kriii): Support `isSEC1`.
 def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
-    return keccak(toBytes(publicKey))[-20:]
+    """
+    Returns the AI Network address of a given public key.
+
+    args:
+        publicKey (Union[bytes, str]):
+            AIN public key | SEC1 encoded public key
+            When the type is `str`, it must be hex prefixed
+        isSEC1 (bool) : Key is SEC1 encoded
+
+    returns:
+        bytes: lower 160 bits of the hash of `publicKey`
+    """
+    if type(publicKey) is str:
+        publicKeyBytes = toBytes(publicKey)
+    elif type(publicKey) is bytes:
+        publicKeyBytes = publicKey
+    else:
+        raise ValueError("Invalid public key type")
+
+    if len(publicKeyBytes) != 64:
+        raise ValueError("Invalid public key")
+    return keccak(publicKeyBytes)[-20:]
 
 def privateToAddress(privateKey: bytes) -> str:
     return toChecksumAddress(bytesToHex(pubToAddress(privateToPublic(privateKey))))
