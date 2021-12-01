@@ -1,6 +1,28 @@
 # ain-py
 
+A python version of [ain-js](https://www.npmjs.com/package/@ainblockchain/ain-js).
+
+## Installation
+```
+pip install ain-py
+```
+
 ## Run all test
 ```
-python3 -m unittest
+tox
+```
+
+## Examples
+```python
+from ain.ain import Ain
+import asyncio
+
+ain = Ain('http://node.ainetwork.ai:8080/', chainId=None)
+
+async def process():
+    accounts = await ain.db.ref('/accounts').getValue()
+    print(accounts)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(process())
 ```
