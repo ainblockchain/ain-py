@@ -1,6 +1,6 @@
 # ain-py
 
-A python version of ain-js [link to https://www.npmjs.com/package/@ainblockchain/ain-js].
+A python version of [ain-js](https://www.npmjs.com/package/@ainblockchain/ain-js).
 
 ## Installation
 ```
