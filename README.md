@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-pip install -i ain
+pip install ain-py
 ```
 
 ## Run all test
