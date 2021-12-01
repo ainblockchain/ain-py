@@ -1,4 +1,8 @@
 from setuptools import setup, find_packages
+from pathlib import Path
+
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
 requirements = [
     "pycryptodome",
@@ -26,7 +30,8 @@ setup(
     description="AI Network Client Library for Python3",
     install_requires=requirements,
     license="MPL license",
-    long_description=open("README.md").read(),
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     include_package_data=True,
     keywords=["ain", "ainetwork", "ainblockchain", "API"],
     name="ain",
