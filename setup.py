@@ -34,7 +34,7 @@ setup(
     long_description_content_type='text/markdown',
     include_package_data=True,
     keywords=["ain", "ainetwork", "ainblockchain", "API"],
-    name="ain",
+    name="ain-py",
     packages=find_packages(include=["ain", "ain.*"]),
     test_suite="tests",
     tests_require=test_requirements,
