@@ -88,6 +88,7 @@ def toBytes(input: Any) -> bytes:
     """
     Attempts to turn a value into a bytes,
     As input it supports bytes, list(of ints), string, int, None.
+    This function is equivalent to `toBuffer` from `@ainblockchain/ain-util`.
     """
     if type(input) is bytes:
         pass
