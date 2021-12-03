@@ -331,10 +331,6 @@ def decryptWithPrivateKey():
     pass
 
 # TODO(kriii): implement this function.
-def createAccount():
-    pass
-
-# TODO(kriii): implement this function.
 def privateToV3Keystore():
     pass
 

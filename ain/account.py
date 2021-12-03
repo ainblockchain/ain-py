@@ -1,8 +1,10 @@
 from typing import Dict, Union
+from secrets import token_bytes
 from ain.utils import (
     privateToPublic,
     privateToAddress,
     mnemonicToPrivatekey,
+    keccak
 )
 
 class Account:
@@ -28,6 +30,16 @@ class Account:
         Returns an Account with the given mnemonic.
         """
         return cls(mnemonicToPrivatekey(mnemonic, index))
+
+    @classmethod
+    def fromEntropy(cls, entropy: str = None):
+        entropyBytes = token_bytes(32)
+        if entropy is not None:
+            entropyBytes = bytes(entropy, "utf-8")
+
+        innerHex = keccak(token_bytes(32) + entropyBytes)
+        middleHex = token_bytes(32) + innerHex + token_bytes(32)
+        return cls(keccak(middleHex))
 
     def __str__(self):
         return "\n".join(

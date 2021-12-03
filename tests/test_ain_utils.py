@@ -189,9 +189,6 @@ class TestMnemonicToPrivatekey(TestCase):
 # TODO(kriii): Add tests after implement `encryptWithPublicKey` and `decryptWithPrivateKey`.
 # class TestEncryption(TestCase):
 
-# TODO(kriii): Add tests after implement `createAccount`.
-# class TestCreateAccount(TestCase):
-
 # TODO(kriii): Add tests after implement `encode`.
 # class TestEncode(TestCase):
 
