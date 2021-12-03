@@ -7,7 +7,8 @@ from coincurve import PrivateKey, PublicKey
 from coincurve.ecdsa import deserialize_recoverable, recoverable_convert, cdata_to_der
 from coincurve.utils import verify_signature, validate_secret
 from mnemonic import Mnemonic
-from bip32 import BIP32
+# TODO(kriii): Need to replace bip32 package or wait for the type hint.
+from bip32 import BIP32 # type: ignore
 from ain.types import ECDSASignature, TransactionBody
 
 def encodeVarInt(number: int) -> bytes:
