@@ -6,6 +6,8 @@ from Crypto.Hash import keccak as _keccak
 from coincurve import PrivateKey, PublicKey
 from coincurve.ecdsa import deserialize_recoverable, recoverable_convert, cdata_to_der
 from coincurve.utils import verify_signature, validate_secret
+from mnemonic import Mnemonic
+from bip32 import BIP32
 from ain.types import ECDSASignature, TransactionBody
 
 def encodeVarInt(number: int) -> bytes:
@@ -33,6 +35,7 @@ def encodeVarInt(number: int) -> bytes:
 SIGNED_MESSAGE_PREFIX = "AINetwork Signed Message:\n"
 SIGNED_MESSAGE_PREFIX_BYTES = bytes(SIGNED_MESSAGE_PREFIX, "utf-8")
 SIGNED_MESSAGE_PREFIX_LENGTH = encodeVarInt(len(SIGNED_MESSAGE_PREFIX))
+AIN_HD_DERIVATION_PATH = "m/44'/412'/0'/0/"
 
 def getTimestamp() -> int:
     """
@@ -296,6 +299,27 @@ def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
 
 def privateToAddress(privateKey: bytes) -> str:
     return toChecksumAddress(bytesToHex(pubToAddress(privateToPublic(privateKey))))
+
+def generateMnemonic() -> str:
+    """
+    Returns a randomly generated mnemonic.
+    """
+    return Mnemonic("english").generate()
+
+def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
+    """
+    Returns an private key with the given mnemonic.
+    """
+    if index < 0:
+        raise ValueError("index should be greater than 0")
+
+    if not Mnemonic("english").check(mnemonic):
+        raise ValueError("Invalid mnemonic")
+    
+    seed = Mnemonic.to_seed(mnemonic)
+    bip32 = BIP32.from_seed(seed)
+    path = AIN_HD_DERIVATION_PATH + f"{index}"
+    return bip32.get_privkey_from_path(path)
 
 # TODO(kriii): implement this function.
 def encryptWithPublicKey():

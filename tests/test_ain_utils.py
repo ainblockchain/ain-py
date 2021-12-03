@@ -182,6 +182,10 @@ class TestEcVerifySig(TestCase):
     def testEcVerifySigDifferentMessage(self):
         self.assertFalse(ecVerifySig("Hello World", correctSignature, address))
 
+class TestMnemonicToPrivatekey(TestCase):
+    def testMnemonicToPrivatekey(self):
+        self.assertEqual(mnemonicToPrivatekey(mnemonic), mnemonicPrivateKey)
+
 # TODO(kriii): Add tests after implement `encryptWithPublicKey` and `decryptWithPrivateKey`.
 # class TestEncryption(TestCase):
 

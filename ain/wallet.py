@@ -11,6 +11,7 @@ from ain.utils import (
     pubToAddress,
     privateToPublic,
     privateToAddress,
+    mnemonicToPrivatekey,
     ecSignMessage,
     ecSignTransaction,
     ecRecoverPub,
@@ -36,6 +37,13 @@ class Account:
         self.private_key = privateKeyBytes.hex()
         self.public_key = privateToPublic(privateKeyBytes).hex()
         self.address = privateToAddress(privateKeyBytes)
+
+    @classmethod
+    def fromMnemonic(cls, mnemonic: str, index: int = 0):
+        """
+        Returns an Account with the given mnemonic.
+        """
+        return cls(mnemonicToPrivatekey(mnemonic, index))
 
     def __str__(self):
         return "\n".join(
