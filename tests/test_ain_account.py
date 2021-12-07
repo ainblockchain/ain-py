@@ -19,3 +19,8 @@ class TestAccount(TestCase):
         account = Account.create()
         publicKey = privateToPublic(bytes.fromhex(account.private_key)).hex()
         self.assertEqual(account.public_key, publicKey)
+
+    def testAccountCreateFromEntropy(self):
+        account = Account.create("Test")
+        publicKey = privateToPublic(bytes.fromhex(account.private_key)).hex()
+        self.assertEqual(account.public_key, publicKey)
