@@ -32,7 +32,7 @@ class Account:
         return cls(mnemonicToPrivatekey(mnemonic, index))
 
     @classmethod
-    def fromEntropy(cls, entropy: str = None):
+    def create(cls, entropy: str = None):
         entropyBytes = token_bytes(32)
         if entropy is not None:
             entropyBytes = bytes(entropy, "utf-8")

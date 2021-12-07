@@ -15,7 +15,7 @@ class TestAccount(TestCase):
         self.assertEqual(account.public_key, mnemonicPublicKey.hex())
         self.assertEqual(account.address, mnemonicAddress)
     
-    def testAccountFromEntropyNone(self):
-        account = Account.fromEntropy()
+    def testAccountCreateFromEntropyNone(self):
+        account = Account.create()
         publicKey = privateToPublic(bytes.fromhex(account.private_key)).hex()
         self.assertEqual(account.public_key, publicKey)
