@@ -9,6 +9,8 @@ requirements = [
     "coincurve",
     "aiohttp[speedups]",
     "jsonrpcclient",
+    "mnemonic",
+    "bip32",
 ]
 
 test_requirements = []
