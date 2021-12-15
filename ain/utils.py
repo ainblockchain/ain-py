@@ -5,7 +5,7 @@ from typing import Any, Union
 from Crypto.Hash import keccak as _keccak
 from coincurve import PrivateKey, PublicKey
 from coincurve.ecdsa import deserialize_recoverable, recoverable_convert, cdata_to_der
-from coincurve.utils import verify_signature, validate_secret
+from coincurve.utils import validate_secret
 from mnemonic import Mnemonic
 # TODO(kriii): Need to replace bip32 package or wait for the type hint.
 from bip32 import BIP32 # type: ignore

@@ -6,8 +6,6 @@ from .data import (
     sk,
     mnemonic,
     mnemonicPrivateKey,
-    mnemonicPublicKey,
-    mnemonicAddress,
     checksumAddresses,
     message,
     correctSignature,
@@ -112,12 +110,6 @@ class TestPrivateToPublic(TestCase):
 class TestPrivateToAddress(TestCase):
     def testPrivateToAddress(self):
         self.assertEqual(privateToAddress(sk), address)
-
-# TODO(kriii): Add tests after implement `mnemonicToPrivatekey`.
-# class TestMnemonicToPrivatekey(TestCase):
-
-# TODO(kriii): Add tests after implement `mnemonicToAccount`.
-# class TestMnemonicToAccount(TestCase):
 
 # TODO(kriii): Add tests after implement `V3Keystore` methods.
 # class TestV3KeyStore(TestCase):

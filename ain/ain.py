@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import Union
 from ain.provider import Provider
 from ain.net import Network
 from ain.wallet import Wallet

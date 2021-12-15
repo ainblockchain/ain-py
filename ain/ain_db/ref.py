@@ -1,4 +1,3 @@
-import asyncio
 from typing import TYPE_CHECKING, Any, List, Optional
 from ain.types import (
     SetOperation,
