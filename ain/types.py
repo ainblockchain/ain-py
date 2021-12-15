@@ -1,4 +1,10 @@
-from typing import Any, Literal, Optional, List, Union
+import sys
+from typing import Any, Optional, List, Union
+
+if sys.version_info >= (3, 8):
+    from typing import Literal
+else:
+    from typing_extensions import Literal
 
 class ECDSASignature:
     r: bytes
