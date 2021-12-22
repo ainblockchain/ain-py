@@ -81,13 +81,14 @@ class Wallet:
         self.setDefaultAccount(address)
         return address
 
-    # TODO(kriii): implement this function.
-    def addFromHDWallet(self):
+    def addFromHDWallet(self, mnemonic: str, index: int = 0):
         """
         Adds an account from a seed phrase. Only the account at the given
         index (default = 0) will be added.
         """
-        pass
+        account = Account.fromMnemonic(mnemonic, index)
+        self.accounts[account.address] = account
+        return account.address
 
     # TODO(kriii): implement this function.
     def addFromV3Keystore(self):
