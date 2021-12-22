@@ -36,6 +36,36 @@ class ECDSASignature:
         v = signature[64]
         return cls(r, s, v)
 
+class ECDHEncrypted:
+    iv: bytes
+    ephemPublicKey: bytes
+    ciphertext: bytes
+    mac: bytes
+
+    def __init__(
+        self,
+        iv: bytes,
+        ephemPublicKey: bytes,
+        ciphertext: bytes,
+        mac: bytes,
+    ):
+        self.iv = iv
+        self.ephemPublicKey = ephemPublicKey
+        self.ciphertext = ciphertext
+        self.mac = mac
+
+    def __str__(self):
+        return "\n".join(
+            (
+                "{",
+                f"  iv: '{self.iv.hex()}',",
+                f"  ephemPublicKey: '{self.ephemPublicKey.hex()}',",
+                f"  ciphertext: '{self.ciphertext.hex()}',",
+                f"  mac: '{self.mac.hex()}',",
+                "}",
+            )
+        )
+
 SetMultiOperationType = Literal["SET"]
 
 GetMultiOperationType = Literal["GET"]
