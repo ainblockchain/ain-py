@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, List, Optional
 from ain.account import Account, Accounts
 from ain.types import (
     TransactionBody,
@@ -44,12 +44,20 @@ class Wallet:
             return ''
         return self.accounts[checksummed].public_key
 
-    # TODO(kriii): implement this function.
-    def create(self):
+    def create(self, numberOfAccounts: int):
         """
         Creates {numberOfAccounts} new accounts and add them to the wallet.
         """
-        pass
+        if numberOfAccounts <= 0:
+            raise ValueError("numberOfAccounts should be greater than 0.")
+        
+        newAccounts: List[str] = []
+        for i in range(numberOfAccounts):
+            account = Account.create()
+            self.accounts[account.address] = account
+            newAccounts.append(account.address)
+
+        return newAccounts
     
     def isAdded(self, address: str) -> bool:
         """
