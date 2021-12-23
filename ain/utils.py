@@ -2,14 +2,19 @@ import re
 import json
 import time
 from typing import Any, Union
+from secrets import token_bytes
+from Crypto import Cipher
+from Crypto.Cipher import AES
 from Crypto.Hash import keccak as _keccak
+from Crypto.Hash import HMAC, SHA256, SHA512
+from Crypto.Util.Padding import pad, unpad
 from coincurve import PrivateKey, PublicKey
 from coincurve.ecdsa import deserialize_recoverable, recoverable_convert, cdata_to_der
 from coincurve.utils import validate_secret
 from mnemonic import Mnemonic
 # TODO(kriii): Need to replace bip32 package or wait for the type hint.
 from bip32 import BIP32 # type: ignore
-from ain.types import ECDSASignature, TransactionBody
+from ain.types import ECDSASignature, ECIESEncrypted, TransactionBody
 
 def encodeVarInt(number: int) -> bytes:
     """
@@ -322,13 +327,68 @@ def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
     path = AIN_HD_DERIVATION_PATH + f"{index}"
     return bip32.get_privkey_from_path(path)
 
-# TODO(kriii): implement this function.
-def encryptWithPublicKey():
-    pass
+# NOTE(kriii): Referenced https://github.com/bitchan/eccrypto/blob/master/index.js#L195-L258
+def encryptWithPublicKey(publicKey: Union[bytes, str], message: str) -> ECIESEncrypted:
+    """
+    Encrypts message with publicKey.
+    """
+    if type(publicKey) is str:
+        publicKeyBytes = bytes.fromhex(publicKey)
+    elif type(publicKey) is bytes:
+        publicKeyBytes = publicKey
+    else:
+        raise ValueError("Invalid public key type")
 
-# TODO(kriii): implement this function.
-def decryptWithPrivateKey():
-    pass
+    if len(publicKeyBytes) == 64:
+        publicKeyBytes = bytes([4]) + publicKeyBytes
+
+    pbK = PublicKey(publicKeyBytes)
+    epK = PrivateKey()
+    ephemPublicKey = epK.public_key.format(False)
+    shared = pbK.multiply(epK.secret)
+    derive = shared.format(True)[1:]
+    hash = SHA512.new()
+    hash.update(derive)
+    iv = token_bytes(16)
+    encKey = hash.digest()[0:32]
+    aes = AES.new(encKey, AES.MODE_CBC, iv=iv)
+    ciphertext = aes.encrypt(pad(toBytes(message), 16))
+    macKey = hash.digest()[32:]
+    hmac = HMAC.new(macKey, digestmod=SHA256)
+    hmac.update(iv + ephemPublicKey + ciphertext)
+    mac = hmac.digest()
+
+    return ECIESEncrypted(iv, ephemPublicKey, ciphertext, mac)
+
+def decryptWithPrivateKey(privateKey: Union[bytes, str], encrypted: ECIESEncrypted) -> str:
+    """
+    Decrypts encrypted data with privateKey.
+    """
+    if type(privateKey) is str:
+        privateKeyBytes = bytes.fromhex(privateKey)
+    elif type(privateKey) is bytes:
+        privateKeyBytes = privateKey
+    else:
+        raise ValueError("Invalid public key type")
+
+    prK = PrivateKey(privateKeyBytes)
+    epK = PublicKey(encrypted.ephemPublicKey)
+    shared = epK.multiply(prK.secret)
+    derive = shared.format(True)[1:]
+    hash = SHA512.new()
+    hash.update(derive)
+    encKey = hash.digest()[0:32]
+    macKey = hash.digest()[32:]
+    hmac = HMAC.new(macKey, digestmod=SHA256)
+    hmac.update(encrypted.iv + encrypted.ephemPublicKey + encrypted.ciphertext)
+    mac = hmac.digest()
+
+    if mac != encrypted.mac:
+        raise ValueError("Bad MAC")
+
+    aes = AES.new(encKey, AES.MODE_CBC, iv=encrypted.iv)
+    plaintext = unpad(aes.decrypt(encrypted.ciphertext), 16)
+    return plaintext.decode("utf-8")
 
 # TODO(kriii): implement this function.
 def privateToV3Keystore():

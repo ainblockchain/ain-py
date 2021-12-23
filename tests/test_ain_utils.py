@@ -11,6 +11,7 @@ from .data import (
     correctSignature,
     tx,
     txDifferent,
+    encrypted,
 )
 
 class TestKeccak(TestCase):
@@ -178,8 +179,15 @@ class TestMnemonicToPrivatekey(TestCase):
     def testMnemonicToPrivatekey(self):
         self.assertEqual(mnemonicToPrivatekey(mnemonic), mnemonicPrivateKey)
 
-# TODO(kriii): Add tests after implement `encryptWithPublicKey` and `decryptWithPrivateKey`.
-# class TestEncryption(TestCase):
+class TestEncryption(TestCase):
+    def testEncryptToDecrypt(self):
+        tmpEncrypted = encryptWithPublicKey(pk, message)
+        decrypted = decryptWithPrivateKey(sk, tmpEncrypted)
+        self.assertEqual(message, decrypted)
+
+    def testDecryptEncrypted(self):
+        decrypted = decryptWithPrivateKey(sk, encrypted)
+        self.assertEqual(message, decrypted)
 
 # TODO(kriii): Add tests after implement `encode`.
 # class TestEncode(TestCase):
