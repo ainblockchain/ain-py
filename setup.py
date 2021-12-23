@@ -19,7 +19,7 @@ test_requirements = []
 setup(
     author="AIN Dev Team",
     author_email="dev@ainetwork.ai",
-    python_requires=">3.7",
+    python_requires=">=3.7",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
@@ -43,6 +43,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/ainblockchain/ain-py",
-    version="0.1.1",
+    version="0.1.2",
     zip_safe=False,
 )
