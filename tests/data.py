@@ -1,4 +1,4 @@
-from ain.types import ECDHEncrypted, SetOperation, TransactionBody
+from ain.types import ECIESEncrypted, SetOperation, TransactionBody
 
 """
 The data in this file is for running test ONLY. Do NOT use it for production.
@@ -38,7 +38,7 @@ txDifferent = TransactionBody(
     parent_tx_hash="",
 )
 ephemPrivateKey=bytes.fromhex("51df6a6e250f9cbb083f319104f2ef8f4093b4851a5a46c0cbd6d00a19bf5078")
-encrypted = ECDHEncrypted(
+encrypted = ECIESEncrypted(
     iv=bytes.fromhex("cbf51904342a81d80a767dca8f5d7399"),
     ephemPublicKey=bytes.fromhex("043a25edc1f59d665ded8a875e7a6d4cf31e4fddc97021b576f8389fa920729cc8d6528a07721102cc43496a14da2a4d7907fd32d57058ab6726b2aea617215106"),
     ciphertext=bytes.fromhex("e71bb030fb2956dff3cb89637352f189"),

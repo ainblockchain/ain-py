@@ -36,7 +36,7 @@ class ECDSASignature:
         v = signature[64]
         return cls(r, s, v)
 
-class ECDHEncrypted:
+class ECIESEncrypted:
     iv: bytes
     ephemPublicKey: bytes
     ciphertext: bytes

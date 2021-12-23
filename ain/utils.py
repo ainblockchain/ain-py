@@ -14,7 +14,7 @@ from coincurve.utils import validate_secret
 from mnemonic import Mnemonic
 # TODO(kriii): Need to replace bip32 package or wait for the type hint.
 from bip32 import BIP32 # type: ignore
-from ain.types import ECDSASignature, ECDHEncrypted, TransactionBody
+from ain.types import ECDSASignature, ECIESEncrypted, TransactionBody
 
 def encodeVarInt(number: int) -> bytes:
     """
@@ -327,7 +327,8 @@ def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
     path = AIN_HD_DERIVATION_PATH + f"{index}"
     return bip32.get_privkey_from_path(path)
 
-def encryptWithPublicKey(publicKey: Union[bytes, str], message: str) -> ECDHEncrypted:
+# NOTE(kriii): Referenced https://github.com/bitchan/eccrypto/blob/master/index.js#L195-L258
+def encryptWithPublicKey(publicKey: Union[bytes, str], message: str) -> ECIESEncrypted:
     """
     Encrypts message with publicKey.
     """
@@ -357,9 +358,9 @@ def encryptWithPublicKey(publicKey: Union[bytes, str], message: str) -> ECDHEncr
     hmac.update(iv + ephemPublicKey + ciphertext)
     mac = hmac.digest()
 
-    return ECDHEncrypted(iv, ephemPublicKey, ciphertext, mac)
+    return ECIESEncrypted(iv, ephemPublicKey, ciphertext, mac)
 
-def decryptWithPrivateKey(privateKey: Union[bytes, str], encrypted: ECDHEncrypted) -> str:
+def decryptWithPrivateKey(privateKey: Union[bytes, str], encrypted: ECIESEncrypted) -> str:
     """
     Decrypts encrypted data with privateKey.
     """
