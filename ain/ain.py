@@ -206,12 +206,16 @@ class Ain:
         if nonce is None:
             nonce = await self.getNonce({"address": address, "from": "pending"})
         timestamp = getattr(transactionInput, "timestamp", getTimestamp())
+        gas_price = getattr(transactionInput, "gas_price", 0)
+        billing = getattr(transactionInput, "billing", None)
 
         return TransactionBody(
             operation=operation,
             parent_tx_hash=parent_tx_hash,
             nonce=nonce,
             timestamp=timestamp,
+            gas_price=gas_price,
+            billing=billing,
         )
 
     # TODO(kriii): implement this function.

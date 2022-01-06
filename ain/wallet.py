@@ -159,7 +159,7 @@ class Wallet:
             addr = toChecksumAddress(address)
         return await self.ain.db.ref(f"/accounts/{addr}/balance").getValue()
 
-    async def transfer(self, toAddress: str, value: int, fromAddress: str = None, nonce: int = None):
+    async def transfer(self, toAddress: str, value: int, fromAddress: str = None, nonce: int = None, gas_price: int = None):
         """
         Sends a transfer transaction to the network.
         """
@@ -172,6 +172,7 @@ class Wallet:
                 address=fromAddress,
                 value=value,
                 nonce=nonce,
+                gas_price=gas_price,
             )
         )
 
