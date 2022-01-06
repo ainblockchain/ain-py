@@ -151,20 +151,29 @@ class TransactionInputBase:
     nonce: Optional[int]
     address: Optional[str]
     timestamp: Optional[int]
+    gas_price: Optional[int]
 
 class TransactionBody(TransactionBodyBase):
     nonce: int
     timestamp: int
+    gas_price: Optional[int]
+    billing: Optional[str]
     def __init__(
         self,
         operation: Union[SetOperation, SetMultiOperation],
         nonce: int,
         timestamp: int,
+        gas_price: int = None,
+        billing: str = None,
         parent_tx_hash: str = None,
     ):
         self.operation = operation
         self.nonce = nonce
         self.timestamp = timestamp
+        if gas_price is not None:
+            self.gas_price = gas_price
+        if billing is not None:
+            self.billing = billing
         if parent_tx_hash is not None:
             self.parent_tx_hash = parent_tx_hash
 
@@ -177,6 +186,7 @@ class TransactionInput(TransactionBodyBase, TransactionInputBase):
         nonce: int = None,
         address: str = None,
         timestamp: int = None,
+        gas_price: int = None,
     ):
         self.operation = operation
         if parent_tx_hash is not None:
@@ -187,6 +197,8 @@ class TransactionInput(TransactionBodyBase, TransactionInputBase):
             self.address = address
         if timestamp is not None:
             self.timestamp = timestamp
+        if gas_price is not None:
+            self.gas_price = gas_price
 
 class ValueOnlyTransactionInput(ValueOnlyTransactionBodyBase, TransactionInputBase):
     def __init__(
@@ -198,6 +210,7 @@ class ValueOnlyTransactionInput(ValueOnlyTransactionBodyBase, TransactionInputBa
         nonce: int = None,
         address: str = None,
         timestamp: int = None,
+        gas_price: int = None,
     ):
         if parent_tx_hash is not None:
             self.parent_tx_hash = parent_tx_hash
@@ -213,6 +226,8 @@ class ValueOnlyTransactionInput(ValueOnlyTransactionBodyBase, TransactionInputBa
             self.address = address
         if timestamp is not None:
             self.timestamp = timestamp
+        if gas_price is not None:
+            self.gas_price = gas_price
 
 class SetMultiTransactionInput(TransactionInputBase):
     parent_tx_hash: Optional[str]
@@ -225,6 +240,7 @@ class SetMultiTransactionInput(TransactionInputBase):
         nonce: int = None,
         address: str = None,
         timestamp: int = None,
+        gas_price: int = None,
     ):
         self.op_list = op_list
         if parent_tx_hash is not None:
@@ -235,6 +251,8 @@ class SetMultiTransactionInput(TransactionInputBase):
             self.address = address
         if timestamp is not None:
             self.timestamp = timestamp
+        if gas_price is not None:
+            self.gas_price = gas_price
 
 class Transaction():
     tx_body: TransactionBody
