@@ -172,7 +172,7 @@ def hashMessage(message: Any):
     )
     return keccak(keccak(dataBytes))
 
-def ecSignHash(msgHash: bytes, privateKey: bytes, chainId: int = None) -> ECDSASignature:
+def ecSignHash(msgHash: bytes, privateKey: bytes, chainId: int = 0) -> ECDSASignature:
     """
     Returns the ECDSA signature of a message hash.
     """
@@ -180,10 +180,10 @@ def ecSignHash(msgHash: bytes, privateKey: bytes, chainId: int = None) -> ECDSAS
     sig = pbK.sign_recoverable(msgHash, hasher=None)
     r = sig[0:32]
     s = sig[32:64]
-    v = sig[64] + (27 if chainId is None else chainId * 2 + 35)
+    v = sig[64] + (27 if chainId == 0 else chainId * 2 + 35)
     return ECDSASignature(r, s, v)
 
-def ecSignMessage(message: Any, privateKey: bytes, chainId: int = None) -> str:
+def ecSignMessage(message: Any, privateKey: bytes, chainId: int = 0) -> str:
     """
     igns a message with a private key and returns a string signature.
     """
@@ -191,7 +191,7 @@ def ecSignMessage(message: Any, privateKey: bytes, chainId: int = None) -> str:
     signature = ecSignHash(hashedMsg, privateKey, chainId)
     return "0x" + hashedMsg.hex() + signature.r.hex() + signature.s.hex() + toBytes(signature.v).hex()
 
-def ecSignTransaction(txData: TransactionBody, privateKey: bytes, chainId: int = None) -> str:
+def ecSignTransaction(txData: TransactionBody, privateKey: bytes, chainId: int = 0) -> str:
     """
     Signs a transaction body with a private key and returns a string signature.
     """
@@ -199,12 +199,12 @@ def ecSignTransaction(txData: TransactionBody, privateKey: bytes, chainId: int =
     signature = ecSignHash(hashedTx, privateKey, chainId)
     return "0x" + hashedTx.hex() + signature.r.hex() + signature.s.hex() + toBytes(signature.v).hex()
 
-def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = None) -> bytes:
+def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = 0) -> bytes:
     """
     ECDSA public key recovery from signature.
     Returns Recovered public key.
     """
-    recovery = signature.v - (27 if chainId is None else chainId * 2 + 35)
+    recovery = signature.v - (27 if chainId == 0 else chainId * 2 + 35)
     if recovery != 0 and recovery != 1:
         raise ValueError("Invalid signature v value")
     cSig = bytes(bytearray(signature.r) + bytearray(signature.s) + bytearray([recovery]))
@@ -214,7 +214,7 @@ def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = None)
         raise ValueError('Public key verify failed')
     return senderPubKey.format(False)
 
-def ecVerifySig(data: Any, signature: str, address: str, chainId: int = None):
+def ecVerifySig(data: Any, signature: str, address: str, chainId: int = 0):
     """
     Checks if the signature is valid.
     """
