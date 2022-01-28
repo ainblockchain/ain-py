@@ -15,6 +15,7 @@ from ain.utils import (
     ecRecoverPub,
     ecVerifySig,
 )
+from ain.utils.V3Keystore import V3Keystore, V3KeystoreOptions
 
 if TYPE_CHECKING:
     from ain.ain import Ain
@@ -216,16 +217,20 @@ class Wallet:
     def verifySignature(self, data: Any, signature: str, address: str) -> bool:
         return ecVerifySig(data, signature, address, self.chainId)
 
-    # TODO(kriii): implement this function.
-    def toV3Keystore(self):
+    def toV3Keystore(self, password: str, options: V3KeystoreOptions) -> List[V3Keystore]:
         """
         Save the accounts in the wallet as V3 Keystores, locking them with the password.
         """
-        pass
+        ret = []
+        for address in self.accounts:
+            ret.append(self.accountToV3Keystore(address, password, options))
+        return ret
     
-    # TODO(kriii): implement this function.
-    def accountToV3Keystore(self):
+    def accountToV3Keystore(self, address: str, password: str, options: V3KeystoreOptions) -> V3Keystore:
         """
         Converts an account into a V3 Keystore and encrypts it with a password.
         """
-        pass
+        if not self.isAdded(address):
+            raise ValueError("No such address exists in the wallet")
+        privateKey = self.accounts[address].private_key
+        return V3Keystore.fromPrivateKey(privateKey, password, options)

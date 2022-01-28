@@ -3,7 +3,6 @@ import json
 import time
 from typing import Any, Union
 from secrets import token_bytes
-from Crypto import Cipher
 from Crypto.Cipher import AES
 from Crypto.Hash import keccak as _keccak
 from Crypto.Hash import HMAC, SHA256, SHA512
@@ -389,11 +388,3 @@ def decryptWithPrivateKey(privateKey: Union[bytes, str], encrypted: ECIESEncrypt
     aes = AES.new(encKey, AES.MODE_CBC, iv=encrypted.iv)
     plaintext = unpad(aes.decrypt(encrypted.ciphertext), 16)
     return plaintext.decode("utf-8")
-
-# TODO(kriii): implement this function.
-def privateToV3Keystore():
-    pass
-
-# TODO(kriii): implement this function.
-def v3KeystoreToPrivate():
-    pass

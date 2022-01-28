@@ -1,5 +1,6 @@
 from unittest import TestCase
 from ain.utils import *
+from ain.utils.V3Keystore import *
 from .data import (
     address,
     pk,
@@ -11,6 +12,14 @@ from .data import (
     correctSignature,
     tx,
     txDifferent,
+    v3KeystoreKDFList,
+    v3KeystoreCipherList,
+    v3KeystorePassword,
+    v3KeystoreJSONList,
+    v3KeystoreFixedUUID,
+    v3KeystoreFixedIV,
+    v3KeystoreFixedSalt,
+    v3KeystoreFixedJSON,
     encrypted,
 )
 
@@ -112,9 +121,33 @@ class TestPrivateToAddress(TestCase):
     def testPrivateToAddress(self):
         self.assertEqual(privateToAddress(sk), address)
 
-# TODO(kriii): Add tests after implement `V3Keystore` methods.
-# class TestV3KeyStore(TestCase):
+class TestV3KeyStore(TestCase):
+    def testV3KeyStore(self):
+        v3keystore = V3Keystore.fromPrivateKey(sk, v3KeystorePassword)
+        self.assertEqual(v3keystore.toPrivateKey(v3KeystorePassword), sk)
+    
+    def testV3KeyStoreKDF(self):
+        for kdf in v3KeystoreKDFList:
+            v3keystore = V3Keystore.fromPrivateKey(sk, v3KeystorePassword, V3KeystoreOptions(kdf=kdf))
+            self.assertEqual(v3keystore.toPrivateKey(v3KeystorePassword), sk, msg=json)
 
+    def testV3KeyStoreCipher(self):
+        for cipher in v3KeystoreCipherList:
+            v3keystore = V3Keystore.fromPrivateKey(sk, v3KeystorePassword, V3KeystoreOptions(cipher=cipher))
+            self.assertEqual(v3keystore.toPrivateKey(v3KeystorePassword), sk, msg=json)
+
+    def testV3KeyStoreFromJSON(self):
+        for json in v3KeystoreJSONList:
+            v3keystoreFromJSON = V3Keystore.fromJSON(json)
+            self.assertEqual(v3keystoreFromJSON.toPrivateKey(v3KeystorePassword), sk, msg=json)
+
+    def testV3KeyStoreFromFixed(self):
+        v3keystore = V3Keystore.fromPrivateKey(
+            sk, v3KeystorePassword,
+            V3KeystoreOptions(uuid=v3KeystoreFixedUUID, iv=v3KeystoreFixedIV, salt=v3KeystoreFixedSalt)
+        )
+        self.assertEqual(str(v3keystore), v3KeystoreFixedJSON)
+        
 class TestToBytes(TestCase):
     def testToBytes(self):
         # bytes
