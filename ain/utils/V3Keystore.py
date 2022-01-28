@@ -146,7 +146,7 @@ class V3Keystore:
             else:
                 raise ValueError("scrypt derived multiple keys")
         elif kdf == "pbkdf2":
-            c = getattr(options, "c", 1000)
+            c = getattr(options, "c", 262144)
             kdfparams.update({
                 "c": c,
                 "prf": "hmac-sha256",
