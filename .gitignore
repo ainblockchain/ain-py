@@ -29,5 +29,8 @@ var/
 # Unit test
 .tox/
 
+# pyenv
+.python-version
+
 # IDE settings
 .vscode/
