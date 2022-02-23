@@ -17,6 +17,8 @@ class Provider:
     def __init__(self, ain: "Ain", endpoint: str):
         self._ain = ain
         parsed = urlparse(endpoint)
+        if parsed.scheme == "" or parsed.netloc == "":
+            raise ValueError("Invalid endpoint received.")
         self.endPoint = parsed.geturl()
         self.apiEndPoint = urljoin(self.endPoint, JSON_RPC_ENDPOINT)
 
@@ -33,6 +35,8 @@ class Provider:
                 res = await response.read()
                 parsed = parse(json.loads(res))
                 if isinstance(parsed, Ok):
+                    if "code" in parsed.result:
+                        return parsed.result
                     return parsed.result.get("result", None)
                 if isinstance(parsed, Error):
                     return parsed

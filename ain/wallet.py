@@ -167,7 +167,7 @@ class Wallet:
         fromAddr = self.getImpliedAddress(fromAddress)
         toAddr = toChecksumAddress(toAddress)
         transferRef = self.ain.db.ref(f"/transfer/{fromAddr}/{toAddr}").push()
-        return transferRef.setValue(
+        return await transferRef.setValue(
             ValueOnlyTransactionInput(
                 ref="/value",
                 address=fromAddress,

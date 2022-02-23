@@ -1,5 +1,4 @@
 from ain.types import ECIESEncrypted, SetOperation, TransactionBody
-from ain.utils import V3Keystore
 
 """
 The data in this file is for running test ONLY. Do NOT use it for production.
@@ -61,3 +60,8 @@ encrypted = ECIESEncrypted(
     ciphertext=bytes.fromhex("e71bb030fb2956dff3cb89637352f189"),
     mac=bytes.fromhex("53031981f5f6631ddba5ef6f5a050a1dedb4975b2de2ecc1beaf3e3953582d78"),
 )
+
+testNode = "http://localhost:8081"
+accountAddress = "0x09A0d53FDf1c36A131938eb379b98910e55EEfe1"
+accountSk = "ee0b1315d446e5318eb6eb4e9d071cd12ef42d2956d546f9acbdc3b75c469640"
+transferAddress = "0xbA58D93edD8343C001eC5f43E620712Ba8C10813"
