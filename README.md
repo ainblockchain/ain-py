@@ -17,7 +17,7 @@ tox
 from ain.ain import Ain
 import asyncio
 
-ain = Ain('http://node.ainetwork.ai:8080/', chainId=None)
+ain = Ain('https://mainnet-api.ainetwork.ai/')
 
 async def process():
     accounts = await ain.db.ref('/accounts').getValue()
