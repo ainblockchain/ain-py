@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, List, Optional
+from typing import TYPE_CHECKING, Any, List, Optional, Union
 from ain.account import Account, Accounts
 from ain.types import (
     TransactionBody,
@@ -6,6 +6,7 @@ from ain.types import (
     ECDSASignature,
 )
 from ain.utils import (
+    privateToAddress,
     toBytes,
     toChecksumAddress,
     bytesToHex,
@@ -91,12 +92,18 @@ class Wallet:
         self.accounts[account.address] = account
         return account.address
 
-    # TODO(kriii): implement this function.
-    def addFromV3Keystore(self):
+    def addFromV3Keystore(self, v3Keystore: Union[V3Keystore, str], password: str):
         """
         Adds an account from a V3 Keystore.
         """
-        pass
+        if type(v3Keystore) is V3Keystore:
+            privateKey = v3Keystore.toPrivateKey(password)
+        elif type(v3Keystore) is str:
+            privateKey = V3Keystore.fromJSON(v3Keystore).toPrivateKey(password)
+        else:
+            raise TypeError("v3Keystore has invalid type")
+        self.add(privateKey)
+        return privateToAddress(privateKey)
     
     def remove(self, address: str):
         """
@@ -217,7 +224,11 @@ class Wallet:
     def verifySignature(self, data: Any, signature: str, address: str) -> bool:
         return ecVerifySig(data, signature, address, self.chainId)
 
-    def toV3Keystore(self, password: str, options: V3KeystoreOptions) -> List[V3Keystore]:
+    def toV3Keystore(
+        self,
+        password: str,
+        options: V3KeystoreOptions = V3KeystoreOptions()
+    ) -> List[V3Keystore]:
         """
         Save the accounts in the wallet as V3 Keystores, locking them with the password.
         """
@@ -226,7 +237,12 @@ class Wallet:
             ret.append(self.accountToV3Keystore(address, password, options))
         return ret
     
-    def accountToV3Keystore(self, address: str, password: str, options: V3KeystoreOptions) -> V3Keystore:
+    def accountToV3Keystore(
+        self,
+        address: str,
+        password: str,
+        options: V3KeystoreOptions = V3KeystoreOptions()
+    ) -> V3Keystore:
         """
         Converts an account into a V3 Keystore and encrypts it with a password.
         """

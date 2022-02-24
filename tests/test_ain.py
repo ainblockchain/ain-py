@@ -8,10 +8,13 @@ from snapshottest import TestCase as SnapshotTestCase
 from ain.ain import Ain
 from ain.provider import JSON_RPC_ENDPOINT
 from ain.utils import *
+from ain.utils.V3Keystore import *
 from ain.types import *
 from .data import (
     mnemonic,
     message,
+    v3KeystorePassword,
+    v3KeystoreJSONList,
     tx,
     testNode,
     accountAddress,
@@ -72,6 +75,11 @@ class TestWallet(TestCase):
 
     def testAddFromV3Keystore(self):
         ain = Ain(testNode)
+        keystoreAddress = ain.wallet.addFromV3Keystore(v3KeystoreJSONList[0], v3KeystorePassword)
+        self.assertEqual(ain.wallet.length, 1)
+        convertedV3Keystore = ain.wallet.accountToV3Keystore(keystoreAddress, v3KeystorePassword)
+        derivedAddress = privateToAddress(convertedV3Keystore.toPrivateKey(v3KeystorePassword))
+        self.assertEqual(derivedAddress, keystoreAddress)
 
     def testAddAccount(self):
         ain = Ain(testNode)
