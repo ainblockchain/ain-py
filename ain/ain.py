@@ -3,7 +3,7 @@ from typing import List, Union
 from ain.provider import Provider
 from ain.net import Network
 from ain.wallet import Wallet
-from ain.types import TransactionInput, TransactionBody
+from ain.types import TransactionInput, TransactionBody, ValueOnlyTransactionInput
 from ain.ain_db.db import Database
 from ain.utils import getTimestamp, toChecksumAddress
 
@@ -150,19 +150,17 @@ class Ain:
             "ain_sendSignedTransactionBatch", {"tx_list": txList}
         )
         
-    # TODO(kriii): implement this function.
-    def depositConsensusStake(self):
+    def depositConsensusStake(self, input: ValueOnlyTransactionInput):
         """
         Sends a transaction that deposits AIN for consensus staking.
         """
-        pass
+        return self.__stakeFunction("/deposit/consensus", input)
 
-    # TODO(kriii): implement this function.
     def withdrawConsensusStake(self):
         """
         Sends a transaction that withdraws AIN for consensus staking.
         """
-        pass
+        return self.__stakeFunction("/withdraw/consensus", input)
 
     async def getConsensusStakeAmount(self, account: str = None) -> int:
         """
@@ -225,13 +223,19 @@ class Ain:
             billing=billing,
         )
 
-    # TODO(kriii): implement this function.
-    def __stakeFunction(self):
+    def __stakeFunction(self, path: str, input: ValueOnlyTransactionInput):
         """
         A base function for all staking related database changes. It builds a
         deposit/withdraw transaction and sends the transaction by calling sendTransaction().
         """
-        pass
+        if not hasattr(input, "value"):
+            raise ValueError("a value should be specified.")
+        if type(input) is not int:
+            raise ValueError("value has to be a int.")
+        input.address = self.wallet.getImpliedAddress(getattr(input, "address", None))
+        ref = self.db.ref(f'{path}/{input.address}').push()
+        input.ref = "value"
+        return ref.setValue(input)
 
     async def __buildSignedTransaction(self, transactionObject: TransactionInput) -> dict:
         """

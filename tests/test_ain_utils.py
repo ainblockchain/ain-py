@@ -71,8 +71,31 @@ class TestIsValidPrivate(TestCase):
     def testIsValidPrivateWork(self):
         self.assertTrue(isValidPrivate((self.SECP256K1_N - 1).to_bytes(32, "big")))
 
-# TODO(kriii): Add tests after implement `isValidPrivate`.
-# class TestIsValidPrivate(TestCase):
+class TestIsValidPublic(TestCase):
+    def testIsValid(self):
+        pubKey = "3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d"
+        self.assertTrue(isValidPublic(bytes.fromhex(pubKey)))
+
+    def testIsValidPublicShortInput(self):
+        pubKey = "3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae744"
+        self.assertFalse(isValidPublic(bytes.fromhex(pubKey)))
+    
+    def testIsValidPublicBigInput(self):
+        pubKey = "3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d00"
+        self.assertFalse(isValidPublic(bytes.fromhex(pubKey)))
+
+    def testIsValidPublicSEC1Key(self):
+        pubKey = "043a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d"
+        self.assertFalse(isValidPublic(bytes.fromhex(pubKey)))
+        self.assertTrue(isValidPublic(bytes.fromhex(pubKey), True))
+
+    def testIsValidPublicInvalidSEC1Key(self):
+        pubKey = "023a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d"
+        self.assertFalse(isValidPublic(bytes.fromhex(pubKey), True))
+
+    def testIsValidPublicCompressedSEC1Key(self):
+        pubKey = "033a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a"
+        self.assertTrue(isValidPublic(bytes.fromhex(pubKey), True))
 
 class TestIsValidAddress(TestCase):
     def testIsValidAddress(self):
@@ -90,16 +113,19 @@ class TestAreSameAddress(TestCase):
 
 class TestPubToAddress(TestCase):
     def testPubToAddress(self):
-        pubKey = bytes.fromhex("3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d")
+        pubKey = "3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d"
         address = "2f015c60e0be116b1f0cd534704db9c92118fb6a"
-        self.assertEqual(pubToAddress(pubKey).hex(), address)
+        self.assertEqual(pubToAddress(bytes.fromhex(pubKey)).hex(), address)
 
-    # TODO(kriii): Add tests after support `SEC1`.
+    def testPubToAddressSEC1(self):
+        pubKey = "043a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d"
+        address = "2f015c60e0be116b1f0cd534704db9c92118fb6a"
+        self.assertEqual(pubToAddress(bytes.fromhex(pubKey), True).hex(), address)
 
     def testPubToAddressInvalid(self):
-        pubKey = bytes.fromhex("3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae744")
+        pubKey = "3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae744"
         with self.assertRaises(ValueError):
-            pubToAddress(pubKey)
+            pubToAddress(bytes.fromhex(pubKey))
         
     def testPubToAddress0x(self):
         pubKey = "0x3a443d8381a6798a70c6ff9304bdc8cb0163c23211d11628fae52ef9e0dca11a001cf066d56a8156fc201cd5df8a36ef694eecd258903fca7086c1fae7441e1d"

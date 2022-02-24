@@ -249,7 +249,6 @@ def isValidPrivate(privateKey: bytes) -> bool:
     except:
         return False
 
-# TODO(kriii): implement this function.
 def isValidPublic(publicKey: bytes, isSEC1: bool = False):
     """
     Checks whether the `publicKey` is a valid public key (follows the rules of the
@@ -259,7 +258,16 @@ def isValidPublic(publicKey: bytes, isSEC1: bool = False):
         publicKey (bytes): The two points of an uncompressed key, unless sanitize is enabled
         isSEC1 (bool): Accept public keys in other formats
     """
-    pass
+    try:
+        if len(publicKey) == 64:
+            publicKey = bytes([4]) + publicKey
+        else:
+            if not isSEC1:
+                return False
+        pk = PublicKey(publicKey)
+    except ValueError:
+        return False
+    return True
 
 def areSameAddresses(address1: str, address2: str) -> bool:
     """
@@ -277,7 +285,6 @@ def privateToPublic(privateKey: bytes) -> bytes:
     prK = PrivateKey(privateKey)
     return prK.public_key.format(False)[1:]
 
-# TODO(kriii): Support `isSEC1`.
 def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
     """
     Returns the AI Network address of a given public key.
@@ -298,6 +305,8 @@ def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
     else:
         raise ValueError("Invalid public key type")
 
+    if isSEC1 and len(publicKeyBytes) != 64:
+        publicKeyBytes = PublicKey(publicKeyBytes).format(False)[1:]
     if len(publicKeyBytes) != 64:
         raise ValueError("Invalid public key")
     return keccak(publicKeyBytes)[-20:]
