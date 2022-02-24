@@ -1,4 +1,5 @@
-from typing import Union
+import asyncio
+from typing import List, Union
 from ain.provider import Provider
 from ain.net import Network
 from ain.wallet import Wallet
@@ -27,7 +28,7 @@ class Ain:
         self.provider = Provider(self, providerUrl)
         self.chainId = chainId
         self.net = Network(self.provider)
-        self.wallet = Wallet(self, self.chainId)
+        self.wallet.chainId = chainId
         self.db = Database(self, self.provider)
 
     # TODO(kriii): Return objects typing.
@@ -36,7 +37,7 @@ class Ain:
         self,
         blockHashOrBlockNumber: Union[str, int],
         returnTransactionObjects: bool = False,
-    ):
+    ) -> dict:
         """
         A coroutine returns a block with the given hash or block number.
 
@@ -87,7 +88,7 @@ class Ain:
     async def getValidators(
         self,
         blockHashOrBlockNumber: Union[str, int],
-    ):
+    ) -> dict:
         """
         A coroutine returns the list of validators for a given block
         """
@@ -102,7 +103,7 @@ class Ain:
         else:
             raise TypeError("blockHashOrBlockNumber has invalid type")
 
-    async def getTransaction(self, transactionHash: str):
+    async def getTransaction(self, transactionHash: str) -> dict:
         """
         Returns the transaction with the given transaction hash.
         """
@@ -110,7 +111,7 @@ class Ain:
             "ain_getTransactionByHash", {"hash": transactionHash}
         )
 
-    async def getStateUsage(self, appName: str):
+    async def getStateUsage(self, appName: str) -> dict:
         """
         Returns the transaction with the given transaction hash.
         """
@@ -118,7 +119,7 @@ class Ain:
             "ain_getStateUsage", {"app_name": appName}
         )
 
-    async def sendTransaction(self, transactionObject: TransactionInput):
+    async def sendTransaction(self, transactionObject: TransactionInput) -> dict:
         """
         Signs and sends a transaction to the network
         """
@@ -128,7 +129,7 @@ class Ain:
         )
         return await self.sendSignedTransaction(signature, txBody)
 
-    async def sendSignedTransaction(self, signature: str, txBody: TransactionBody):
+    async def sendSignedTransaction(self, signature: str, txBody: TransactionBody) -> dict:
         """
         Sends a signed transaction to the network
         """
@@ -136,13 +137,19 @@ class Ain:
             "ain_sendSignedTransaction", {"signature": signature, "tx_body": txBody}
         )
 
-    # TODO(kriii): implement this function.
-    async def sendTransactionBatch(self):
+    async def sendTransactionBatch(self, transactionObjects: List[TransactionInput]) -> List[dict]:
         """
         Sends signed transactions to the network.
         """
-        pass
-
+        txListCoroutines = []
+        for txInput in transactionObjects:
+            txListCoroutines.append(self.__buildSignedTransaction(txInput))
+        
+        txList = await asyncio.gather(*txListCoroutines)
+        return await self.provider.send(
+            "ain_sendSignedTransactionBatch", {"tx_list": txList}
+        )
+        
     # TODO(kriii): implement this function.
     def depositConsensusStake(self):
         """
@@ -225,3 +232,18 @@ class Ain:
         deposit/withdraw transaction and sends the transaction by calling sendTransaction().
         """
         pass
+
+    async def __buildSignedTransaction(self, transactionObject: TransactionInput) -> dict:
+        """
+        Returns a builded transaction with the signature
+        """
+        txBody = await self.buildTransactionBody(transactionObject)
+        if not hasattr(transactionObject, "nonce"):
+            # Batch transactions' nonces should be specified.
+            # If they're not, they default to un-nonced (nonce = -1).
+            txBody.nonce = -1
+            
+        signature = self.wallet.signTransaction(
+            txBody, getattr(transactionObject, "address", None)
+        )
+        return {"signature": signature, "tx_body": txBody}

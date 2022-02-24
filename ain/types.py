@@ -76,6 +76,36 @@ GetOperationType = Literal["GET_VALUE", "GET_RULE", "GET_OWNER", "GET_FUNCTION"]
 
 OwnerPermission = Literal["branch_owner", "write_function", "write_owner", "write_rule"]
 
+class GetOptions():
+    is_global: Optional[bool]
+    is_final: Optional[bool]
+    is_shallow: Optional[bool]
+    include_version: Optional[bool]
+    include_tree_info: Optional[bool]
+    include_proof: Optional[bool]
+
+    def __init__(
+        self,
+        is_global: bool = None,
+        is_final: bool = None,
+        is_shallow: bool = None,
+        include_version: bool = None,
+        include_tree_info: bool = None,
+        include_proof: bool = None,
+    ):
+        if is_global is not None:
+            self.is_global = is_global
+        if is_final is not None:
+            self.is_final = is_final
+        if is_shallow is not None:
+            self.is_shallow = is_shallow
+        if include_version is not None:
+            self.include_version = include_version
+        if include_tree_info is not None:
+            self.include_tree_info = include_tree_info
+        if include_proof is not None:
+            self.include_proof = include_proof
+
 class SetOperation():
     type: SetOperationType
     ref: str
@@ -266,13 +296,57 @@ class EvalRuleInput:
     address: Optional[str]
     timestamp: Optional[int]
     is_global: Optional[bool]
+    
+    def __init__(
+        self,
+        value: Any = None,
+        ref: str = None,
+        address: str = None,
+        timestamp: int = None,
+        is_global: bool = None,
+    ):
+        if value is not None:
+            self.value = value
+        if ref is not None:
+            self.ref = ref
+        if address is not None:
+            self.address = address
+        if timestamp is not None:
+            self.timestamp = timestamp
+        if is_global is not None:
+            self.is_global = is_global
 
 class EvalOwnerInput:
+    permission: OwnerPermission
     ref: Optional[str]
     address: Optional[str]
-    permission: OwnerPermission
     is_global: Optional[bool]
+
+    def __init__(
+        self,
+        permission: OwnerPermission,
+        ref: str = None,
+        address: str = None,
+        is_global: bool = None,
+    ):
+        self.permission = permission
+        if ref is not None:
+            self.ref = ref
+        if address is not None:
+            self.address = address
+        if is_global is not None:
+            self.is_global = is_global
 
 class MatchInput:
     ref: Optional[str]
     is_global: Optional[bool]
+
+    def __init__(
+        self,
+        ref: str = None,
+        is_global: bool = None,
+    ):
+        if ref is not None:
+            self.ref = ref
+        if is_global is not None:
+            self.is_global = is_global

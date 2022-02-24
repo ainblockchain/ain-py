@@ -12,6 +12,7 @@ requirements = [
     "jsonrpcclient",
     "mnemonic",
     "bip32",
+    "snapshottest",
 ]
 
 test_requirements = []

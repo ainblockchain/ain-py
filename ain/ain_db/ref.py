@@ -12,6 +12,7 @@ from ain.types import (
     EvalRuleInput,
     EvalOwnerInput,
     MatchInput,
+    GetOptions,
 )
 from ain.ain_db.push_id import PushId
 
@@ -63,33 +64,33 @@ class Reference:
         """
         return await self.push().setValue(ValueOnlyTransactionInput(value=value))
 
-    async def getValue(self, path: str = None) -> Any:
+    async def getValue(self, path: str = None, options: GetOptions = None) -> Any:
         """
         Returns the value at the path.
         """
-        req = self.buildGetRequest("GET_VALUE", Reference.extendPath(self.path, path))
+        req = self.buildGetRequest("GET_VALUE", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
-    async def getRule(self, path: str = None) -> Any:
+    async def getRule(self, path: str = None, options: GetOptions = None) -> Any:
         """
         Returns the rule at the path.
         """
-        req = self.buildGetRequest("GET_RULE", Reference.extendPath(self.path, path))
+        req = self.buildGetRequest("GET_RULE", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
-    async def getOwner(self, path: str = None) -> Any:
+    async def getOwner(self, path: str = None, options: GetOptions = None) -> Any:
         """
         Returns the owner config at the path.
         """
-        req = self.buildGetRequest("GET_OWNER", Reference.extendPath(self.path, path))
+        req = self.buildGetRequest("GET_OWNER", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
-    async def getFunction(self, path: str = None) -> Any:
+    async def getFunction(self, path: str = None, options: GetOptions = None) -> Any:
         """
         Returns the function config at the path.
         """
-        req = self.buildGetRequest("GET_FUNCTION", Reference.extendPath(self.path, path))
-        return self._ain.provider.send("ain_get", req)
+        req = self.buildGetRequest("GET_FUNCTION", Reference.extendPath(self.path, path), options)
+        return await self._ain.provider.send("ain_get", req)
 
     async def get(self, gets: List[GetOperation]) -> Any:
         """
@@ -123,14 +124,17 @@ class Reference:
         txInput = ValueOnlyTransactionInput()
         if transactionInput is not None:
             txInput = transactionInput
-        txInput.value = None
         ref = Reference.extendPath(self._path, getattr(txInput, "ref", None))
+        operation = SetOperation(
+            type="SET_VALUE",
+            ref=ref,
+            is_global=getattr(txInput, "is_global", self._isGlobal),
+        )
+        operation.value = None
         return await self._ain.sendTransaction(
-            Reference.extendSetTransactionInput(
-                txInput,
-                ref,
-                "SET_VALUE",
-                self._isGlobal
+            TransactionInput(
+                operation=operation,
+                parent_tx_hash=getattr(txInput, "parent_tx_hash", None),
             )
         )
 
@@ -284,11 +288,14 @@ class Reference:
         return await self._ain.provider.send("ain_matchOwner", {"ref": ref})
 
     @staticmethod
-    def buildGetRequest(type: GetOperationType, ref: str) -> dict:
+    def buildGetRequest(type: GetOperationType, ref: str, options: GetOptions = None) -> dict:
         """
         Builds a get request.
         """
-        return {"type": type, "ref": Reference.sanitizeRef(ref)}
+        request = {"type": type, "ref": Reference.sanitizeRef(ref)}
+        if options is not None:
+            request.update(options.__dict__)
+        return request
 
     @staticmethod
     def extendPath(basePath: str = None, extension: str = None) -> str:

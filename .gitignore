@@ -28,6 +28,7 @@ var/
 
 # Unit test
 .tox/
+tests/snapshots
 
 # pyenv
 .python-version
