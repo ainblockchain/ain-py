@@ -334,8 +334,12 @@ class Reference:
         return TransactionInput(
             operation=operation,
             parent_tx_hash=getattr(input, "parent_tx_hash", None),
+            nonce=getattr(input, "nonce", None),
+            address=getattr(input, "address", None),
+            timestamp=getattr(input, "timestamp", None),
+            gas_price=getattr(input, "gas_price", None),
         )
-
+        
     @staticmethod
     def extendSetMultiTransactionInput(
         input: SetMultiTransactionInput,
@@ -361,13 +365,14 @@ class Reference:
                 )
             )
             
-        operatiron = SetMultiOperation(type, op_list)
+        operation = SetMultiOperation(type, op_list)
         return TransactionInput(
-            operation=operatiron,
+            operation=operation,
             parent_tx_hash=getattr(input, "parent_tx_hash", None),
             nonce=getattr(input, "nonce", None),
             address=getattr(input, "address", None),
             timestamp=getattr(input, "timestamp", None),
+            gas_price=getattr(input, "gas_price", None),
         )
 
     @staticmethod
