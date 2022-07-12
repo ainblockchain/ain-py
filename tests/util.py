@@ -35,3 +35,7 @@ async def waitUntilTxFinalized(testNode: str, txHash: str) -> bool:
             pass
         await asyncio.sleep(5)
     return False
+
+def eraseProtoVer(ret: dict):
+    ret["protoVer"] = "erased"
+    return ret
