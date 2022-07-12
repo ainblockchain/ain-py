@@ -1,5 +1,3 @@
-import aiohttp
-import asyncio
 import json
 import platform
 import re
@@ -9,6 +7,7 @@ from ain.ain import Ain
 from ain.provider import JSON_RPC_ENDPOINT
 from ain.utils import *
 from ain.utils.V3Keystore import *
+from ain.errors import *
 from ain.types import *
 from .data import (
     mnemonic,
@@ -21,18 +20,16 @@ from .data import (
     accountSk,
     transferAddress,
 )
+from .util import (
+    asyncTest,
+    getRequest,
+    postRequest,
+    waitUntilTxFinalized,
+)
+
 TX_PATTERN = re.compile("0x[0-9a-fA-F]{64}")
 PY_VERSION = platform.python_version().replace(".", "")
 APP_NAME = "bfan"
-
-def asyncTest(coroutine):
-    def wrapper(*args, **kwargs):
-        loop = asyncio.new_event_loop()
-        try:
-            return loop.run_until_complete(coroutine(*args, **kwargs))
-        finally:
-            loop.close()
-    return wrapper
 
 class TestNetwork(TestCase):
     def testChainId(self):
@@ -65,7 +62,7 @@ class TestNetwork(TestCase):
         ain = Ain(testNode)
         res = await ain.net.checkProtocolVersion()
         self.assertEqual(res["code"], 0)
-        self.assertEqual(res["result"], "Success")
+        self.assertEqual(res["result"], True)
 
 class TestWallet(TestCase):
     def testCreateAccount(self):
@@ -157,7 +154,7 @@ class TestWallet(TestCase):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
         balanceBefore = await ain.wallet.getBalance()
-        await ain.wallet.transfer(transferAddress, 100, nonce=-1, gas_price=0)
+        await ain.wallet.transfer(transferAddress, 100, nonce=-1)
         balanceAfter = await ain.wallet.getBalance()
         self.assertEqual(balanceBefore - 100, balanceAfter)
 
@@ -175,31 +172,6 @@ class TestWallet(TestCase):
         self.assertEqual(ain.wallet.verifySignature(tx, sig, accountAddress), True)
         self.assertEqual(ecVerifySig(tx, sig, accountAddress, 0), False)
         self.assertEqual(ain.wallet.recover(sig), accountAddress)
-
-async def getRequest(url: str):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            res = await response.read()
-            return json.loads(res)
-
-async def postRequest(url: str, params: dict = {}):
-    dump = json.dumps(params)
-    async with aiohttp.ClientSession() as session:
-        async with session.post(url, json=json.loads(dump)) as response:
-            res = await response.read()
-            return json.loads(res)
-
-async def waitUntilTxFinalized(txHash: str) -> bool:
-    MAX_ITERATION = 20
-    for _ in range(MAX_ITERATION):
-        try:
-            res = await getRequest(f"{testNode}/get_transaction?hash={txHash}")
-            if res["result"]["is_finalized"]:
-                return True
-        except:
-            pass
-        await asyncio.sleep(5)
-    return False
             
 class TestCore(TestCase):
     ain: Ain
@@ -233,7 +205,7 @@ class TestCore(TestCase):
             ],
             "nonce": -1
         })
-        await waitUntilTxFinalized(stakeForApps["result"]["tx_hash"])
+        await waitUntilTxFinalized(testNode, stakeForApps["result"]["tx_hash"])
 
         createApps = await postRequest(f"{testNode}/set", {
             "op_list": [
@@ -250,7 +222,7 @@ class TestCore(TestCase):
             ],
             "nonce": -1
         })
-        await waitUntilTxFinalized(createApps["result"]["tx_hash"])
+        await waitUntilTxFinalized(testNode, createApps["result"]["tx_hash"])
 
     @asyncTest
     async def test00GetBlock(self):
@@ -324,9 +296,44 @@ class TestCore(TestCase):
 
         sig = self.ain.wallet.signTransaction(tx)
         res = await self.ain.sendSignedTransaction(sig, tx)
-        self.assertEqual(res["result"]["code"], 0)
         targetTxHash = res["tx_hash"]
+        self.assertFalse("code" in res)
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
+        self.assertEqual(res["result"]["code"], 0)
+
+    @asyncTest
+    async def test00SendSignedTransactionInvalidSignature(self):
+        tx = TransactionBody(
+            nonce=-1,
+            gas_price=500,
+            timestamp=getTimestamp(),
+            operation=SetOperation(
+                type="SET_OWNER",
+                ref=f"/apps/{APP_NAME}{PY_VERSION}",
+                value={
+                    ".owner": {
+                        "owners": {
+                            "*": {
+                                "write_owner": True,
+                                "write_rule": True,
+                                "write_function": True,
+                                "branch_owner": True
+                            }
+                        }
+                    }
+                }
+            )
+        )
+
+        sig = ""
+        raised = False
+        try:
+            await self.ain.sendSignedTransaction(sig, tx)
+        except BlockchainError as e:
+            self.assertEqual(e.code, 30302)
+            self.assertEqual(e.message, "Missing properties.")
+            raised = True
+        self.assertTrue(raised)
 
     @asyncTest
     async def test01SendTransactionBatch(self):
@@ -424,6 +431,17 @@ class TestCore(TestCase):
         self.assertEqual(resps[3]["result"]["code"], 0)
         self.assertEqual(resps[4]["result"]["code"], 12103)
         self.assertEqual(resps[5]["result"]["code"], 12302)
+
+    @asyncTest
+    async def test01SendTransactionBatchWithEmptyList(self):
+        raised = False
+        try:
+            await self.ain.sendTransactionBatch([])
+        except BlockchainError as e:
+            self.assertEqual(e.code, 30401)
+            self.assertEqual(e.message, "Invalid batch transaction format.")
+            raised = True
+        self.assertTrue(raised)
 
 class TestDatabase(SnapshotTestCase):
     ain: Ain
@@ -574,6 +592,17 @@ class TestDatabase(SnapshotTestCase):
                 ref="deeper/path"
             )
         ]))
+
+    @asyncTest
+    async def test01GetWithEmptyList(self):
+        raised = False
+        try:
+            await self.ain.db.ref(self.allowedPath).get([])
+        except BlockchainError as e:
+            self.assertEqual(e.code, 30006)
+            self.assertEqual(e.message, "Invalid op_list given")
+            raised = True
+        self.assertTrue(raised)
 
     @asyncTest
     async def test01GetWithOptions(self):
