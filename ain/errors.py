@@ -1,6 +1,3 @@
-import string
-
-
 class BlockchainError(Exception):
     code: int
     message: str
