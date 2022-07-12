@@ -245,7 +245,7 @@ class TestCore(TestCase):
         self.assertDictEqual(await self.ain.getValidators(hash), validators)
 
     @asyncTest
-    async def test00Transaction(self):
+    async def test00SendTransaction(self):
         op = SetOperation(
             type="SET_OWNER",
             ref=f"/apps/test{PY_VERSION}",
