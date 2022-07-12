@@ -149,9 +149,6 @@ class TestWallet(TestCase):
         ain.wallet.addAndSetDefaultAccount(accountSk)
         self.assertGreaterEqual(await ain.wallet.getBalance(), 0)
 
-    # TODO(kriii): This test causes failure for now,
-    #               but it is ok when increased the pool size limit.
-    #               So, need to lower the overall transition density.
     @asyncTest
     async def testTransfer(self):
         ain = Ain(testNode)
