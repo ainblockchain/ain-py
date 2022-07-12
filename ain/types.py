@@ -76,6 +76,16 @@ GetOperationType = Literal["GET_VALUE", "GET_RULE", "GET_OWNER", "GET_FUNCTION"]
 
 OwnerPermission = Literal["branch_owner", "write_function", "write_owner", "write_rule"]
 
+class AinOptions():
+    rawResultMode: Optional[bool]
+    
+    def __init__(
+        self,
+        rawResultMode: bool = None,
+    ):
+        if rawResultMode is not None:
+            self.rawResultMode = rawResultMode
+
 class GetOptions():
     is_global: Optional[bool]
     is_final: Optional[bool]
