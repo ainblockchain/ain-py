@@ -245,6 +245,25 @@ class TestCore(TestCase):
         self.assertDictEqual(await self.ain.getValidators(hash), validators)
 
     @asyncTest
+    async def test00ValidateAppNameTrue(self):
+        res = await self.ain.validateAppName("test_new")
+        self.assertEqual(res["is_valid"], True)
+        self.assertEqual(res["result"], True)
+        self.assertEqual(res["code"], 0)
+        self.assertTrue("protoVer" in res)
+
+    @asyncTest
+    async def test00ValidateAppNameFalse(self):
+        raised = False
+        try:
+            await self.ain.validateAppName("app/path")
+        except BlockchainError as e:
+            self.assertEqual(e.code, 30601)
+            self.assertEqual(e.message, "Invalid app name for state label: app/path")
+            raised = True
+        self.assertTrue(raised)
+
+    @asyncTest
     async def test00SendTransaction(self):
         op = SetOperation(
             type="SET_OWNER",

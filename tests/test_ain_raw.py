@@ -75,6 +75,23 @@ class TestCoreRaw(TestCase):
             "nonce": -1
         })
         await waitUntilTxFinalized(testNode, createApps["result"]["tx_hash"])
+    
+    @asyncTest
+    async def test00ValidateAppNameTrueRaw(self):
+        res = await self.ain.validateAppName("test_new")
+        self.assertEqual(res["is_valid"], True)
+        self.assertEqual(res["result"], True)
+        self.assertEqual(res["code"], 0)
+        self.assertTrue("protoVer" in res)
+
+    @asyncTest
+    async def test00ValidateAppNameFalseRaw(self):
+        res = await self.ain.validateAppName("app/path")
+        self.assertEqual(res["is_valid"], False)
+        self.assertEqual(res["result"], False)
+        self.assertEqual(res["code"], 30601)
+        self.assertEqual(res["message"], "Invalid app name for state label: app/path")
+        self.assertTrue("protoVer" in res)
 
     @asyncTest
     async def test00SendSignedTransactionRaw(self):
