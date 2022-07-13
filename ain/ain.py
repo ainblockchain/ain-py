@@ -121,6 +121,14 @@ class Ain:
             "ain_getStateUsage", {"app_name": appName}
         )
 
+    async def validateAppName(self, appName: str) -> dict:
+        """
+        Validate the given app name.
+        """
+        return await self.provider.send(
+            "ain_validateAppName", {"app_name": appName}
+        )
+
     async def sendTransaction(self, transactionObject: TransactionInput) -> dict:
         """
         Signs and sends a transaction to the network
