@@ -67,7 +67,7 @@ class Wallet:
         """
         return address in self.accounts
 
-    def add(self, privateKey: str) -> str:
+    def add(self, privateKey: Union[str, bytes]) -> str:
         """
         Adds a new account from the given private key.
         """

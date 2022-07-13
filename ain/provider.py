@@ -3,6 +3,7 @@ import json
 from urllib.parse import urlparse, urljoin
 from jsonrpcclient import request, parse, Ok, Error
 from typing import TYPE_CHECKING, Any
+from ain.errors import BlockchainError
 
 if TYPE_CHECKING:
     from ain.ain import Ain
@@ -35,9 +36,14 @@ class Provider:
                 res = await response.read()
                 parsed = parse(json.loads(res))
                 if isinstance(parsed, Ok):
-                    if "code" in parsed.result:
-                        return parsed.result
-                    return parsed.result.get("result", None)
+                    rawResult = parsed.result
+                    if self._ain.rawResultMode:
+                        return rawResult
+                    if not isinstance(rawResult, dict) or not ("code" not in rawResult or rawResult["code"] == 0):
+                        raise BlockchainError(rawResult["code"], rawResult["message"])
+                    if "code" in rawResult:
+                        return rawResult
+                    return rawResult.get("result", None)
                 if isinstance(parsed, Error):
                     return parsed
                 raise AssertionError("The response must be singular.")

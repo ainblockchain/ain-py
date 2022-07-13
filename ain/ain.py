@@ -3,20 +3,22 @@ from typing import List, Union
 from ain.provider import Provider
 from ain.net import Network
 from ain.wallet import Wallet
-from ain.types import TransactionInput, TransactionBody, ValueOnlyTransactionInput
+from ain.types import AinOptions, TransactionInput, TransactionBody, ValueOnlyTransactionInput
 from ain.ain_db.db import Database
 from ain.utils import getTimestamp, toChecksumAddress
 
 class Ain:
     provider: Provider
     chainId: int
+    rawResultMode: bool
     db: Database
     net: Network
     wallet: Wallet
 
-    def __init__(self, providerUrl: str, chainId: int = 0):
+    def __init__(self, providerUrl: str, chainId: int = 0, ainOptions: AinOptions = AinOptions()):
         self.provider = Provider(self, providerUrl)
         self.chainId = chainId
+        self.rawResultMode = getattr(ainOptions, "rawResultMode", False)
         self.net = Network(self.provider)
         self.wallet = Wallet(self, self.chainId)
         self.db = Database(self, self.provider)
