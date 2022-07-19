@@ -16,7 +16,7 @@ from ain.utils import (
     ecRecoverPub,
     ecVerifySig,
 )
-from ain.utils.V3Keystore import V3Keystore, V3KeystoreOptions
+from ain.utils.v3keystore import V3Keystore, V3KeystoreOptions
 
 if TYPE_CHECKING:
     from ain.ain import Ain

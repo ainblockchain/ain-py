@@ -4,7 +4,7 @@ from ain.provider import Provider
 from ain.net import Network
 from ain.wallet import Wallet
 from ain.types import AinOptions, TransactionInput, TransactionBody, ValueOnlyTransactionInput
-from ain.ain_db.db import Database
+from ain.db import Database
 from ain.utils import getTimestamp, toChecksumAddress
 
 class Ain:

@@ -14,7 +14,7 @@ from ain.types import (
     MatchInput,
     GetOptions,
 )
-from ain.ain_db.push_id import PushId
+from ain.db.push_id import PushId
 
 if TYPE_CHECKING:
     from ain.ain import Ain

@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from ain.ain_db.ref import Reference
+from ain.db.ref import Reference
 
 if TYPE_CHECKING:
     from ain.ain import Ain
