@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
 
-<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T16:21:09Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.net", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T16:51:32Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.net", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
 
 <!--
 Using this variable directly instead of using `JSON.parse` is deprecated.
@@ -67,13 +67,16 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <li class="toctree-l3"><a class="reference internal" href="ain.ain.html">ain.ain module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.account.html">ain.account module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.provider.html">ain.provider module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ain.net module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ain.net module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ain.net.Network"><code class="docutils literal notranslate"><span class="pre">Network</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="ain.wallet.html">ain.wallet module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.types.html">ain.types module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.errors.html">ain.errors module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ain.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ain.html#module-ain">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -103,8 +106,69 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ain-net-module">
-<h1>ain.net module<a class="headerlink" href="#ain-net-module" title="Permalink to this heading"></a></h1>
+  <section id="module-ain.net">
+<span id="ain-net-module"></span><h1>ain.net module<a class="headerlink" href="#module-ain.net" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ain.net.Network">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.net.</span></span><span class="sig-name descname"><span class="pre">Network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.provider.html#ain.provider.Provider" title="ain.provider.Provider"><span class="pre">Provider</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for the AIN Blockchain network status checker.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.checkProtocolVersion">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkProtocolVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.checkProtocolVersion" title="Permalink to this definition"></a></dt>
+<dd><p>Checks the protocol version.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getEventHandlerNetworkInfo">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getEventHandlerNetworkInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getEventHandlerNetworkInfo" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the event handler network information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getNetworkId">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getNetworkId</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getNetworkId" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the id of the network the node is connected to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getPeerCount">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getPeerCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getPeerCount" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of peers the provider node is connected to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getProtocolVersion">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getProtocolVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getProtocolVersion" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the protocol version of the node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.isListening">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isListening</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.isListening" title="Permalink to this definition"></a></dt>
+<dd><p>Returns whether the node is listening for network connections.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.isSyncing">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isSyncing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.isSyncing" title="Permalink to this definition"></a></dt>
+<dd><p>Returns whether the node is syncing with the network or not.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ain.net.Network.protoVer">
+<span class="sig-name descname"><span class="pre">protoVer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#ain.net.Network.protoVer" title="Permalink to this definition"></a></dt>
+<dd><p>The protocol version of the blockchain.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ain.net.Network.provider">
+<span class="sig-name descname"><span class="pre">provider</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.provider.html#ain.provider.Provider" title="ain.provider.Provider"><span class="pre">Provider</span></a></em><a class="headerlink" href="#ain.net.Network.provider" title="Permalink to this definition"></a></dt>
+<dd><p>The <cite>Provider</cite> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 

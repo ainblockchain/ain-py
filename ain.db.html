@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
 
-<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T16:21:09Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.db", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T16:51:32Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.db", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
 
 <!--
 Using this variable directly instead of using `JSON.parse` is deprecated.
@@ -65,13 +65,14 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <li class="toctree-l2 current"><a class="reference internal" href="ain.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ain.db package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="ain.db.ref.html">ain.db.ref module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.db.Database"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ain.utils.html">ain.utils package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ain.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ain.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ain.html#module-ain">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -110,6 +111,31 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 </ul>
 </div>
 <p class="rubric">Module contents</p>
+<span class="target" id="module-ain.db"></span><dl class="py class">
+<dt class="sig sig-object py" id="ain.db.Database">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.db.</span></span><span class="sig-name descname"><span class="pre">Database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Ain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.provider.html#ain.provider.Provider" title="ain.provider.Provider"><span class="pre">Provider</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.db.Database" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for the AIN Database instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.db.Database.ref">
+<span class="sig-name descname"><span class="pre">ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.db.ref.html#ain.db.ref.Reference" title="ain.db.ref.Reference"><span class="pre">Reference</span></a></span></span><a class="headerlink" href="#ain.db.Database.ref" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a <cite>Reference</cite> to the given path in the AIN Database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to create a <cite>Reference</cite>.
+If <cite>path</cite> is <cite>None</cite>, references the root. Defaults to <cite>None</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <cite>Reference</cite> at the path.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ain.db.ref.html#ain.db.ref.Reference" title="ain.db.ref.Reference">Reference</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
