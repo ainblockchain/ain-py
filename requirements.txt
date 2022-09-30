@@ -7,3 +7,4 @@ mnemonic
 bip32
 snapshottest
 sphinx-rtd-theme
+readthedocs-sphinx-ext
