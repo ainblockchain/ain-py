@@ -224,17 +224,20 @@ class Ain:
         """Sends a transaction that deposits AIN for consensus staking.
 
         Args:
-            input (ValueOnlyTransactionInput): The value only transaction input for deposit AIN value.
+            input (ValueOnlyTransactionInput): The value only transaction input to deposit AIN value.
             
         Returns:
             The transaction results.
         """
         return self.__stakeFunction("/deposit/consensus", input)
 
-    def withdrawConsensusStake(self) -> Any:
+    def withdrawConsensusStake(self, input: ValueOnlyTransactionInput) -> Any:
         """
         Sends a transaction that withdraws AIN for consensus staking.
 
+        Args:
+            input (ValueOnlyTransactionInput): The value only transaction input to withdraw AIN value.
+            
         Returns:
             The transaction results.
         """
@@ -320,7 +323,7 @@ class Ain:
         """
         if not hasattr(input, "value"):
             raise ValueError("a value should be specified.")
-        if type(input) is not int:
+        if type(input.value) is not int:
             raise ValueError("value has to be a int.")
         input.address = self.wallet.getImpliedAddress(getattr(input, "address", None))
         ref = self.db.ref(f'{path}/{input.address}').push()
