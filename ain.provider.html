@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
 
-<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T16:11:36Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.provider", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T16:16:50Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.provider", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
 
 <!--
 Using this variable directly instead of using `JSON.parse` is deprecated.
@@ -66,17 +66,14 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <li class="toctree-l2 current"><a class="reference internal" href="ain.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="ain.ain.html">ain.ain module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.account.html">ain.account module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ain.provider module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ain.provider.Provider"><code class="docutils literal notranslate"><span class="pre">Provider</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ain.provider module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.net.html">ain.net module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.wallet.html">ain.wallet module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.types.html">ain.types module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ain.errors.html">ain.errors module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ain.html#module-ain">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ain.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -106,44 +103,8 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-ain.provider">
-<span id="ain-provider-module"></span><h1>ain.provider module<a class="headerlink" href="#module-ain.provider" title="Permalink to this heading"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="ain.provider.Provider">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.provider.</span></span><span class="sig-name descname"><span class="pre">Provider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Ain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.provider.Provider" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class for the AIN Blockchain node provider.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="ain.provider.Provider.send">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rpcMethod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.provider.Provider.send" title="Permalink to this definition"></a></dt>
-<dd><p>Creates the JSON-RPC payload and sends it to the node.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rpcMethod</strong> (<em>str</em>) – The JSON-RPC method name.</p></li>
-<li><p><strong>params</strong> (<em>dict</em>) – The parameters for the payload.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The response result.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ain.provider.Provider.apiEndPoint">
-<span class="sig-name descname"><span class="pre">apiEndPoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#ain.provider.Provider.apiEndPoint" title="Permalink to this definition"></a></dt>
-<dd><p>The JSON-RPC API endpoint of the node provider.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ain.provider.Provider.endPoint">
-<span class="sig-name descname"><span class="pre">endPoint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#ain.provider.Provider.endPoint" title="Permalink to this definition"></a></dt>
-<dd><p>The endpoint of the node provider.</p>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="ain-provider-module">
+<h1>ain.provider module<a class="headerlink" href="#ain-provider-module" title="Permalink to this heading"></a></h1>
 </section>
 
 
