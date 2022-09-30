@@ -16,8 +16,13 @@ from bip32 import BIP32 # type: ignore
 from ain.types import ECDSASignature, ECIESEncrypted, TransactionBody
 
 def encodeVarInt(number: int) -> bytes:
-    """
-    Encodes the number as bitcoin variable length integer
+    """Encodes the number as bitcoin variable length integer
+
+    Args:
+        number (int): A number that you want to encode.
+
+    Returns:
+        bytes: The encoded number as bitcoin variable length integer.
     """
     MAX_SAFE_INTEGER = 9007199254740991
     if number < 0 or number > MAX_SAFE_INTEGER:
@@ -43,60 +48,117 @@ SIGNED_MESSAGE_PREFIX_LENGTH = encodeVarInt(len(SIGNED_MESSAGE_PREFIX))
 AIN_HD_DERIVATION_PATH = "m/44'/412'/0'/0/"
 
 def getTimestamp() -> int:
-    """
-    Returns the current timestamp.
+    """Gets the current timestamp.
+    
+    Returns:
+        int:
+            The current timestamp.
     """
     return int(time.time() * 1000)
 
-def addHexPrefix(string: str) -> str:
+def addHexPrefix(input: str) -> str:
+    """Adds the hex prefix('0x') to the given string if it does not hex prefixed.
+    
+    Args:
+        input (str): The string that you want to add prefix.
+    
+    Returns:
+        str:
+            The hex prefixed string.
     """
-    Adds '0x' to the given string if it does not already start with '0x'.
-    """
-    return string if isHexPrefixed(string) else ("0x" + string)
+    return input if isHexPrefixed(input) else ("0x" + input)
 
 def bytesToHex(input: bytes) -> str:
-    """
-    Converts the given bytes into a hex prefixed hex string.
+    """Converts the given bytes into the hex prefixed hex string.
+
+    Args:
+        input (bytes): The bytes that you want to convert into hex.
+
+    Returns:
+        str:
+            The hex converted bytes.
     """
     return "0x" + input.hex()
 
-def isValidAddress(string: str) -> bool:
-    """
-    Checks if the given string is a valid address.
+def isValidAddress(address: str) -> bool:
+    """Checks if the given string is a valid address.
+
+    Args:
+        address (str): The address that you want to check.
+
+    Returns:
+        bool:
+            `True`, if the `address` is valid address.
+            `False`, if not.
     """
     pattern = re.compile("0x[0-9a-fA-F]{40}")
-    return pattern.fullmatch(string) is not None
+    return pattern.fullmatch(address) is not None
 
-def isHexString(string: str) -> bool:
-    """
-    Checks if the given string is a hex string.
+def isHexString(input: str) -> bool:
+    """Checks if the given string is a hex string.
+    
+    Args:
+        input (str): The string that you want to check.
+    
+    Returns:
+        bool:
+            `True`, if the `input` is hex string.
+            `False`, if not.
     """
     pattern = re.compile("0x[0-9a-fA-F]*")
-    return pattern.fullmatch(string) is not None
+    return pattern.fullmatch(input) is not None
 
-def isHexPrefixed(string: str) -> bool:
+def isHexPrefixed(input: str) -> bool:
+    """Checks if the given string is prefixed with `0x`.
+        
+    Args:
+        input (str): The string that you want to check.
+    
+    Returns:
+        bool:
+            `True`, if the `input` is hex prefixed.
+            `False`, if not.
     """
-    Checks if the given string is prefixed with `0x`.
-    """
-    return string.startswith("0x")
+    return input.startswith("0x")
 
-def stripHexPrefix(string: str) -> str:
+def stripHexPrefix(input: str) -> str:
+    """Strips `0x` from the given string, if that is hex prefixed.
+    
+    Args:
+        input (str): The string that you want to strip.
+    
+    Returns:
+        str:
+            The hex prefix stripped string, if `input` is hex prefixed.
+            `input` itself, if it not hex prefixed.
     """
-    Removes `0x` from the given string.
-    """
-    return string[2:] if isHexPrefixed(string) else string
+    return input[2:] if isHexPrefixed(input) else input
 
-def padToEven(string: str) -> str:
+def padToEven(input: str) -> str:
+    """Pads the leading zero into the given string to have an even length.
+
+    Args:
+        input (str): The string that you want to pad.
+    
+    Returns:
+        str:
+            The leading zero padded string, if `input` is odd lengthed.
+            `input` itself, if it is even lengthed.
     """
-    Pads the given string to have an even length.
-    """
-    return string if len(string) % 2 == 0 else ("0" + string)
+    return input if len(input) % 2 == 0 else ("0" + input)
 
 def toBytes(input: Any) -> bytes:
-    """
-    Attempts to turn a value into a bytes,
-    As input it supports bytes, list(of ints), string, int, None.
+    """Attempts to convert a input into a bytes,
     This function is equivalent to `toBuffer` from `@ainblockchain/ain-util`.
+
+    Args:
+        input: The input that you want to convert.
+            It supports bytes, list(of ints), string, int, and None.
+            If `input` is unsupported type, raises `TypeError`.
+
+    Returns:
+        bytes:
+            The converted bytes.
     """
     if type(input) is bytes:
         pass
@@ -116,8 +178,15 @@ def toBytes(input: Any) -> bytes:
     return input
 
 def toChecksumAddress(address: str) -> str:
-    """
-    Returns a checksummed address.
+    """Returns a checksummed address.
+
+    Args:
+        address (str): The address that you want to convert.
+            If `address` isn't valid, raises `ValueError`.
+
+    Returns:
+        str:
+            The checksummed address.
     """
     if not isValidAddress(address):
         raise ValueError("Invalid address")
@@ -135,17 +204,34 @@ def toChecksumAddress(address: str) -> str:
     return ret
 
 def keccak(input: Any, bits: int = 256) -> bytes:
+    """Creates the Keccak hash of the input.
+
+    Args:
+        input: The input that you want to create hash.
+            Note that `input` will be converted with `toBytes` method.
+            If `input` is unsupported type, raises `TypeError`.
+        bits (int): The size of the hash, in (224, 456, 384, 512).
+            Defaults to 256.
+        
+    Returns:
+        bytes:
+            The Keccak hash of the input.
     """
-    Creates Keccak hash of the input.
-    """
-    input = toBytes(input)
+    inputBytes = toBytes(input)
     k = _keccak.new(digest_bits=bits)
-    k.update(input)
+    k.update(inputBytes)
     return k.digest()
 
-def hashTransaction(transaction: Union[TransactionBody, str]):
-    """
-    Generates keccak hash using a transaction body.
+def hashTransaction(transaction: Union[TransactionBody, str]) -> bytes:
+    """Creates the Keccak-256 hash of the transaction body.
+
+    Args:
+        transaction (Union[TransactionBody, str]):
+            The transaction that you want to create hash.
+
+    Returns:
+        bytes:
+            The Keccak hash of the transaction.
     """
     if type(transaction) is TransactionBody:
         transaction = json.dumps(
@@ -156,10 +242,18 @@ def hashTransaction(transaction: Union[TransactionBody, str]):
         )
     return keccak(keccak(transaction))
 
-def hashMessage(message: Any):
-    """
-    Returns the bitcoin's varint encoding of keccak-256 hash of `message`,
+def hashMessage(message: Any) -> bytes:
+    """Creates the bitcoin's varint encoding of Keccak-256 hash of the message,
     prefixed with the header `AINetwork Signed Message:`.
+
+    Args:
+        message: The message that you want to create hash.
+            Note that `message` should be convertible with :meth:`toBytes`.
+            If `message` is unsupported type, raises `TypeError`.
+    
+    Returns:
+        bytes:
+            The bitcoin's varint encoding of Keccak-256 hash of the message.
     """
     msgBytes = toBytes(message)
     msgLenBytes = encodeVarInt(len(msgBytes))
@@ -172,8 +266,16 @@ def hashMessage(message: Any):
     return keccak(keccak(dataBytes))
 
 def ecSignHash(msgHash: bytes, privateKey: bytes, chainId: int = 0) -> ECDSASignature:
-    """
-    Returns the ECDSA signature of a message hash.
+    """Returns the ECDSA signature of a message hash.
+
+    Args:
+        msgHash (bytes): The message hash.
+        privateKey (bytes): The private key for the signature.
+        chainId (int): The chain ID of the provider. Defaults to 0.
+
+    Returns:
+        ECDSASignature:
+            The object of the ECDSA signature.
     """
     pbK = PrivateKey(privateKey)
     sig = pbK.sign_recoverable(msgHash, hasher=None)
@@ -183,25 +285,50 @@ def ecSignHash(msgHash: bytes, privateKey: bytes, chainId: int = 0) -> ECDSASign
     return ECDSASignature(r, s, v)
 
 def ecSignMessage(message: Any, privateKey: bytes, chainId: int = 0) -> str:
-    """
-    igns a message with a private key and returns a string signature.
+    """Signs a message with a private key and returns a string signature.
+
+    Args:
+        message: The message that you want to sign.
+            Note that `message` should be convertible with :meth:`toBytes`.
+            If `message` is unsupported type, raises `TypeError`.
+        privateKey (bytes): The private key for the signature.
+        chainId (int): The chain ID of the provider. Defaults to 0.
+    
+    Returns:
+        str:
+            The hex prefixed string signature.
     """
     hashedMsg = hashMessage(message)
     signature = ecSignHash(hashedMsg, privateKey, chainId)
     return "0x" + hashedMsg.hex() + signature.r.hex() + signature.s.hex() + toBytes(signature.v).hex()
 
 def ecSignTransaction(txData: TransactionBody, privateKey: bytes, chainId: int = 0) -> str:
-    """
-    Signs a transaction body with a private key and returns a string signature.
+    """Signs a transaction body with a private key and returns a string signature.
+
+    Args:
+        txData (TransactionBody): The transaction that you want to sign.
+        privateKey (bytes): The private key for the signature.
+        chainId (int): The chain ID of the provider. Defaults to 0.
+
+    Returns:
+        str:
+            The hex prefixed string signature.
     """
     hashedTx = hashTransaction(txData)
     signature = ecSignHash(hashedTx, privateKey, chainId)
     return "0x" + hashedTx.hex() + signature.r.hex() + signature.s.hex() + toBytes(signature.v).hex()
 
 def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = 0) -> bytes:
-    """
-    ECDSA public key recovery from signature.
-    Returns Recovered public key.
+    """Recovers the public key from ECDSA signature.
+
+    Args:
+        msgHash (bytes): The hash of the message.
+        signature (ECDSASignature): The object of the ECDSA signature.
+        chainId (int): The chain ID of the provider. Defaults to 0.
+
+    Returns:
+        str:
+            The recovered public key.
     """
     recovery = signature.v - (27 if chainId == 0 else chainId * 2 + 35)
     if recovery != 0 and recovery != 1:
@@ -213,9 +340,19 @@ def ecRecoverPub(msgHash: bytes, signature: ECDSASignature, chainId: int = 0) ->
         raise ValueError('Public key verify failed')
     return senderPubKey.format(False)
 
-def ecVerifySig(data: Any, signature: str, address: str, chainId: int = 0):
-    """
-    Checks if the signature is valid.
+def ecVerifySig(data: Any, signature: str, address: str, chainId: int = 0) -> bool:
+    """Verifies if the signature is valid.
+
+    Args:
+        data: The message or transaction that you want to verify.
+        signature (str): The hex prefixed string signature.
+        address (str): The address of the signature.
+        chainId (int): The chain ID of the provider. Defaults to 0.
+
+    Returns:
+        bool:
+            `True`, if the given signature is a valid signature.
+            `False`, if not.
     """
     sigBytes = toBytes(signature)
     lenHash = len(sigBytes) - 65
@@ -237,9 +374,17 @@ def ecVerifySig(data: Any, signature: str, address: str, chainId: int = 0):
     return areSameAddresses(address, addr)
 
 def isValidPrivate(privateKey: bytes) -> bool:
-    """
-    Checks whether the `privateKey` is a valid private key (follows the rules of the
-    curve secp256k1).
+    """Checks whether the `privateKey` is a valid private key
+    (follows the rules of the curve `secp256k1`).
+
+    Args:
+        privateKey (bytes):
+            The private key of the AIN blockchain account that you want to check.
+
+    Returns:
+        bool:
+            `True`, if the given key is a valid private key.
+            `False`, if not.
     """
     try:
         if len(privateKey) != 32:
@@ -249,14 +394,21 @@ def isValidPrivate(privateKey: bytes) -> bool:
     except:
         return False
 
-def isValidPublic(publicKey: bytes, isSEC1: bool = False):
-    """
-    Checks whether the `publicKey` is a valid public key (follows the rules of the
-    curve secp256k1 and meets the AIN requirements).
+def isValidPublic(publicKey: bytes, isSEC1: bool = False) -> bool:
+    """Checks whether the `publicKey` is a valid public key
+    (follows the rules of the curve `secp256k1` and meets the AIN requirements).
 
-    args:
-        publicKey (bytes): The two points of an uncompressed key, unless sanitize is enabled
-        isSEC1 (bool): Accept public keys in other formats
+    Args:
+        publicKey (bytes):
+            The public key of the AIN blockchain account that you want to check.
+        isSEC1 (bool):
+            If `True`, public key should be SEC1 encoded one.
+            Defaults to `False`.
+    
+    Returns:
+        bool:
+            `True`, if the given key is a valid public key.
+            `False`, if not.
     """
     try:
         if len(publicKey) == 64:
@@ -270,33 +422,47 @@ def isValidPublic(publicKey: bytes, isSEC1: bool = False):
     return True
 
 def areSameAddresses(address1: str, address2: str) -> bool:
-    """
-    Checks if the two addresses are the same.
+    """Checks if the two addresses are the same.
+    
+    Args:
+        address1 (str): The first address.
+        address2 (str): The second address.
+    
+    Returns:
+        bool:
+            `True`, if the two addresses are the same.
+            `False`, if not.
     """
     return toChecksumAddress(address1) == toChecksumAddress(address2)
 
 def privateToPublic(privateKey: bytes) -> bytes:
-    """
-    Returns the public key of a given private key.
+    """Returns the public key of a given private key.
     
-    args:
-        privateKey (bytes): A private key must be 256 bits wide
+    Args:
+        privateKey (bytes): The private key of the AIN blockchain account.
+
+    Returns:
+        bytes:
+            The public key of a given private key.
     """
     prK = PrivateKey(privateKey)
     return prK.public_key.format(False)[1:]
 
 def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
-    """
-    Returns the AI Network address of a given public key.
+    """Returns the AIN blockchain address of the given public key,
+    which is the lower 160 bits of the Keccak-256 hash of the public key.
 
-    args:
+    Args:
         publicKey (Union[bytes, str]):
-            AIN public key | SEC1 encoded public key
-            When the type is `str`, it must be hex prefixed
-        isSEC1 (bool) : Key is SEC1 encoded
+            The public key of the AIN blockchain account or SEC1 encoded public key.
+            When the type is `str`, it must be hex prefixed.
+        isSEC1 (bool):
+            If `True`, public key should be SEC1 encoded one.
+            Defaults to `False`.
 
-    returns:
-        bytes: lower 160 bits of the hash of `publicKey`
+    Returns:
+        bytes:
+            The AIN blockchain address of the given public key.
     """
     if type(publicKey) is str:
         publicKeyBytes = toBytes(publicKey)
@@ -312,17 +478,36 @@ def pubToAddress(publicKey: Union[bytes, str], isSEC1: bool = False) -> bytes:
     return keccak(publicKeyBytes)[-20:]
 
 def privateToAddress(privateKey: bytes) -> str:
+    """Returns the checksummed AIN blockchain address of the given private key.
+
+    Args:
+        privateKey (bytes): The private key of an AIN blockchain account.
+
+    Returns:
+        str:
+            The checksummed AIN blockchain address of the given private key.
+    """
     return toChecksumAddress(bytesToHex(pubToAddress(privateToPublic(privateKey))))
 
 def generateMnemonic() -> str:
-    """
-    Returns a randomly generated mnemonic.
+    """Generates the random english mnemonic.
+
+    Returns:
+        str:
+            The randomly generated english mnemonic.
     """
     return Mnemonic("english").generate()
 
 def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
-    """
-    Returns an private key with the given mnemonic.
+    """Returns an private key with the given mnemonic.
+
+    Args:
+        mnemonic (str): The mnemonic of account.
+        index (int): The index of account. Defaults to 0.
+
+    Returns:
+        bytes:
+            The private key with the given mnemonic.
     """
     if index < 0:
         raise ValueError("index should be greater than 0")
@@ -337,8 +522,17 @@ def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
 
 # NOTE(kriii): Referenced https://github.com/bitchan/eccrypto/blob/master/index.js#L195-L258
 def encryptWithPublicKey(publicKey: Union[bytes, str], message: str) -> ECIESEncrypted:
-    """
-    Encrypts message with publicKey.
+    """Encrypts message with publicKey.
+
+    Args:
+        publicKey (Union[bytes, str]):
+            The public key.
+            When the type is `str`, it must be hex prefixed.
+        message (str): The message.
+
+    Returns:
+        ECIESEncrypted:
+            The object of the encrypted message.
     """
     if type(publicKey) is str:
         publicKeyBytes = bytes.fromhex(publicKey)
@@ -369,8 +563,15 @@ def encryptWithPublicKey(publicKey: Union[bytes, str], message: str) -> ECIESEnc
     return ECIESEncrypted(iv, ephemPublicKey, ciphertext, mac)
 
 def decryptWithPrivateKey(privateKey: Union[bytes, str], encrypted: ECIESEncrypted) -> str:
-    """
-    Decrypts encrypted data with privateKey.
+    """Decrypts encrypted data with privateKey.
+
+    Args:
+        privateKey (Union[bytes, str]): The private key.
+        encrypted (ECIESEncrypted): The ECIES encrypted object.
+    
+    Returns:
+        str:
+            The decrypted message.
     """
     if type(privateKey) is str:
         privateKeyBytes = bytes.fromhex(privateKey)

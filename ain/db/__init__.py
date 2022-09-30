@@ -6,6 +6,8 @@ if TYPE_CHECKING:
     from ain.provider import Provider
 
 class Database:
+    """Class for the AIN Database instance."""
+
     _ain: "Ain"
     _provider: "Provider"
     
@@ -14,5 +16,14 @@ class Database:
         self._provider = provider
 
     def ref(self, path: str = None) -> Reference:
+        """Creates a `Reference` to the given path in the AIN Database.
+
+        Args:
+            path (str, Optional): The path that you want to create a `Reference`.
+                If `path` is `None`, references the root. Defaults to `None`.
+
+        Returns:
+            Reference: The `Reference` at the path.
+        """
         return Reference(self._ain, path)
 

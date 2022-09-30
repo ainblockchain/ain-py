@@ -7,6 +7,8 @@ else:
     from typing_extensions import Literal
 
 class ECDSASignature:
+    """Class for the ECDSA signature."""
+
     r: bytes
     s: bytes
     v: int
@@ -25,8 +27,10 @@ class ECDSASignature:
 
     @classmethod
     def fromSignature(cls, signature: bytes):
-        """
-        Converts signature format of the `eth_sign` RPC method to signature parameters.
+        """Converts signature format of the `eth_sign` RPC method to signature parameters.
+
+        Args:
+            signature: The `eth_sign` signature.
         """
         if len(signature) != 65:
             raise ValueError("Invalid signature length: r")
@@ -37,6 +41,8 @@ class ECDSASignature:
         return cls(r, s, v)
 
 class ECIESEncrypted:
+    """Class for the ECIES encrypted ciphertext."""
+
     iv: bytes
     ephemPublicKey: bytes
     ciphertext: bytes
@@ -77,8 +83,11 @@ GetOperationType = Literal["GET_VALUE", "GET_RULE", "GET_OWNER", "GET_FUNCTION"]
 OwnerPermission = Literal["branch_owner", "write_function", "write_owner", "write_rule"]
 
 class AinOptions():
+    """Class for the AIN blockchain options."""
+
     rawResultMode: Optional[bool]
-    
+    """The flag of the using transaction raw result mode."""
+
     def __init__(
         self,
         rawResultMode: bool = None,
@@ -87,6 +96,8 @@ class AinOptions():
             self.rawResultMode = rawResultMode
 
 class GetOptions():
+    """Class for the get transaction options."""
+
     is_global: Optional[bool]
     is_final: Optional[bool]
     is_shallow: Optional[bool]
@@ -117,9 +128,14 @@ class GetOptions():
             self.include_proof = include_proof
 
 class SetOperation():
+    """Class for the set operation."""
+
     type: SetOperationType
+    """The type of the set operation."""
     ref: str
+    """The reference of the path."""
     value: Optional[Any]
+    """The value that you want to set."""
     is_global: Optional[bool]
 
     def __init__(
@@ -149,6 +165,8 @@ class SetMultiOperation():
         self.op_list = op_list
 
 class GetOperation():
+    """Class for the get operation."""
+
     type: GetOperationType
     ref: Optional[str]
     is_global: Optional[bool]
@@ -166,6 +184,8 @@ class GetOperation():
             self.is_global = is_global
 
 class GetMultiOperation():
+    """Class for the multiple get operation."""
+
     type: GetMultiOperationType
     op_list: List[GetOperation]
 
@@ -178,22 +198,30 @@ class GetMultiOperation():
         self.op_list = op_list
 
 class TransactionBodyBase:
+    """Class for the transaction body base."""
+
     parent_tx_hash: Optional[str]
     operation: Union[SetOperation, SetMultiOperation]
 
 class ValueOnlyTransactionBodyBase:
+    """Class for the value only transaction body base."""
+
     parent_tx_hash: Optional[str]
     value: Optional[Any]
     ref: Optional[str]
     is_global: Optional[bool]
 
 class TransactionInputBase:
+    """Class for the transaction input base."""
+
     nonce: Optional[int]
     address: Optional[str]
     timestamp: Optional[int]
     gas_price: Optional[int]
 
 class TransactionBody(TransactionBodyBase):
+    """Class for the transaction body."""
+
     nonce: int
     timestamp: int
     gas_price: Optional[int]
@@ -219,6 +247,8 @@ class TransactionBody(TransactionBodyBase):
 
 
 class TransactionInput(TransactionBodyBase, TransactionInputBase):
+    """Class for the transaction input."""
+
     def __init__(
         self,
         operation: Union[SetOperation, SetMultiOperation],
@@ -241,6 +271,8 @@ class TransactionInput(TransactionBodyBase, TransactionInputBase):
             self.gas_price = gas_price
 
 class ValueOnlyTransactionInput(ValueOnlyTransactionBodyBase, TransactionInputBase):
+    """Class for the value only transaction input."""
+
     def __init__(
         self,
         parent_tx_hash: str = None,
@@ -270,6 +302,8 @@ class ValueOnlyTransactionInput(ValueOnlyTransactionBodyBase, TransactionInputBa
             self.gas_price = gas_price
 
 class SetMultiTransactionInput(TransactionInputBase):
+    """Class for the multiple set transaction input."""
+
     parent_tx_hash: Optional[str]
     op_list: List[SetOperation]
 
@@ -295,12 +329,16 @@ class SetMultiTransactionInput(TransactionInputBase):
             self.gas_price = gas_price
 
 class Transaction():
+    """Class for the transaction."""
+
     tx_body: TransactionBody
     signature: str
     hash: str
     address: str
 
 class EvalRuleInput:
+    """Class for the eval rule input."""
+
     value: Any
     ref: Optional[str]
     address: Optional[str]
@@ -327,6 +365,8 @@ class EvalRuleInput:
             self.is_global = is_global
 
 class EvalOwnerInput:
+    """Class for the eval owner input."""
+
     permission: OwnerPermission
     ref: Optional[str]
     address: Optional[str]
@@ -348,6 +388,8 @@ class EvalOwnerInput:
             self.is_global = is_global
 
 class MatchInput:
+    """Class for the match input."""
+
     ref: Optional[str]
     is_global: Optional[bool]
 
