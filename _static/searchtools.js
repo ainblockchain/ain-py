@@ -563,4 +563,4 @@ const Search = {
   },
 };
 
-_ready(Search.init);
+/* Search initialization removed for Read the Docs */

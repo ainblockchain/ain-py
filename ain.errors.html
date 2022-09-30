@@ -7,6 +7,8 @@
   <title>ain.errors module &mdash; ain-py  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/sphinx-toolbox.css" type="text/css" />
+      <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,10 +19,29 @@
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="ain.types module" href="ain.types.html" /> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T11:10:08Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.errors", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -89,19 +110,21 @@
 <span id="ain-errors-module"></span><h1>ain.errors module<a class="headerlink" href="#module-ain.errors" title="Permalink to this heading"></a></h1>
 <dl class="py exception">
 <dt class="sig sig-object py" id="ain.errors.BlockchainError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.errors.</span></span><span class="sig-name descname"><span class="pre">BlockchainError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.errors.BlockchainError" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.errors.</span></span><span class="sig-name descname"><span class="pre">BlockchainError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.errors.BlockchainError" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Class for the custom error of the blockchain API result.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.errors.BlockchainError.code">
-<span class="sig-name descname"><span class="pre">code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.errors.BlockchainError.code" title="Permalink to this definition"></a></dt>
-<dd><p>The code of an error.</p>
+<span class="sig-name descname"><span class="pre">code</span></span><a class="headerlink" href="#ain.errors.BlockchainError.code" title="Permalink to this definition"></a></dt>
+<dd><p><strong>Type:</strong>    <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+<p>The code of an error.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.errors.BlockchainError.message">
-<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#ain.errors.BlockchainError.message" title="Permalink to this definition"></a></dt>
-<dd><p>The message of an error.</p>
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#ain.errors.BlockchainError.message" title="Permalink to this definition"></a></dt>
+<dd><p><strong>Type:</strong>    <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>The message of an error.</p>
 </dd></dl>
 
 </dd></dl>
