@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ain.utils package &mdash; ain-py  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ain.utils.v3keystore module" href="ain.utils.v3keystore.html" />
+    <link rel="prev" title="ain.db.ref module" href="ain.db.ref.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ain-py
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ain.html">ain package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ain.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ain.db.html">ain.db package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ain.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ain.utils.v3keystore.html">ain.utils.v3keystore module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.addHexPrefix"><code class="docutils literal notranslate"><span class="pre">addHexPrefix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.areSameAddresses"><code class="docutils literal notranslate"><span class="pre">areSameAddresses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.bytesToHex"><code class="docutils literal notranslate"><span class="pre">bytesToHex()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.decryptWithPrivateKey"><code class="docutils literal notranslate"><span class="pre">decryptWithPrivateKey()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecRecoverPub"><code class="docutils literal notranslate"><span class="pre">ecRecoverPub()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecSignHash"><code class="docutils literal notranslate"><span class="pre">ecSignHash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecSignMessage"><code class="docutils literal notranslate"><span class="pre">ecSignMessage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecSignTransaction"><code class="docutils literal notranslate"><span class="pre">ecSignTransaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecVerifySig"><code class="docutils literal notranslate"><span class="pre">ecVerifySig()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.encodeVarInt"><code class="docutils literal notranslate"><span class="pre">encodeVarInt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.encryptWithPublicKey"><code class="docutils literal notranslate"><span class="pre">encryptWithPublicKey()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.generateMnemonic"><code class="docutils literal notranslate"><span class="pre">generateMnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.getTimestamp"><code class="docutils literal notranslate"><span class="pre">getTimestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.hashMessage"><code class="docutils literal notranslate"><span class="pre">hashMessage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.hashTransaction"><code class="docutils literal notranslate"><span class="pre">hashTransaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.isHexPrefixed"><code class="docutils literal notranslate"><span class="pre">isHexPrefixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.isHexString"><code class="docutils literal notranslate"><span class="pre">isHexString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.isValidAddress"><code class="docutils literal notranslate"><span class="pre">isValidAddress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.isValidPrivate"><code class="docutils literal notranslate"><span class="pre">isValidPrivate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.isValidPublic"><code class="docutils literal notranslate"><span class="pre">isValidPublic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.keccak"><code class="docutils literal notranslate"><span class="pre">keccak()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.mnemonicToPrivatekey"><code class="docutils literal notranslate"><span class="pre">mnemonicToPrivatekey()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.padToEven"><code class="docutils literal notranslate"><span class="pre">padToEven()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.privateToAddress"><code class="docutils literal notranslate"><span class="pre">privateToAddress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.privateToPublic"><code class="docutils literal notranslate"><span class="pre">privateToPublic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.pubToAddress"><code class="docutils literal notranslate"><span class="pre">pubToAddress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.stripHexPrefix"><code class="docutils literal notranslate"><span class="pre">stripHexPrefix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.toBytes"><code class="docutils literal notranslate"><span class="pre">toBytes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.toChecksumAddress"><code class="docutils literal notranslate"><span class="pre">toChecksumAddress()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ain.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ain.html#module-ain">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ain-py</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="ain.html">ain package</a> &raquo;</li>
+      <li>ain.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ain.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ain-utils-package">
+<h1>ain.utils package<a class="headerlink" href="#ain-utils-package" title="Permalink to this heading"></a></h1>
+<p class="rubric">Submodules</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ain.utils.v3keystore.html">ain.utils.v3keystore module</a></li>
+</ul>
+</div>
+<p class="rubric">Module contents</p>
+<span class="target" id="module-ain.utils"></span><dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.addHexPrefix">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">addHexPrefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.addHexPrefix" title="Permalink to this definition"></a></dt>
+<dd><p>Adds the hex prefix(‘0x’) to the given string if it does not hex prefixed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>str</em>) – The string that you want to add prefix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The hex prefixed string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.areSameAddresses">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">areSameAddresses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.areSameAddresses" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the two addresses are the same.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address1</strong> (<em>str</em>) – The first address.</p></li>
+<li><p><strong>address2</strong> (<em>str</em>) – The second address.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the two addresses are the same.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.bytesToHex">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">bytesToHex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.bytesToHex" title="Permalink to this definition"></a></dt>
+<dd><p>Converts the given bytes into the hex prefixed hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>bytes</em>) – The bytes that you want to convert into hex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The hex converted bytes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.decryptWithPrivateKey">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">decryptWithPrivateKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encrypted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ECIESEncrypted" title="ain.types.ECIESEncrypted"><span class="pre">ECIESEncrypted</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.decryptWithPrivateKey" title="Permalink to this definition"></a></dt>
+<dd><p>Decrypts encrypted data with privateKey.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>privateKey</strong> (<em>Union</em><em>[</em><em>bytes</em><em>, </em><em>str</em><em>]</em>) – The private key.</p></li>
+<li><p><strong>encrypted</strong> (<a class="reference internal" href="ain.types.html#ain.types.ECIESEncrypted" title="ain.types.ECIESEncrypted"><em>ECIESEncrypted</em></a>) – The ECIES encrypted object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The decrypted message.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.ecRecoverPub">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">ecRecoverPub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msgHash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ECDSASignature" title="ain.types.ECDSASignature"><span class="pre">ECDSASignature</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.ecRecoverPub" title="Permalink to this definition"></a></dt>
+<dd><p>Recovers the public key from ECDSA signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgHash</strong> (<em>bytes</em>) – The hash of the message.</p></li>
+<li><p><strong>signature</strong> (<a class="reference internal" href="ain.types.html#ain.types.ECDSASignature" title="ain.types.ECDSASignature"><em>ECDSASignature</em></a>) – The object of the ECDSA signature.</p></li>
+<li><p><strong>chainId</strong> (<em>int</em>) – The chain ID of the provider. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The recovered public key.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.ecSignHash">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">ecSignHash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msgHash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.types.html#ain.types.ECDSASignature" title="ain.types.ECDSASignature"><span class="pre">ECDSASignature</span></a></span></span><a class="headerlink" href="#ain.utils.ecSignHash" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the ECDSA signature of a message hash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgHash</strong> (<em>bytes</em>) – The message hash.</p></li>
+<li><p><strong>privateKey</strong> (<em>bytes</em>) – The private key for the signature.</p></li>
+<li><p><strong>chainId</strong> (<em>int</em>) – The chain ID of the provider. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The object of the ECDSA signature.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ain.types.html#ain.types.ECDSASignature" title="ain.types.ECDSASignature">ECDSASignature</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.ecSignMessage">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">ecSignMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.ecSignMessage" title="Permalink to this definition"></a></dt>
+<dd><p>Signs a message with a private key and returns a string signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> – The message that you want to sign.
+Note that <cite>message</cite> should be convertible with <a class="reference internal" href="#ain.utils.toBytes" title="ain.utils.toBytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">toBytes()</span></code></a>.
+If <cite>message</cite> is unsupported type, raises <cite>TypeError</cite>.</p></li>
+<li><p><strong>privateKey</strong> (<em>bytes</em>) – The private key for the signature.</p></li>
+<li><p><strong>chainId</strong> (<em>int</em>) – The chain ID of the provider. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The hex prefixed string signature.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.ecSignTransaction">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">ecSignTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txData</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.ecSignTransaction" title="Permalink to this definition"></a></dt>
+<dd><p>Signs a transaction body with a private key and returns a string signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txData</strong> (<a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><em>TransactionBody</em></a>) – The transaction that you want to sign.</p></li>
+<li><p><strong>privateKey</strong> (<em>bytes</em>) – The private key for the signature.</p></li>
+<li><p><strong>chainId</strong> (<em>int</em>) – The chain ID of the provider. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The hex prefixed string signature.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.ecVerifySig">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">ecVerifySig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.ecVerifySig" title="Permalink to this definition"></a></dt>
+<dd><p>Verifies if the signature is valid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – The message or transaction that you want to verify.</p></li>
+<li><p><strong>signature</strong> (<em>str</em>) – The hex prefixed string signature.</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – The address of the signature.</p></li>
+<li><p><strong>chainId</strong> (<em>int</em>) – The chain ID of the provider. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the given signature is a valid signature.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.encodeVarInt">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">encodeVarInt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.encodeVarInt" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes the number as bitcoin variable length integer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>int</em>) – A number that you want to encode.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The encoded number as bitcoin variable length integer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.encryptWithPublicKey">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">encryptWithPublicKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">publicKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.types.html#ain.types.ECIESEncrypted" title="ain.types.ECIESEncrypted"><span class="pre">ECIESEncrypted</span></a></span></span><a class="headerlink" href="#ain.utils.encryptWithPublicKey" title="Permalink to this definition"></a></dt>
+<dd><p>Encrypts message with publicKey.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>publicKey</strong> (<em>Union</em><em>[</em><em>bytes</em><em>, </em><em>str</em><em>]</em>) – The public key.
+When the type is <cite>str</cite>, it must be hex prefixed.</p></li>
+<li><p><strong>message</strong> (<em>str</em>) – The message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The object of the encrypted message.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="ain.types.html#ain.types.ECIESEncrypted" title="ain.types.ECIESEncrypted">ECIESEncrypted</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.generateMnemonic">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">generateMnemonic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.generateMnemonic" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the random english mnemonic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The randomly generated english mnemonic.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.getTimestamp">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">getTimestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.utils.getTimestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the current timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The current timestamp.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.hashMessage">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">hashMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.hashMessage" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the bitcoin’s varint encoding of Keccak-256 hash of the message,
+prefixed with the header <cite>AINetwork Signed Message:</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>message</strong> – The message that you want to create hash.
+Note that <cite>message</cite> should be convertible with <a class="reference internal" href="#ain.utils.toBytes" title="ain.utils.toBytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">toBytes()</span></code></a>.
+If <cite>message</cite> is unsupported type, raises <cite>TypeError</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The bitcoin’s varint encoding of Keccak-256 hash of the message.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.hashTransaction">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">hashTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.hashTransaction" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the Keccak-256 hash of the transaction body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>transaction</strong> (<em>Union</em><em>[</em><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><em>TransactionBody</em></a><em>, </em><em>str</em><em>]</em>) – The transaction that you want to create hash.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Keccak hash of the transaction.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.isHexPrefixed">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">isHexPrefixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.isHexPrefixed" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the given string is prefixed with <cite>0x</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>str</em>) – The string that you want to check.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the <cite>input</cite> is hex prefixed.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.isHexString">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">isHexString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.isHexString" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the given string is a hex string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>str</em>) – The string that you want to check.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the <cite>input</cite> is hex string.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.isValidAddress">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">isValidAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.isValidAddress" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the given string is a valid address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – The address that you want to check.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the <cite>address</cite> is valid address.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.isValidPrivate">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">isValidPrivate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.isValidPrivate" title="Permalink to this definition"></a></dt>
+<dd><p>Checks whether the <cite>privateKey</cite> is a valid private key
+(follows the rules of the curve <cite>secp256k1</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>privateKey</strong> (<em>bytes</em>) – The private key of the AIN blockchain account that you want to check.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the given key is a valid private key.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.isValidPublic">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">isValidPublic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">publicKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isSEC1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.utils.isValidPublic" title="Permalink to this definition"></a></dt>
+<dd><p>Checks whether the <cite>publicKey</cite> is a valid public key
+(follows the rules of the curve <cite>secp256k1</cite> and meets the AIN requirements).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>publicKey</strong> (<em>bytes</em>) – The public key of the AIN blockchain account that you want to check.</p></li>
+<li><p><strong>isSEC1</strong> (<em>bool</em>) – If <cite>True</cite>, public key should be SEC1 encoded one.
+Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite>, if the given key is a valid public key.
+<cite>False</cite>, if not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.keccak">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">keccak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.keccak" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the Keccak hash of the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – The input that you want to create hash.
+Note that <cite>input</cite> will be converted with <cite>toBytes</cite> method.
+If <cite>input</cite> is unsupported type, raises <cite>TypeError</cite>.</p></li>
+<li><p><strong>bits</strong> (<em>int</em>) – The size of the hash, in (224, 456, 384, 512).
+Defaults to 256.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Keccak hash of the input.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.mnemonicToPrivatekey">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">mnemonicToPrivatekey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.mnemonicToPrivatekey" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an private key with the given mnemonic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mnemonic</strong> (<em>str</em>) – The mnemonic of account.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – The index of account. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The private key with the given mnemonic.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.padToEven">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">padToEven</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.padToEven" title="Permalink to this definition"></a></dt>
+<dd><p>Pads the leading zero into the given string to have an even length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>str</em>) – The string that you want to pad.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The leading zero padded string, if <cite>input</cite> is odd lengthed.
+<cite>input</cite> itself, if it is even lengthed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.privateToAddress">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">privateToAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.privateToAddress" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the checksummed AIN blockchain address of the given private key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>privateKey</strong> (<em>bytes</em>) – The private key of an AIN blockchain account.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The checksummed AIN blockchain address of the given private key.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.privateToPublic">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">privateToPublic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.privateToPublic" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the public key of a given private key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>privateKey</strong> (<em>bytes</em>) – The private key of the AIN blockchain account.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The public key of a given private key.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.pubToAddress">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">pubToAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">publicKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isSEC1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.pubToAddress" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the AIN blockchain address of the given public key,
+which is the lower 160 bits of the Keccak-256 hash of the public key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>publicKey</strong> (<em>Union</em><em>[</em><em>bytes</em><em>, </em><em>str</em><em>]</em>) – The public key of the AIN blockchain account or SEC1 encoded public key.
+When the type is <cite>str</cite>, it must be hex prefixed.</p></li>
+<li><p><strong>isSEC1</strong> (<em>bool</em>) – If <cite>True</cite>, public key should be SEC1 encoded one.
+Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The AIN blockchain address of the given public key.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.stripHexPrefix">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">stripHexPrefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.stripHexPrefix" title="Permalink to this definition"></a></dt>
+<dd><p>Strips <cite>0x</cite> from the given string, if that is hex prefixed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> (<em>str</em>) – The string that you want to strip.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The hex prefix stripped string, if <cite>input</cite> is hex prefixed.
+<cite>input</cite> itself, if it not hex prefixed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.toBytes">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">toBytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ain.utils.toBytes" title="Permalink to this definition"></a></dt>
+<dd><p>Attempts to convert a input into a bytes,
+This function is equivalent to <cite>toBuffer</cite> from <cite>&#64;ainblockchain/ain-util</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input</strong> – The input that you want to convert.
+It supports bytes, list(of ints), string, int, and None.
+If <cite>input</cite> is unsupported type, raises <cite>TypeError</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The converted bytes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.toChecksumAddress">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">toChecksumAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.toChecksumAddress" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a checksummed address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<em>str</em>) – The address that you want to convert.
+If <cite>address</cite> isn’t valid, raises <cite>ValueError</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The checksummed address.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ain.db.ref.html" class="btn btn-neutral float-left" title="ain.db.ref module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ain.utils.v3keystore.html" class="btn btn-neutral float-right" title="ain.utils.v3keystore module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, AIN Dev Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
