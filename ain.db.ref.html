@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
 
-<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-09-30T17:00:39Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.db.ref", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-10-18T08:51:25Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.db.ref", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
 
 <!--
 Using this variable directly instead of using `JSON.parse` is deprecated.
@@ -118,13 +118,16 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>type</strong> (<em>GetOperationType</em>) – The type of get operation.</p></li>
-<li><p><strong>ref</strong> (<em>str</em>) – The path that you want to request.</p></li>
+<li><p><strong>ref</strong> (<em>str</em>) – The path that you want to make transaction.</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="ain.types.html#ain.types.GetOptions" title="ain.types.GetOptions"><em>GetOptions</em></a><em>, </em><em>Optional</em>) – The options for this transaction.
 Defaults to no options.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The builded get request.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -146,7 +149,7 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.deleteValue">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.deleteValue" title="Permalink to this definition"></a></dt>
-<dd><p>Deletes a value.</p>
+<dd><p>Deletes the value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.
@@ -200,7 +203,7 @@ Any value given will be overwritten with null.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A extended <cite>basePath</cite>, by the <cite>extension</cite>.</p>
+<dd class="field-even"><p>The extended <cite>basePath</cite>, by the <cite>extension</cite>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
@@ -216,7 +219,7 @@ Any value given will be overwritten with null.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input</strong> (<a class="reference internal" href="ain.types.html#ain.types.SetMultiTransactionInput" title="ain.types.SetMultiTransactionInput"><em>SetMultiTransactionInput</em></a>) – The transaction input object.</p></li>
-<li><p><strong>ref</strong> (<em>str</em>) – The path that you want to request.</p></li>
+<li><p><strong>ref</strong> (<em>str</em>) – The path that you want to make transaction.</p></li>
 <li><p><strong>type</strong> (<em>SetMultiOperationType</em>) – The type of set operations.</p></li>
 </ul>
 </dd>
@@ -237,7 +240,7 @@ Any value given will be overwritten with null.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
-<li><p><strong>ref</strong> (<em>str</em>) – The path that you want to request.</p></li>
+<li><p><strong>ref</strong> (<em>str</em>) – The path that you want to make transaction.</p></li>
 <li><p><strong>type</strong> (<em>SetOperationType</em>) – The type of set operation.</p></li>
 </ul>
 </dd>
@@ -272,8 +275,8 @@ Could be any one from “VALUE”, “RULE”, “OWNER”, “FUNC” or a comb
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the <cite>self.path</cite>.
-If <cite>path</cite> is None, no extending. Defaults to None.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the base path.
+If <cite>path</cite> is <cite>None</cite>, no extending. Defaults to <cite>None</cite>.</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="ain.types.html#ain.types.GetOptions" title="ain.types.GetOptions"><em>GetOptions</em></a><em>, </em><em>Optional</em>) – The options for this transaction.
 Defaults to no options.</p></li>
 </ul>
@@ -291,8 +294,8 @@ Defaults to no options.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the <cite>self.path</cite>.
-If <cite>path</cite> is None, no extending. Defaults to None.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the base path.
+If <cite>path</cite> is <cite>None</cite>, no extending. Defaults to <cite>None</cite>.</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="ain.types.html#ain.types.GetOptions" title="ain.types.GetOptions"><em>GetOptions</em></a><em>, </em><em>Optional</em>) – The options for this transaction.
 Defaults to no options.</p></li>
 </ul>
@@ -310,8 +313,8 @@ Defaults to no options.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the <cite>self.path</cite>.
-If <cite>path</cite> is None, no extending. Defaults to None.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the base path.
+If <cite>path</cite> is <cite>None</cite>, no extending. Defaults to <cite>None</cite>.</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="ain.types.html#ain.types.GetOptions" title="ain.types.GetOptions"><em>GetOptions</em></a><em>, </em><em>Optional</em>) – The options for this transaction.
 Defaults to no options.</p></li>
 </ul>
@@ -329,8 +332,8 @@ Defaults to no options.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the <cite>self.path</cite>.
-If <cite>path</cite> is None, no extending. Defaults to None.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>Optional</em>) – The path that you want to extend under the base path.
+If <cite>path</cite> is <cite>None</cite>, no extending. Defaults to <cite>None</cite>.</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="ain.types.html#ain.types.GetOptions" title="ain.types.GetOptions"><em>GetOptions</em></a><em>, </em><em>Optional</em>) – The options for this transaction.
 Defaults to no options.</p></li>
 </ul>
@@ -400,7 +403,8 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.push">
 <span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ain.db.ref.Reference" title="ain.db.ref.Reference"><span class="pre">Reference</span></a></span></span><a class="headerlink" href="#ain.db.ref.Reference.push" title="Permalink to this definition"></a></dt>
-<dd><p>Creates a key for a new child of <cite>self.path</cite>, but doesn’t set any values.</p>
+<dd><p>Creates a key for a new child of base path virtually.
+So doesn’t set any values on the AIN Blockchain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>The instance of <cite>Reference</cite> of a new child.</p>
@@ -414,10 +418,10 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.pushValue">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pushValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.pushValue" title="Permalink to this definition"></a></dt>
-<dd><p>Sets a value at a new child of <cite>self.path</cite>.</p>
+<dd><p>Sets the value at a new child of base path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>value</strong> (<em>Any</em><em>, </em><em>Optional</em>) – The value that you want to set. Defaults to None.</p>
+<dd class="field-odd"><p><strong>value</strong> (<em>Any</em><em>, </em><em>Optional</em>) – The value that you want to set. Defaults to <cite>None</cite>.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -435,6 +439,9 @@ Defaults to no options.</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A sanitized ref. It should have a slash at the beginning and no slash at the end.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -456,7 +463,7 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setFunction">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setFunction" title="Permalink to this definition"></a></dt>
-<dd><p>Sets a function config.</p>
+<dd><p>Sets the function config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
@@ -470,10 +477,10 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setIsGlobal">
 <span class="sig-name descname"><span class="pre">setIsGlobal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isGlobal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.db.ref.Reference.setIsGlobal" title="Permalink to this definition"></a></dt>
-<dd><p>Sets a global path flag.</p>
+<dd><p>Sets a global reference using flag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>isGlobal</strong> (<em>bool</em>) – The global path flag.</p>
+<dd class="field-odd"><p><strong>isGlobal</strong> (<em>bool</em>) – The global reference using flag.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -481,7 +488,7 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setOwner">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setOwner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setOwner" title="Permalink to this definition"></a></dt>
-<dd><p>Sets an owner rule.</p>
+<dd><p>Sets the owner rule.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
@@ -495,7 +502,7 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setRule">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setRule" title="Permalink to this definition"></a></dt>
-<dd><p>Sets a write rule.</p>
+<dd><p>Sets the write rule.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
@@ -509,7 +516,7 @@ Defaults to no options.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setValue">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setValue" title="Permalink to this definition"></a></dt>
-<dd><p>Sets a value.</p>
+<dd><p>Sets the value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
