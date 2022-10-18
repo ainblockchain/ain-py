@@ -16,11 +16,11 @@ class Database:
         self._provider = provider
 
     def ref(self, path: str = None) -> Reference:
-        """Creates a `Reference` to the given path in the AIN Database.
+        """Creates a `Reference` to the given path at the AIN Blockchain Database(global state tree).
 
         Args:
             path (str, Optional): The path that you want to create a `Reference`.
-                If `path` is `None`, references the root. Defaults to `None`.
+                If `path` is `None`, references the root of the tree. Defaults to `None`.
 
         Returns:
             Reference: The `Reference` at the path.

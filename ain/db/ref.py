@@ -50,15 +50,16 @@ class Reference:
         return self._key
 
     def setIsGlobal(self, isGlobal: bool):
-        """Sets a global path flag.
+        """Sets a global reference using flag.
 
         Args:
-            isGlobal (bool): The global path flag.
+            isGlobal (bool): The global reference using flag.
         """
         self._isGlobal = isGlobal
 
     def push(self) -> "Reference":
-        """Creates a key for a new child of `self.path`, but doesn't set any values.
+        """Creates a key for a new child of base path virtually.
+        So doesn't set any values on the AIN Blockchain.
 
         Returns:
             Reference: The instance of `Reference` of a new child.
@@ -67,10 +68,10 @@ class Reference:
         return Reference(self._ain, Reference.extendPath(self._path, newKey))
 
     async def pushValue(self, value: Any = None) -> Any:
-        """Sets a value at a new child of `self.path`.
+        """Sets the value at a new child of base path.
 
         Args:
-            value (Any, Optional): The value that you want to set. Defaults to None.
+            value (Any, Optional): The value that you want to set. Defaults to `None`.
         
         Returns:
             The result of the transaction.
@@ -81,11 +82,9 @@ class Reference:
         """Gets a value at the `path`.
 
         Args:
-            path (str, Optional):
-                The path that you want to extend under the `self.path`.
-                If `path` is None, no extending. Defaults to None.
-            options (GetOptions, Optional):
-                The options for this transaction.
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
                 Defaults to no options.
 
         Returns:
@@ -98,11 +97,9 @@ class Reference:
         """Gets a rule at the `path`.
 
         Args:
-            path (str, Optional):
-                The path that you want to extend under the `self.path`.
-                If `path` is None, no extending. Defaults to None.
-            options (GetOptions, Optional):
-                The options for this transaction.
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
                 Defaults to no options.
 
         Returns:
@@ -115,11 +112,9 @@ class Reference:
         """Gets an owner config at the `path`.
 
         Args:
-            path (str, Optional):
-                The path that you want to extend under the `self.path`.
-                If `path` is None, no extending. Defaults to None.
-            options (GetOptions, Optional):
-                The options for this transaction.
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
                 Defaults to no options.
         
         Returns:
@@ -132,11 +127,9 @@ class Reference:
         """Gets a function config at the `path`.
 
         Args:
-            path (str, Optional):
-                The path that you want to extend under the `self.path`.
-                If `path` is None, no extending. Defaults to None.
-            options (GetOptions, Optional):
-                The options for this transaction.
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
                 Defaults to no options.
         
         Returns:
@@ -149,8 +142,7 @@ class Reference:
         """Gets a value, write rule, owner rule, or function hash at multiple paths.
 
         Args:
-            gets (List[GetOperation]):
-                The array of the get requests.
+            gets (List[GetOperation]): The array of the get requests.
                 Could be any one from "VALUE", "RULE", "OWNER", "FUNC" or a combination of them as an array.
 
         Returns:
@@ -169,11 +161,10 @@ class Reference:
         return await self._ain.provider.send("ain_get", req)
 
     async def deleteValue(self, transactionInput: ValueOnlyTransactionInput = None) -> Any:
-        """Deletes a value.
+        """Deletes the value.
 
         Args:
-            transactionInput (ValueOnlyTransactionInput):
-                The transaction input object.
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
                 Any value given will be overwritten with null.
 
         Returns:
@@ -197,7 +188,7 @@ class Reference:
         )
 
     async def setFunction(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """Sets a function config.
+        """Sets the function config.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
@@ -216,7 +207,7 @@ class Reference:
         )
 
     async def setOwner(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """Sets an owner rule.
+        """Sets the owner rule.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
@@ -235,7 +226,7 @@ class Reference:
         )
 
     async def setRule(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """Sets a write rule.
+        """Sets the write rule.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
@@ -254,7 +245,7 @@ class Reference:
         )
 
     async def setValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """Sets a value.
+        """Sets the value.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
@@ -412,13 +403,12 @@ class Reference:
 
         Args:
             type (GetOperationType): The type of get operation.
-            ref (str): The path that you want to request.
-            options (GetOptions, Optional):
-                The options for this transaction.
+            ref (str): The path that you want to make transaction.
+            options (GetOptions, Optional): The options for this transaction.
                 Defaults to no options.
         
         Returns:
-            The builded get request.
+            dict: The builded get request.
         """
         request = {"type": type, "ref": Reference.sanitizeRef(ref)}
         if options is not None:
@@ -434,7 +424,7 @@ class Reference:
             extension (str, Optional): The extension that you want to extend under the base path.
         
         Returns:
-            str: A extended `basePath`, by the `extension`.
+            str: The extended `basePath`, by the `extension`.
         """
         sanitizedBase = Reference.sanitizeRef(basePath)
         sanitizedExt = Reference.sanitizeRef(extension)
@@ -455,7 +445,7 @@ class Reference:
 
         Args:
             input (ValueOnlyTransactionInput): The transaction input object.
-            ref (str): The path that you want to request.
+            ref (str): The path that you want to make transaction.
             type (SetOperationType): The type of set operation.
         
         Returns:
@@ -486,7 +476,7 @@ class Reference:
 
         Args:
             input (SetMultiTransactionInput): The transaction input object.
-            ref (str): The path that you want to request.
+            ref (str): The path that you want to make transaction.
             type (SetMultiOperationType): The type of set operations.
         
         Returns:
@@ -521,7 +511,7 @@ class Reference:
             ref (str): A path that you want to sanitize.
         
         Returns:
-            A sanitized ref. It should have a slash at the beginning and no slash at the end.
+            str: A sanitized ref. It should have a slash at the beginning and no slash at the end.
         """
         if ref is None:
             return "/"

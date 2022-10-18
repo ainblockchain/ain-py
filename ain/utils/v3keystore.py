@@ -137,8 +137,7 @@ class V3Keystore:
         Args:
             privateKey (Union[bytes, str]): The private key of an AIN blockchain account.
             password (str): The password of the v3 keystore.
-            options (V3KeystoreOptions):
-                The options for the v3 keystore.
+            options (V3KeystoreOptions): The options for the v3 keystore.
                 Defaults to no options.
         """
 
@@ -264,9 +263,7 @@ class V3Keystore:
         )
 
     def toPrivateKey(self, password: str) -> bytes:
-        """
-        Returns a private key from a v3 Keystore.
-        """
+        """Returns a private key from a v3 Keystore."""
 
         kdfparams = self.crypto.kdfparams
         salt = bytes.fromhex(kdfparams["salt"])

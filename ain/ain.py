@@ -15,7 +15,7 @@ class Ain:
         chainId (int): The chain ID of the provider. Defaults to 0.
         ainOptions (AinOptions): The options for this `Ain` instance. Defaults to no options.
     """
-
+    
     provider: Provider
     """The `Provider` instance."""
     chainId: int
@@ -61,10 +61,8 @@ class Ain:
 
         Args:
             blockHashOrBlockNumber (Union[str, int]): The block hash or the block number.
-            returnTransactionObjects (bool):
-                If `True`, returns the full transaction objects.
-                If `False`, returns only the transaction hashes.
-                Default to `False`.
+            returnTransactionObjects (bool): If `True`, returns the full transaction objects.
+                If `False`, returns only the transaction hashes. Default to `False`.
         
         Returns:
             The block with the given hash or block number.
@@ -293,8 +291,7 @@ class Ain:
             transactionInput (TransactionInput): The transaction input.
         
         Returns:
-            TransactionBody:
-                The builded transaction body.
+            TransactionBody: The builded transaction body.
         """
         address = self.wallet.getImpliedAddress(
             getattr(transactionInput, "address", None)
