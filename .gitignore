@@ -34,3 +34,6 @@ var/
 
 # IDE settings
 .vscode/
+
+#docs
+docs/_build/
