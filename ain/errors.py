@@ -1,8 +1,12 @@
 class BlockchainError(Exception):
-    code: int
-    message: str
+    """Class for the custom error of the blockchain API result."""
 
-    def __init__(self, code, message):
+    code: int
+    """The code of an error."""
+    message: str
+    """The message of an error."""
+
+    def __init__(self, code: int, message: str):
         self.code = code
         self.message = message
         super().__init__(message)

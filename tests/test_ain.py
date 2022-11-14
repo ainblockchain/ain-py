@@ -6,7 +6,7 @@ from snapshottest import TestCase as SnapshotTestCase
 from ain.ain import Ain
 from ain.provider import JSON_RPC_ENDPOINT
 from ain.utils import *
-from ain.utils.V3Keystore import *
+from ain.utils.v3keystore import *
 from ain.errors import *
 from ain.types import *
 from .data import (

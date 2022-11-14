@@ -10,47 +10,72 @@ from Crypto.Util.Padding import pad, unpad
 from ain.utils import privateToAddress, keccak
 
 class Cipherparams:
+    """Class for the cipher params."""
+
     iv: str
+    """The initial vector of the cipher."""
 
 class Crypto:
+    """Class for the crypto."""
+    
     ciphertext: str
+    """The ciphertext."""
     cipherparams: Cipherparams
+    """The cipher params."""
     cipher: str
+    """The name of the cipher."""
     kdf: str
+    """The name of the KDF(key derivation function). `scrypt` and `pbkdf2` are supported."""
     kdfparams: dict
+    """The KDF params."""
     mac: str
+    """The MAC(message authentication code)."""
 
 class V3KeystoreOptions:
-    salt: Optional[bytes]
-    iv: Optional[bytes]
-    kdf: Optional[str]
-    dklen: Optional[int]
-    n: Optional[int]
-    r: Optional[int]
-    p: Optional[int]
-    c: Optional[int]
+    """Class for the v3 keystore options."""
+
     cipher: Optional[str]
+    """The name of the cipher."""
+    iv: Optional[bytes]
+    """The initial vector of the cipher."""
+    kdf: Optional[str]
+    """The name of the KDF(key derivation function). `scrypt` and `pbkdf2` are supported."""
+    salt: Optional[bytes]
+    """The salt for the KDF."""
+    dklen: Optional[int]
+    """The length of the desired key for KDF."""
+    n: Optional[int]
+    """The n option for the KDF `scrypt`"""
+    r: Optional[int]
+    """The r option for the KDF `scrypt`"""
+    p: Optional[int]
+    """The p option for the KDF `scrypt`"""
+    c: Optional[int]
+    """The c option for the KDF `pbkdf2`"""
     uuid: Optional[bytes]
+    """The predetermined bytes of the UUID."""
 
     def __init__(
         self,
-        salt: bytes = None,
+        cipher: str = None,
         iv: bytes = None,
         kdf: str = None,
+        salt: bytes = None,
         dklen: int = None,
         n: int = None,
         r: int = None,
         p: int = None,
         c: int = None,
-        cipher: str = None,
         uuid: bytes = None,
     ):
-        if salt is not None:
-            self.salt = salt
+        if cipher is not None:
+            self.cipher = cipher
         if iv is not None:
             self.iv = iv
         if kdf is not None:
             self.kdf = kdf
+        if salt is not None:
+            self.salt = salt
         if dklen is not None:
             self.dklen = dklen
         if n is not None:
@@ -61,16 +86,20 @@ class V3KeystoreOptions:
             self.r = p
         if c is not None:
             self.c = c
-        if cipher is not None:
-            self.cipher = cipher
         if uuid is not None:
             self.uuid = uuid
 
 class V3Keystore:
+    """Class for the v3 keystore."""
+
     version: int
+    """The version of the keystore."""
     id: str
+    """The UUID of the keystore."""
     address: str
+    """The AIN blockchain address of the keystore."""
     crypto: Crypto
+    """The object of the crypto."""
 
     def __init__(
         self,
@@ -103,8 +132,13 @@ class V3Keystore:
         password: str,
         options: V3KeystoreOptions = V3KeystoreOptions()
     ):
-        """
-        Converts an account into a V3 Keystore and encrypts it with a password.
+        """Converts an account into a v3 Keystore and encrypts it with a password.
+        
+        Args:
+            privateKey (Union[bytes, str]): The private key of an AIN blockchain account.
+            password (str): The password of the v3 keystore.
+            options (V3KeystoreOptions): The options for the v3 keystore.
+                Defaults to no options.
         """
 
         if type(privateKey) is str:
@@ -200,6 +234,12 @@ class V3Keystore:
 
     @classmethod
     def fromJSON(cls, v3KeystoreJSON: str):
+        """Converts the stringified v3 keystore JSON into a v3 keystore object.
+        
+        Args:
+            v3KeystoreJSON (str): The stringified v3 keystore JSON.
+        """
+
         loaded = json.loads(v3KeystoreJSON, object_hook=lambda d: SimpleNamespace(**d))
         version = int(loaded.version)
         id = str(loaded.id)
@@ -223,9 +263,7 @@ class V3Keystore:
         )
 
     def toPrivateKey(self, password: str) -> bytes:
-        """
-        Returns a private key from a V3 Keystore.
-        """
+        """Returns a private key from a v3 Keystore."""
 
         kdfparams = self.crypto.kdfparams
         salt = bytes.fromhex(kdfparams["salt"])

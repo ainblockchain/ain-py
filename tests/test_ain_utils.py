@@ -1,6 +1,6 @@
 from unittest import TestCase
 from ain.utils import *
-from ain.utils.V3Keystore import *
+from ain.utils.v3keystore import *
 from .data import (
     address,
     pk,

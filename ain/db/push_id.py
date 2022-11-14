@@ -2,8 +2,7 @@ import random
 from ain.utils import getTimestamp
 from typing import List
 
-"""
-SEE --> https://gist.github.com/mikelehen/3596a30bd69384624c11
+"""SEE --> https://gist.github.com/mikelehen/3596a30bd69384624c11
 
 Generator that creates 20-character string identifiers with the following properties:
 
@@ -18,13 +17,11 @@ Generator that creates 20-character string identifiers with the following proper
 ASCII_CHARS = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz"
 
 class PushId:
-    """
-    Timestamp of last push, used to prevent local
+    """Timestamp of last push, used to prevent local
     collisions if you push twice in one ms.
     """
     _lastPushTime: int
-    """
-    We generate 72-bits of randomness which get
+    """We generate 72-bits of randomness which get
     turned into 12 characters and appended to the
     timestamp to prevent collisions with other clients.
     We store the last characters we generated because

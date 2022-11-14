@@ -2,7 +2,7 @@ import aiohttp
 import json
 from urllib.parse import urlparse, urljoin
 from jsonrpcclient import request, parse, Ok, Error
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 from ain.errors import BlockchainError
 
 if TYPE_CHECKING:
@@ -11,8 +11,12 @@ if TYPE_CHECKING:
 JSON_RPC_ENDPOINT = "json-rpc"
 
 class Provider:
+    """Class for the AIN Blockchain node provider."""
+
     endPoint: str
+    """The endpoint of the node provider."""
     apiEndPoint: str
+    """The JSON-RPC API endpoint of the node provider."""
     _ain: "Ain"
     
     def __init__(self, ain: "Ain", endpoint: str):
@@ -23,7 +27,16 @@ class Provider:
         self.endPoint = parsed.geturl()
         self.apiEndPoint = urljoin(self.endPoint, JSON_RPC_ENDPOINT)
 
-    async def send(self, rpcMethod: str, params: dict = {}) -> Any:
+    async def send(self, rpcMethod: str, params: dict = {}):
+        """Creates the JSON-RPC payload and sends it to the node.
+
+        Args:
+            rpcMethod (str): The JSON-RPC method name.
+            params (dict): The parameters for the payload.
+
+        Returns:
+            The response result.
+        """
         params.update({"protoVer": self._ain.net.protoVer})
         dump = json.dumps(
             request(rpcMethod, params=params, id=0),

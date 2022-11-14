@@ -14,12 +14,14 @@ from ain.types import (
     MatchInput,
     GetOptions,
 )
-from ain.ain_db.push_id import PushId
+from ain.db.push_id import PushId
 
 if TYPE_CHECKING:
     from ain.ain import Ain
 
 class Reference:
+    """Class that creates a reference to a path in the AIN Database."""
+
     _path: str
     _key: Optional[str]
     _ain: "Ain"
@@ -39,66 +41,112 @@ class Reference:
 
     @property
     def path(self) -> str:
+        """The base path of this reference."""
         return self._path
 
     @property
     def key(self) -> Optional[str]:
+        """The key of this reference."""
         return self._key
 
-    def setIsGlobal(self, isGlobal):
-        """
-        Sets the global path flag.
+    def setIsGlobal(self, isGlobal: bool):
+        """Sets a global reference using flag.
+
+        Args:
+            isGlobal (bool): The global reference using flag.
         """
         self._isGlobal = isGlobal
 
     def push(self) -> "Reference":
-        """
-        Creates a key for a new child but doesn't set any values.
+        """Creates a key for a new child of base path virtually.
+        So doesn't set any values on the AIN Blockchain.
+
+        Returns:
+            Reference: The instance of `Reference` of a new child.
         """
         newKey = "/" + self._pushId.generate()
         return Reference(self._ain, Reference.extendPath(self._path, newKey))
 
     async def pushValue(self, value: Any = None) -> Any:
-        """
-        Sets the value at a new child of self.path;
+        """Sets the value at a new child of base path.
+
+        Args:
+            value (Any, Optional): The value that you want to set. Defaults to `None`.
+        
+        Returns:
+            The result of the transaction.
         """
         return await self.push().setValue(ValueOnlyTransactionInput(value=value))
 
     async def getValue(self, path: str = None, options: GetOptions = None) -> Any:
-        """
-        Returns the value at the path.
+        """Gets a value at the `path`.
+
+        Args:
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
+                Defaults to no options.
+
+        Returns:
+            The value at the `path`.
         """
         req = self.buildGetRequest("GET_VALUE", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
     async def getRule(self, path: str = None, options: GetOptions = None) -> Any:
-        """
-        Returns the rule at the path.
+        """Gets a rule at the `path`.
+
+        Args:
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
+                Defaults to no options.
+
+        Returns:
+            The rule at the `path`.
         """
         req = self.buildGetRequest("GET_RULE", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
     async def getOwner(self, path: str = None, options: GetOptions = None) -> Any:
-        """
-        Returns the owner config at the path.
+        """Gets an owner config at the `path`.
+
+        Args:
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
+                Defaults to no options.
+        
+        Returns:
+            The owner config at the `path`.
         """
         req = self.buildGetRequest("GET_OWNER", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
     async def getFunction(self, path: str = None, options: GetOptions = None) -> Any:
-        """
-        Returns the function config at the path.
+        """Gets a function config at the `path`.
+
+        Args:
+            path (str, Optional): The path that you want to extend under the base path.
+                If `path` is `None`, no extending. Defaults to `None`.
+            options (GetOptions, Optional): The options for this transaction.
+                Defaults to no options.
+        
+        Returns:
+            The function config at the `path`.
         """
         req = self.buildGetRequest("GET_FUNCTION", Reference.extendPath(self.path, path), options)
         return await self._ain.provider.send("ain_get", req)
 
     async def get(self, gets: List[GetOperation]) -> Any:
-        """
-        Returns the value / write rule / owner rule / function hash at multiple paths.
+        """Gets a value, write rule, owner rule, or function hash at multiple paths.
 
         Args:
-            gets (List[GetOperation]): Array of get requests
+            gets (List[GetOperation]): The array of the get requests.
                 Could be any one from "VALUE", "RULE", "OWNER", "FUNC" or a combination of them as an array.
+
+        Returns:
+            The value, write rule, owner rule, or function hash at multiple paths.
         """
         extendedGets: List[GetOperation] = []
         for get in gets:
@@ -113,13 +161,14 @@ class Reference:
         return await self._ain.provider.send("ain_get", req)
 
     async def deleteValue(self, transactionInput: ValueOnlyTransactionInput = None) -> Any:
-        """
-        Deletes a value.
+        """Deletes the value.
 
         Args:
-            transactionInput (ValueOnlyTransactionInput):
-                A transaction input object.
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
                 Any value given will be overwritten with null.
+
+        Returns:
+            The result of the transaction.
         """
         txInput = ValueOnlyTransactionInput()
         if transactionInput is not None:
@@ -139,8 +188,13 @@ class Reference:
         )
 
     async def setFunction(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """
-        Sets a function config.
+        """Sets the function config.
+
+        Args:
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
+
+        Returns:
+            The result of the transaction.
         """
         ref = Reference.extendPath(self._path, getattr(transactionInput, "ref", None))
         return await self._ain.sendTransaction(
@@ -153,8 +207,13 @@ class Reference:
         )
 
     async def setOwner(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """
-        Sets the owner rule.
+        """Sets the owner rule.
+
+        Args:
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            
+        Returns:
+            The result of the transaction.
         """
         ref = Reference.extendPath(self._path, getattr(transactionInput, "ref", None))
         return await self._ain.sendTransaction(
@@ -167,8 +226,13 @@ class Reference:
         )
 
     async def setRule(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """
-        Sets the write rule.
+        """Sets the write rule.
+
+        Args:
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            
+        Returns:
+            The result of the transaction.
         """
         ref = Reference.extendPath(self._path, getattr(transactionInput, "ref", None))
         return await self._ain.sendTransaction(
@@ -181,8 +245,13 @@ class Reference:
         )
 
     async def setValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """
-        Sets a value.
+        """Sets the value.
+
+        Args:
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            
+        Returns:
+            The result of the transaction.
         """
         ref = Reference.extendPath(self._path, getattr(transactionInput, "ref", None))
         return await self._ain.sendTransaction(
@@ -195,8 +264,13 @@ class Reference:
         )
 
     async def incrementValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """
-        Increments the value.
+        """Increments the value.
+
+        Args:
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            
+        Returns:
+            The result of the transaction.
         """
         ref = Reference.extendPath(self._path, getattr(transactionInput, "ref", None))
         return await self._ain.sendTransaction(
@@ -209,8 +283,13 @@ class Reference:
         )
 
     async def decrementValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
-        """
-        Decrements the value.
+        """Decrements the value.
+        
+        Args:
+            transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            
+        Returns:
+            The result of the transaction.
         """
         ref = Reference.extendPath(self._path, getattr(transactionInput, "ref", None))
         return await self._ain.sendTransaction(
@@ -223,8 +302,13 @@ class Reference:
         )
 
     async def set(self, transactionInput: SetMultiTransactionInput) -> Any:
-        """
-        Processes multiple set operations.
+        """Processes the multiple set operations.
+        
+        Args:
+            transactionInput (SetMultiTransactionInput): The transaction input object.
+            
+        Returns:
+            The result of the transaction.
         """
         return await self._ain.sendTransaction(
             Reference.extendSetMultiTransactionInput(
@@ -233,10 +317,16 @@ class Reference:
             )
         )
 
-    async def evalRule(self, params: EvalRuleInput) -> bool:
-        """
-        Returns the rule evaluation result. True if the params satisfy the write rule,
-        false if not.
+    async def evalRule(self, params: EvalRuleInput) -> Any:
+        """Evals the rule evaluation result.
+
+        Args:
+            params (EvalRuleInput): The eval rule input object.
+            
+        Returns:
+            The result of the evaluation.
+            `True`, if the params satisfy the write rule,
+            `False,` if not.
         """
         address = self._ain.wallet.getImpliedAddress(getattr(params, "address", None))
         req = {
@@ -249,8 +339,13 @@ class Reference:
         return await self._ain.provider.send("ain_evalRule", req)
 
     async def evalOwner(self, params: EvalOwnerInput) -> Any:
-        """
-        Returns the owner evaluation result.
+        """Evals the owner evaluation result.
+
+        Args:
+            params (EvalOwnerInput): The eval owner input object.
+            
+        Returns:
+            The owner evaluation result.
         """
         address = self._ain.wallet.getImpliedAddress(getattr(params, "address", None))
         req = {
@@ -261,8 +356,13 @@ class Reference:
         return await self._ain.provider.send("ain_evalOwner", req)
 
     async def matchFunction(self, params: MatchInput = None) -> Any:
-        """
-        Returns the function configs that are related to the input ref.
+        """Matches the function configs that are related to the input ref.
+
+        Args:
+            params (MatchInput): The match input object.
+            
+        Returns:
+            The function configs that are related to the input ref.
         """
         ref = self._path
         if params is not None and hasattr(params, "ref"):
@@ -270,8 +370,13 @@ class Reference:
         return await self._ain.provider.send("ain_matchFunction", {"ref": ref})
 
     async def matchRule(self, params: MatchInput = None) -> Any:
-        """
-        Returns the rule configs that are related to the input ref.
+        """Matches the rule configs that are related to the input ref.
+
+        Args:
+            params (MatchInput): The match input object.
+            
+        Returns:
+            The rule configs that are related to the input ref.
         """
         ref = self._path
         if params is not None and hasattr(params, "ref"):
@@ -279,8 +384,13 @@ class Reference:
         return await self._ain.provider.send("ain_matchRule", {"ref": ref})
 
     async def matchOwner(self, params: MatchInput = None) -> Any:
-        """
-        Returns the owner configs that are related to the input ref.
+        """Matches the owner configs that are related to the input ref.
+
+        Args:
+            params (MatchInput): The match input object.
+            
+        Returns:
+            The owner configs that are related to the input ref.
         """
         ref = self._path
         if params is not None and hasattr(params, "ref"):
@@ -289,8 +399,16 @@ class Reference:
 
     @staticmethod
     def buildGetRequest(type: GetOperationType, ref: str, options: GetOptions = None) -> dict:
-        """
-        Builds a get request.
+        """Builds a get request.
+
+        Args:
+            type (GetOperationType): The type of get operation.
+            ref (str): The path that you want to make transaction.
+            options (GetOptions, Optional): The options for this transaction.
+                Defaults to no options.
+        
+        Returns:
+            dict: The builded get request.
         """
         request = {"type": type, "ref": Reference.sanitizeRef(ref)}
         if options is not None:
@@ -299,8 +417,14 @@ class Reference:
 
     @staticmethod
     def extendPath(basePath: str = None, extension: str = None) -> str:
-        """
-        Returns a path that is the basePath extended with extension.
+        """Extends the path.
+
+        Args:
+            basePath (str, Optional): The base path that you want.
+            extension (str, Optional): The extension that you want to extend under the base path.
+        
+        Returns:
+            str: The extended `basePath`, by the `extension`.
         """
         sanitizedBase = Reference.sanitizeRef(basePath)
         sanitizedExt = Reference.sanitizeRef(extension)
@@ -317,13 +441,15 @@ class Reference:
         type: SetOperationType, 
         isGlobal: bool
     ) -> TransactionInput:
-        """
-        Decorates a transaction input with an appropriate type, ref and value.
+        """Extends the transaction input with an appropriate type, ref and value.
 
         Args:
-            input (ValueOnlyTransactionInput): A transaction input object
-            ref (str): The path at which set operations will take place
-            type (SetOperationType): A type of set operations
+            input (ValueOnlyTransactionInput): The transaction input object.
+            ref (str): The path that you want to make transaction.
+            type (SetOperationType): The type of set operation.
+        
+        Returns:
+            TransactionInput: The decorated transaction input.
         """
         operation = SetOperation(
             type=type,
@@ -345,14 +471,16 @@ class Reference:
         input: SetMultiTransactionInput,
         ref: str,
         type: SetMultiOperationType = "SET",
-    ):
-        """
-        Decorates a transaction input with an appropriate type and op_list.
+    ) -> TransactionInput:
+        """Extends the transaction input with an appropriate type and op_list.
 
         Args:
-            input (SetMultiTransactionInput): A transaction input object
-            ref (str): The path at which set operations will take place
-            type (SetMultiOperationType): A type of set operations
+            input (SetMultiTransactionInput): The transaction input object.
+            ref (str): The path that you want to make transaction.
+            type (SetMultiOperationType): The type of set operations.
+        
+        Returns:
+            TransactionInput: The decorated transaction input.
         """
         op_list: List[SetOperation] = []
         for op in input.op_list:
@@ -376,10 +504,14 @@ class Reference:
         )
 
     @staticmethod
-    def sanitizeRef(ref: str = None):
-        """
-        Returns a sanitized ref. If should have a slash at the
-        beginning and no slash at the end.
+    def sanitizeRef(ref: str = None) -> str:
+        """Sanitizes the path.
+
+        Args:
+            ref (str): A path that you want to sanitize.
+        
+        Returns:
+            str: A sanitized ref. It should have a slash at the beginning and no slash at the end.
         """
         if ref is None:
             return "/"
