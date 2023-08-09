@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ain.types module &mdash; ain-py  documentation</title>
@@ -12,10 +12,9 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
@@ -29,7 +28,7 @@
 
 <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
 
-<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "build_date": "2022-11-14T05:41:20Z", "builder": "sphinx", "canonical_url": "", "commit": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.types", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": "", "api_host": "", "builder": "sphinx", "canonical_url": "", "docroot": "", "features": {"docsearch_disabled": false}, "global_analytics_code": null, "language": "", "page": "ain.types", "programming_language": "", "project": "", "source_suffix": ".rst", "subprojects": {}, "theme": "", "user_analytics_code": null, "version": ""}</script>
 
 <!--
 Using this variable directly instead of using `JSON.parse` is deprecated.
@@ -49,11 +48,15 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ain-py
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ain-py
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -112,7 +115,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="ain.html">ain package</a></li>
       <li class="breadcrumb-item active">ain.types module</li>
       <li class="wy-breadcrumbs-aside">
@@ -133,7 +136,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the AIN blockchain options.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.AinOptions.rawResultMode">
-<span class="sig-name descname"><span class="pre">rawResultMode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.AinOptions.rawResultMode" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">rawResultMode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.AinOptions.rawResultMode" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using transaction raw result mode. If <cite>True</cite>, the raw result will return.</p>
 </dd></dl>
 
@@ -149,7 +152,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromSignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.types.ECDSASignature.fromSignature" title="Permalink to this definition"></a></dt>
 <dd><p>Converts signature format of the <cite>eth_sign</cite> RPC method to signature parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>signature</strong> – The <cite>eth_sign</cite> signature.</p>
 </dd>
 </dl>
@@ -206,13 +209,13 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the eval owner input.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalOwnerInput.address">
-<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalOwnerInput.address" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalOwnerInput.address" title="Permalink to this definition"></a></dt>
 <dd><p>The AIN blockchain address of the sender.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalOwnerInput.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalOwnerInput.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalOwnerInput.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
@@ -224,7 +227,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalOwnerInput.ref">
-<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalOwnerInput.ref" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalOwnerInput.ref" title="Permalink to this definition"></a></dt>
 <dd><p>The path that you want to make transaction.</p>
 </dd></dl>
 
@@ -237,25 +240,25 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the eval rule input.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalRuleInput.address">
-<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalRuleInput.address" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalRuleInput.address" title="Permalink to this definition"></a></dt>
 <dd><p>The AIN blockchain address of the sender.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalRuleInput.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalRuleInput.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalRuleInput.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalRuleInput.ref">
-<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalRuleInput.ref" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalRuleInput.ref" title="Permalink to this definition"></a></dt>
 <dd><p>The path that you want to make transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.EvalRuleInput.timestamp">
-<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.EvalRuleInput.timestamp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.EvalRuleInput.timestamp" title="Permalink to this definition"></a></dt>
 <dd><p>The unix time in milliseconds when the transaction has been created.</p>
 </dd></dl>
 
@@ -293,13 +296,13 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the get operation.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOperation.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOperation.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOperation.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOperation.ref">
-<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOperation.ref" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOperation.ref" title="Permalink to this definition"></a></dt>
 <dd><p>The path that you want to make transaction.</p>
 </dd></dl>
 
@@ -318,37 +321,37 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the get transaction options.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOptions.include_proof">
-<span class="sig-name descname"><span class="pre">include_proof</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOptions.include_proof" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">include_proof</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOptions.include_proof" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the including proof hashes. If <cite>True</cite>, the result will include proof hashes.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOptions.include_tree_info">
-<span class="sig-name descname"><span class="pre">include_tree_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOptions.include_tree_info" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">include_tree_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOptions.include_tree_info" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the including tree info. If <cite>True</cite>, the result will include additional state tree information.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOptions.include_version">
-<span class="sig-name descname"><span class="pre">include_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOptions.include_version" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">include_version</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOptions.include_version" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the including version. If <cite>True</cite>, the result will include state versions.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOptions.is_final">
-<span class="sig-name descname"><span class="pre">is_final</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOptions.is_final" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_final</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOptions.is_final" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the getting finalized result. If <cite>True</cite>, the result will return finalized.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOptions.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOptions.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOptions.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.GetOptions.is_shallow">
-<span class="sig-name descname"><span class="pre">is_shallow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.GetOptions.is_shallow" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_shallow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.GetOptions.is_shallow" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the getting shallow result. If <cite>True</cite>, the result will return only the keys of the children.</p>
 </dd></dl>
 
@@ -361,13 +364,13 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the match input.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.MatchInput.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.MatchInput.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.MatchInput.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.MatchInput.ref">
-<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.MatchInput.ref" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.MatchInput.ref" title="Permalink to this definition"></a></dt>
 <dd><p>The path that you want to make transaction.</p>
 </dd></dl>
 
@@ -399,19 +402,19 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the multiple set transaction input.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetMultiTransactionInput.address">
-<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.address" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.address" title="Permalink to this definition"></a></dt>
 <dd><p>The AIN blockchain address of the sender.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetMultiTransactionInput.gas_price">
-<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.gas_price" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.gas_price" title="Permalink to this definition"></a></dt>
 <dd><p>The gas price of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetMultiTransactionInput.nonce">
-<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.nonce" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.nonce" title="Permalink to this definition"></a></dt>
 <dd><p>The nonce of the transaction.</p>
 </dd></dl>
 
@@ -423,13 +426,13 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetMultiTransactionInput.parent_tx_hash">
-<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.parent_tx_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.parent_tx_hash" title="Permalink to this definition"></a></dt>
 <dd><p>The hash of the parent transaction. If transaction is not nested, this should not be given.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetMultiTransactionInput.timestamp">
-<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.timestamp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetMultiTransactionInput.timestamp" title="Permalink to this definition"></a></dt>
 <dd><p>The unix time in milliseconds when the transaction has been created.</p>
 </dd></dl>
 
@@ -442,7 +445,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the set operation.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetOperation.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetOperation.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetOperation.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
@@ -460,7 +463,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.SetOperation.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.SetOperation.value" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.SetOperation.value" title="Permalink to this definition"></a></dt>
 <dd><p>The value that you want to set.</p>
 </dd></dl>
 
@@ -499,18 +502,18 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ain.types.TransactionBody">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.types.</span></span><span class="sig-name descname"><span class="pre">TransactionBody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">billing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_tx_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.types.TransactionBody" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.types.</span></span><span class="sig-name descname"><span class="pre">TransactionBody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">billing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_tx_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.types.TransactionBody" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ain.types.TransactionBodyBase" title="ain.types.TransactionBodyBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransactionBodyBase</span></code></a></p>
 <p>Class for the transaction body.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionBody.billing">
-<span class="sig-name descname"><span class="pre">billing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionBody.billing" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">billing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionBody.billing" title="Permalink to this definition"></a></dt>
 <dd><p>The billing app name and the billing ID. Must be formatted as <cite>&lt;app_name&gt;|&lt;billing_id&gt;</cite></p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionBody.gas_price">
-<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionBody.gas_price" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionBody.gas_price" title="Permalink to this definition"></a></dt>
 <dd><p>The gas price of the transaction.</p>
 </dd></dl>
 
@@ -522,13 +525,13 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionBody.operation">
-<span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionBody.operation" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a></em><a class="headerlink" href="#ain.types.TransactionBody.operation" title="Permalink to this definition"></a></dt>
 <dd><p>The set operation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionBody.parent_tx_hash">
-<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionBody.parent_tx_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionBody.parent_tx_hash" title="Permalink to this definition"></a></dt>
 <dd><p>The hash of the parent transaction. If transaction is not nested, this should not be given.</p>
 </dd></dl>
 
@@ -547,13 +550,13 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the transaction body base.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionBodyBase.operation">
-<span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionBodyBase.operation" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a></em><a class="headerlink" href="#ain.types.TransactionBodyBase.operation" title="Permalink to this definition"></a></dt>
 <dd><p>The set operation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionBodyBase.parent_tx_hash">
-<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionBodyBase.parent_tx_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionBodyBase.parent_tx_hash" title="Permalink to this definition"></a></dt>
 <dd><p>The hash of the parent transaction. If transaction is not nested, this should not be given.</p>
 </dd></dl>
 
@@ -561,42 +564,42 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ain.types.TransactionInput">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.types.</span></span><span class="sig-name descname"><span class="pre">TransactionInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_tx_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.types.TransactionInput" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.types.</span></span><span class="sig-name descname"><span class="pre">TransactionInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_tx_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.types.TransactionInput" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ain.types.TransactionBodyBase" title="ain.types.TransactionBodyBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransactionBodyBase</span></code></a>, <a class="reference internal" href="#ain.types.TransactionInputBase" title="ain.types.TransactionInputBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransactionInputBase</span></code></a></p>
 <p>Class for the transaction input.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInput.address">
-<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInput.address" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInput.address" title="Permalink to this definition"></a></dt>
 <dd><p>The AIN blockchain address of the sender.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInput.gas_price">
-<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInput.gas_price" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInput.gas_price" title="Permalink to this definition"></a></dt>
 <dd><p>The gas price of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInput.nonce">
-<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInput.nonce" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInput.nonce" title="Permalink to this definition"></a></dt>
 <dd><p>The nonce of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInput.operation">
-<span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInput.operation" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetOperation" title="ain.types.SetOperation"><span class="pre">SetOperation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ain.types.SetMultiOperation" title="ain.types.SetMultiOperation"><span class="pre">SetMultiOperation</span></a></em><a class="headerlink" href="#ain.types.TransactionInput.operation" title="Permalink to this definition"></a></dt>
 <dd><p>The set operation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInput.parent_tx_hash">
-<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInput.parent_tx_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInput.parent_tx_hash" title="Permalink to this definition"></a></dt>
 <dd><p>The hash of the parent transaction. If transaction is not nested, this should not be given.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInput.timestamp">
-<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInput.timestamp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInput.timestamp" title="Permalink to this definition"></a></dt>
 <dd><p>The unix time in milliseconds when the transaction has been created.</p>
 </dd></dl>
 
@@ -609,25 +612,25 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the transaction input base.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInputBase.address">
-<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInputBase.address" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInputBase.address" title="Permalink to this definition"></a></dt>
 <dd><p>The AIN blockchain address of the sender.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInputBase.gas_price">
-<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInputBase.gas_price" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInputBase.gas_price" title="Permalink to this definition"></a></dt>
 <dd><p>The gas price of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInputBase.nonce">
-<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInputBase.nonce" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInputBase.nonce" title="Permalink to this definition"></a></dt>
 <dd><p>The nonce of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.TransactionInputBase.timestamp">
-<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.TransactionInputBase.timestamp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.TransactionInputBase.timestamp" title="Permalink to this definition"></a></dt>
 <dd><p>The unix time in milliseconds when the transaction has been created.</p>
 </dd></dl>
 
@@ -640,25 +643,25 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the value only transaction body base.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionBodyBase.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionBodyBase.parent_tx_hash">
-<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.parent_tx_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.parent_tx_hash" title="Permalink to this definition"></a></dt>
 <dd><p>The hash of the parent transaction. If transaction is not nested, this should not be given.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionBodyBase.ref">
-<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.ref" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.ref" title="Permalink to this definition"></a></dt>
 <dd><p>The path that you want to make transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionBodyBase.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.value" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionBodyBase.value" title="Permalink to this definition"></a></dt>
 <dd><p>The value that you want to set.</p>
 </dd></dl>
 
@@ -671,49 +674,49 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the value only transaction input.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.address">
-<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.address" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.address" title="Permalink to this definition"></a></dt>
 <dd><p>The AIN blockchain address of the sender.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.gas_price">
-<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.gas_price" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">gas_price</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.gas_price" title="Permalink to this definition"></a></dt>
 <dd><p>The gas price of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.is_global">
-<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.is_global" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_global</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.is_global" title="Permalink to this definition"></a></dt>
 <dd><p>The flag of the using global reference path. If <cite>True</cite>, the given ref will be interpreted as a global path.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.nonce">
-<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.nonce" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nonce</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.nonce" title="Permalink to this definition"></a></dt>
 <dd><p>The nonce of the transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.parent_tx_hash">
-<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.parent_tx_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parent_tx_hash</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.parent_tx_hash" title="Permalink to this definition"></a></dt>
 <dd><p>The hash of the parent transaction. If transaction is not nested, this should not be given.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.ref">
-<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.ref" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.ref" title="Permalink to this definition"></a></dt>
 <dd><p>The path that you want to make transaction.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.timestamp">
-<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.timestamp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.timestamp" title="Permalink to this definition"></a></dt>
 <dd><p>The unix time in milliseconds when the transaction has been created.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.types.ValueOnlyTransactionInput.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.value" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.types.ValueOnlyTransactionInput.value" title="Permalink to this definition"></a></dt>
 <dd><p>The value that you want to set.</p>
 </dd></dl>
 
