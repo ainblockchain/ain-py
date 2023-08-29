@@ -12,11 +12,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -110,10 +110,10 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
            <div itemprop="articleBody">
              
   <section id="module-ain.ain">
-<span id="ain-ain-module"></span><h1>ain.ain module<a class="headerlink" href="#module-ain.ain" title="Permalink to this heading"></a></h1>
+<span id="ain-ain-module"></span><h1>ain.ain module<a class="headerlink" href="#module-ain.ain" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ain.ain.Ain">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.ain.</span></span><span class="sig-name descname"><span class="pre">Ain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providerUrl:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ainOptions:</span> <span class="pre">~ain.types.AinOptions</span> <span class="pre">=</span> <span class="pre">&lt;ain.types.AinOptions</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.ain.Ain" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.ain.</span></span><span class="sig-name descname"><span class="pre">Ain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providerUrl:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ainOptions:</span> <span class="pre">~ain.types.AinOptions</span> <span class="pre">=</span> <span class="pre">&lt;ain.types.AinOptions</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.ain.Ain" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class for the <cite>Ain</cite> instance, the interactor for the AIN Blockchain.</p>
 <dl class="field-list simple">
@@ -127,7 +127,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.buildTransactionBody">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">buildTransactionBody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionInput" title="ain.types.TransactionInput"><span class="pre">TransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></span><a class="headerlink" href="#ain.ain.Ain.buildTransactionBody" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">buildTransactionBody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionInput" title="ain.types.TransactionInput"><span class="pre">TransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></span><a class="headerlink" href="#ain.ain.Ain.buildTransactionBody" title="Link to this definition"></a></dt>
 <dd><p>Builds a transaction body from the transaction input.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -144,7 +144,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.depositConsensusStake">
-<span class="sig-name descname"><span class="pre">depositConsensusStake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.depositConsensusStake" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">depositConsensusStake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.depositConsensusStake" title="Link to this definition"></a></dt>
 <dd><p>Sends a transaction that deposits AIN for consensus staking.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -158,7 +158,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getBlock">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHashOrBlockNumber</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnTransactionObjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getBlock" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHashOrBlockNumber</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnTransactionObjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getBlock" title="Link to this definition"></a></dt>
 <dd><p>Gets a block with the given hash or block number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -176,7 +176,7 @@ If <cite>False</cite>, returns only the transaction hashes. Default to <cite>Fal
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getConsensusStakeAmount">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getConsensusStakeAmount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getConsensusStakeAmount" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getConsensusStakeAmount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getConsensusStakeAmount" title="Link to this definition"></a></dt>
 <dd><p>Gets an amount of the AIN currently staked for participating in consensus protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -190,7 +190,7 @@ If <cite>False</cite>, returns only the transaction hashes. Default to <cite>Fal
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getNonce">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getNonce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getNonce" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getNonce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getNonce" title="Link to this definition"></a></dt>
 <dd><p>Gets a current transaction count of account, which is the nonce of the account.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -208,7 +208,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getProposer">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getProposer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHashOrBlockNumber</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getProposer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getProposer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHashOrBlockNumber</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getProposer" title="Link to this definition"></a></dt>
 <dd><p>Gets an address of the proposer of the given block.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -222,7 +222,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getStateUsage">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getStateUsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">appName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getStateUsage" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getStateUsage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">appName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getStateUsage" title="Link to this definition"></a></dt>
 <dd><p>Gets a state usage with the given app name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -236,7 +236,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getTransaction">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionHash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getTransaction" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionHash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getTransaction" title="Link to this definition"></a></dt>
 <dd><p>Gets a transaction with the given transaction hash.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -250,7 +250,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.getValidators">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getValidators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHashOrBlockNumber</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getValidators" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getValidators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blockHashOrBlockNumber</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.getValidators" title="Link to this definition"></a></dt>
 <dd><p>Gets the list of validators for a given block</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -264,7 +264,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.sendSignedTransaction">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sendSignedTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txBody</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.sendSignedTransaction" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sendSignedTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txBody</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.sendSignedTransaction" title="Link to this definition"></a></dt>
 <dd><p>Sends a signed transaction to the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -281,7 +281,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.sendTransaction">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sendTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionObject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionInput" title="ain.types.TransactionInput"><span class="pre">TransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.sendTransaction" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sendTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionObject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionInput" title="ain.types.TransactionInput"><span class="pre">TransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.sendTransaction" title="Link to this definition"></a></dt>
 <dd><p>Signs and sends the transaction to the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -295,7 +295,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.sendTransactionBatch">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sendTransactionBatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionObjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="ain.types.html#ain.types.TransactionInput" title="ain.types.TransactionInput"><span class="pre">TransactionInput</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ain.ain.Ain.sendTransactionBatch" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sendTransactionBatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionObjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="ain.types.html#ain.types.TransactionInput" title="ain.types.TransactionInput"><span class="pre">TransactionInput</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ain.ain.Ain.sendTransactionBatch" title="Link to this definition"></a></dt>
 <dd><p>Sends a signed transactions to the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -309,7 +309,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.setProvider">
-<span class="sig-name descname"><span class="pre">setProvider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providerUrl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.ain.Ain.setProvider" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">setProvider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">providerUrl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.ain.Ain.setProvider" title="Link to this definition"></a></dt>
 <dd><p>Sets a new provider</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -323,7 +323,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.validateAppName">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validateAppName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">appName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.validateAppName" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validateAppName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">appName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.validateAppName" title="Link to this definition"></a></dt>
 <dd><p>Validate a given app name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -337,7 +337,7 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.ain.Ain.withdrawConsensusStake">
-<span class="sig-name descname"><span class="pre">withdrawConsensusStake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.withdrawConsensusStake" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">withdrawConsensusStake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.ain.Ain.withdrawConsensusStake" title="Link to this definition"></a></dt>
 <dd><p>Sends a transaction that withdraws AIN for consensus staking.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -351,37 +351,37 @@ the committed blocks (“committed”). The default value is “committed”.</p
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.ain.Ain.chainId">
-<span class="sig-name descname"><span class="pre">chainId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.ain.Ain.chainId" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">chainId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.ain.Ain.chainId" title="Link to this definition"></a></dt>
 <dd><p>The chain ID of the provider.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.ain.Ain.db">
-<span class="sig-name descname"><span class="pre">db</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.db.html#ain.db.Database" title="ain.db.Database"><span class="pre">Database</span></a></em><a class="headerlink" href="#ain.ain.Ain.db" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">db</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.db.html#ain.db.Database" title="ain.db.Database"><span class="pre">Database</span></a></em><a class="headerlink" href="#ain.ain.Ain.db" title="Link to this definition"></a></dt>
 <dd><p>The <cite>Database</cite> instance.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.ain.Ain.net">
-<span class="sig-name descname"><span class="pre">net</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.net.html#ain.net.Network" title="ain.net.Network"><span class="pre">Network</span></a></em><a class="headerlink" href="#ain.ain.Ain.net" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">net</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.net.html#ain.net.Network" title="ain.net.Network"><span class="pre">Network</span></a></em><a class="headerlink" href="#ain.ain.Ain.net" title="Link to this definition"></a></dt>
 <dd><p>The <cite>Network</cite> instance.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.ain.Ain.provider">
-<span class="sig-name descname"><span class="pre">provider</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.provider.html#ain.provider.Provider" title="ain.provider.Provider"><span class="pre">Provider</span></a></em><a class="headerlink" href="#ain.ain.Ain.provider" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">provider</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.provider.html#ain.provider.Provider" title="ain.provider.Provider"><span class="pre">Provider</span></a></em><a class="headerlink" href="#ain.ain.Ain.provider" title="Link to this definition"></a></dt>
 <dd><p>The <cite>Provider</cite> instance.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.ain.Ain.rawResultMode">
-<span class="sig-name descname"><span class="pre">rawResultMode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#ain.ain.Ain.rawResultMode" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">rawResultMode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#ain.ain.Ain.rawResultMode" title="Link to this definition"></a></dt>
 <dd><p>The flag of the raw result mode.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.ain.Ain.wallet">
-<span class="sig-name descname"><span class="pre">wallet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.wallet.html#ain.wallet.Wallet" title="ain.wallet.Wallet"><span class="pre">Wallet</span></a></em><a class="headerlink" href="#ain.ain.Ain.wallet" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">wallet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.wallet.html#ain.wallet.Wallet" title="ain.wallet.Wallet"><span class="pre">Wallet</span></a></em><a class="headerlink" href="#ain.ain.Ain.wallet" title="Link to this definition"></a></dt>
 <dd><p>The <cite>Wallet</cite> instance.</p>
 </dd></dl>
 

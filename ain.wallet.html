@@ -12,11 +12,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -110,15 +110,15 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
            <div itemprop="articleBody">
              
   <section id="module-ain.wallet">
-<span id="ain-wallet-module"></span><h1>ain.wallet module<a class="headerlink" href="#module-ain.wallet" title="Permalink to this heading"></a></h1>
+<span id="ain-wallet-module"></span><h1>ain.wallet module<a class="headerlink" href="#module-ain.wallet" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ain.wallet.Wallet">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.wallet.</span></span><span class="sig-name descname"><span class="pre">Wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.ain.html#ain.ain.Ain" title="ain.ain.Ain"><span class="pre">Ain</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ain.wallet.</span></span><span class="sig-name descname"><span class="pre">Wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.ain.html#ain.ain.Ain" title="ain.ain.Ain"><span class="pre">Ain</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class for the AIN Blockchain wallet.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.accountToV3Keystore">
-<span class="sig-name descname"><span class="pre">accountToV3Keystore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options:</span> <span class="pre">~ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">=</span> <span class="pre">&lt;ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.utils.v3keystore.html#ain.utils.v3keystore.V3Keystore" title="ain.utils.v3keystore.V3Keystore"><span class="pre">V3Keystore</span></a></span></span><a class="headerlink" href="#ain.wallet.Wallet.accountToV3Keystore" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">accountToV3Keystore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options:</span> <span class="pre">~ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">=</span> <span class="pre">&lt;ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="ain.utils.v3keystore.html#ain.utils.v3keystore.V3Keystore" title="ain.utils.v3keystore.V3Keystore"><span class="pre">V3Keystore</span></a></span></span><a class="headerlink" href="#ain.wallet.Wallet.accountToV3Keystore" title="Link to this definition"></a></dt>
 <dd><p>Converts an account into a v3 Keystore and encrypts it with a password.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -140,7 +140,7 @@ Defaults to no options.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.add">
-<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.add" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.add" title="Link to this definition"></a></dt>
 <dd><p>Adds a new account to the wallet, from the given private key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -157,7 +157,7 @@ Defaults to no options.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.addAndSetDefaultAccount">
-<span class="sig-name descname"><span class="pre">addAndSetDefaultAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.addAndSetDefaultAccount" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">addAndSetDefaultAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">privateKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.addAndSetDefaultAccount" title="Link to this definition"></a></dt>
 <dd><p>Adds a new account to the wallet, from the given private key.
 Then, sets the new account as the default account.</p>
 <dl class="field-list simple">
@@ -175,7 +175,7 @@ Then, sets the new account as the default account.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.addFromHDWallet">
-<span class="sig-name descname"><span class="pre">addFromHDWallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.addFromHDWallet" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">addFromHDWallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.addFromHDWallet" title="Link to this definition"></a></dt>
 <dd><p>Adds an account to the wallet, from a seed phrase.
 Only the account at the given index will be added.</p>
 <dl class="field-list simple">
@@ -196,7 +196,7 @@ Only the account at the given index will be added.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.addFromV3Keystore">
-<span class="sig-name descname"><span class="pre">addFromV3Keystore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v3Keystore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.utils.v3keystore.html#ain.utils.v3keystore.V3Keystore" title="ain.utils.v3keystore.V3Keystore"><span class="pre">V3Keystore</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.addFromV3Keystore" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">addFromV3Keystore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v3Keystore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.utils.v3keystore.html#ain.utils.v3keystore.V3Keystore" title="ain.utils.v3keystore.V3Keystore"><span class="pre">V3Keystore</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.addFromV3Keystore" title="Link to this definition"></a></dt>
 <dd><p>Adds an account to the wallet, from the v3 keystore.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -216,13 +216,13 @@ Only the account at the given index will be added.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.clear">
-<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.clear" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.clear" title="Link to this definition"></a></dt>
 <dd><p>Clears the wallet, remove all account information.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfAccounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.create" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfAccounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.create" title="Link to this definition"></a></dt>
 <dd><p>Creates <cite>numberOfAccounts</cite> new accounts, and adds them to the wallet.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -234,7 +234,7 @@ If this is not positive, raises <cite>ValueError</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.getBalance">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getBalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getBalance" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getBalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getBalance" title="Link to this definition"></a></dt>
 <dd><p>Gets an AIN balance of the given account.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -253,7 +253,7 @@ If <cite>address</cite> is <cite>None</cite> and default account is not set, rai
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.getHashStrFromSig">
-<span class="sig-name descname"><span class="pre">getHashStrFromSig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getHashStrFromSig" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getHashStrFromSig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getHashStrFromSig" title="Link to this definition"></a></dt>
 <dd><p>Gets a hash from the signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -267,7 +267,7 @@ If <cite>address</cite> is <cite>None</cite> and default account is not set, rai
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.getImpliedAddress">
-<span class="sig-name descname"><span class="pre">getImpliedAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getImpliedAddress" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getImpliedAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getImpliedAddress" title="Link to this definition"></a></dt>
 <dd><p>Gets an implied address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -287,7 +287,7 @@ If such <cite>address</cite> is not added to the wallet, raises <cite>ValueError
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.getPublicKey">
-<span class="sig-name descname"><span class="pre">getPublicKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getPublicKey" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getPublicKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.getPublicKey" title="Link to this definition"></a></dt>
 <dd><p>Gets a full public key of the given address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -308,7 +308,7 @@ If such <cite>address</cite> is not added to the wallet, raises <cite>ValueError
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.isAdded">
-<span class="sig-name descname"><span class="pre">isAdded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.isAdded" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">isAdded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.isAdded" title="Link to this definition"></a></dt>
 <dd><p>Returns whether the address has already been added to the wallet.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -329,7 +329,7 @@ If such <cite>address</cite> is not added to the wallet, raises <cite>ValueError
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.recover">
-<span class="sig-name descname"><span class="pre">recover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.recover" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">recover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.recover" title="Link to this definition"></a></dt>
 <dd><p>Recovers an address of the account that was used to create the signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -343,7 +343,7 @@ If such <cite>address</cite> is not added to the wallet, raises <cite>ValueError
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.remove" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.remove" title="Link to this definition"></a></dt>
 <dd><p>Removes the account from the wallet.
 If such account doesn’t exist, raises <cite>ValueError</cite>.</p>
 <dl class="field-list simple">
@@ -355,13 +355,13 @@ If such account doesn’t exist, raises <cite>ValueError</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.removeDefaultAccount">
-<span class="sig-name descname"><span class="pre">removeDefaultAccount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.removeDefaultAccount" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">removeDefaultAccount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.removeDefaultAccount" title="Link to this definition"></a></dt>
 <dd><p>Removes a default account from the wallet, and sets it to <cite>None</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.setDefaultAccount">
-<span class="sig-name descname"><span class="pre">setDefaultAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.setDefaultAccount" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">setDefaultAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.setDefaultAccount" title="Link to this definition"></a></dt>
 <dd><p>Sets the default AIN Blockchain account address as <cite>address</cite>.
 If such <cite>address</cite> is not added to the wallet, raises <cite>ValueError</cite>.</p>
 <dl class="field-list simple">
@@ -373,7 +373,7 @@ If such <cite>address</cite> is not added to the wallet, raises <cite>ValueError
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.sign">
-<span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.sign" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.sign" title="Link to this definition"></a></dt>
 <dd><p>Signs a string data with the private key of the given address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -394,7 +394,7 @@ Defaults to <cite>None</cite>, use the default account of the current wallet.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.signTransaction">
-<span class="sig-name descname"><span class="pre">signTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.signTransaction" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">signTransaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.TransactionBody" title="ain.types.TransactionBody"><span class="pre">TransactionBody</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.signTransaction" title="Link to this definition"></a></dt>
 <dd><p>Signs a transaction data with the private key of the given address.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -415,7 +415,7 @@ Defaults to <cite>None</cite>, use the default account of the current wallet.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.toV3Keystore">
-<span class="sig-name descname"><span class="pre">toV3Keystore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options:</span> <span class="pre">~ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">=</span> <span class="pre">&lt;ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="ain.utils.v3keystore.html#ain.utils.v3keystore.V3Keystore" title="ain.utils.v3keystore.V3Keystore"><span class="pre">V3Keystore</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ain.wallet.Wallet.toV3Keystore" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">toV3Keystore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options:</span> <span class="pre">~ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">=</span> <span class="pre">&lt;ain.utils.v3keystore.V3KeystoreOptions</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="ain.utils.v3keystore.html#ain.utils.v3keystore.V3Keystore" title="ain.utils.v3keystore.V3Keystore"><span class="pre">V3Keystore</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ain.wallet.Wallet.toV3Keystore" title="Link to this definition"></a></dt>
 <dd><p>Saves the accounts in the wallet as v3 Keystores, locking them with the password.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -436,7 +436,7 @@ Defaults to no options.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.transfer">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fromAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.transfer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fromAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.wallet.Wallet.transfer" title="Link to this definition"></a></dt>
 <dd><p>Sends a transfer transaction to the network.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -459,7 +459,7 @@ Defaults to <cite>None</cite>.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.verifySignature">
-<span class="sig-name descname"><span class="pre">verifySignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.verifySignature" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">verifySignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.wallet.Wallet.verifySignature" title="Link to this definition"></a></dt>
 <dd><p>Verifies the given signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -484,31 +484,31 @@ Defaults to <cite>None</cite>.</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.accounts">
-<span class="sig-name descname"><span class="pre">accounts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="ain.account.html#ain.account.Account" title="ain.account.Account"><span class="pre">Account</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.wallet.Wallet.accounts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">accounts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="ain.account.html#ain.account.Account" title="ain.account.Account"><span class="pre">Account</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ain.wallet.Wallet.accounts" title="Link to this definition"></a></dt>
 <dd><p>The set of the accounts. Keys are the addresses of the accounts.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.ain">
-<span class="sig-name descname"><span class="pre">ain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.ain.html#ain.ain.Ain" title="ain.ain.Ain"><span class="pre">Ain</span></a></em><a class="headerlink" href="#ain.wallet.Wallet.ain" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.ain.html#ain.ain.Ain" title="ain.ain.Ain"><span class="pre">Ain</span></a></em><a class="headerlink" href="#ain.wallet.Wallet.ain" title="Link to this definition"></a></dt>
 <dd><p>The <cite>Ain</cite> instance.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.chainId">
-<span class="sig-name descname"><span class="pre">chainId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.wallet.Wallet.chainId" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">chainId</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.wallet.Wallet.chainId" title="Link to this definition"></a></dt>
 <dd><p>The chain ID of the provider.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.defaultAccount">
-<span class="sig-name descname"><span class="pre">defaultAccount</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.account.html#ain.account.Account" title="ain.account.Account"><span class="pre">Account</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.wallet.Wallet.defaultAccount" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defaultAccount</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ain.account.html#ain.account.Account" title="ain.account.Account"><span class="pre">Account</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ain.wallet.Wallet.defaultAccount" title="Link to this definition"></a></dt>
 <dd><p>The default account of the wallet.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ain.wallet.Wallet.length">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.wallet.Wallet.length" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ain.wallet.Wallet.length" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
