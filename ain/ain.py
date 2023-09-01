@@ -171,11 +171,12 @@ class Ain:
             "ain_validateAppName", {"app_name": appName}
         )
 
-    async def sendTransaction(self, transactionObject: TransactionInput) -> Any:
+    async def sendTransaction(self, transactionObject: TransactionInput, isDryrun = False) -> Any:
         """Signs and sends the transaction to the network.
 
         Args:
             transactionObject (TransactionInput): The transaction.
+            isDryrun (bool): Dryrun option.
 
         Returns:
             The transaction result.
@@ -184,20 +185,21 @@ class Ain:
         signature = self.wallet.signTransaction(
             txBody, getattr(transactionObject, "address", None)
         )
-        return await self.sendSignedTransaction(signature, txBody)
+        return await self.sendSignedTransaction(signature, txBody, isDryrun)
 
-    async def sendSignedTransaction(self, signature: str, txBody: TransactionBody) -> Any:
+    async def sendSignedTransaction(self, signature: str, txBody: TransactionBody, isDryrun = False) -> Any:
         """Sends a signed transaction to the network.
 
         Args:
             signature (str): The signature of the transaction.
             txBody (TransactionBody): The transaction body.
+            isDryrun (bool): Dryrun option.
 
         Returns:
             The transaction result.
         """
-        return await self.provider.send(
-            "ain_sendSignedTransaction", {"signature": signature, "tx_body": txBody}
+        method = "ain_sendSignedTransactionDryrun" if isDryrun == True else "ain_sendSignedTransaction"
+        return await self.provider.send(method, {"signature": signature, "tx_body": txBody}
         )
 
     async def sendTransactionBatch(self, transactionObjects: List[TransactionInput]) -> List[Any]:
