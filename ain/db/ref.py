@@ -160,12 +160,13 @@ class Reference:
         req = {"type": "GET", "op_list": extendedGets}
         return await self._ain.provider.send("ain_get", req)
 
-    async def deleteValue(self, transactionInput: ValueOnlyTransactionInput = None) -> Any:
+    async def deleteValue(self, transactionInput: ValueOnlyTransactionInput = None, isDryrun = False) -> Any:
         """Deletes the value.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
                 Any value given will be overwritten with null.
+            isDryrun (bool): Dryrun option.
 
         Returns:
             The result of the transaction.
@@ -184,14 +185,16 @@ class Reference:
             TransactionInput(
                 operation=operation,
                 parent_tx_hash=getattr(txInput, "parent_tx_hash", None),
-            )
+            ),
+            isDryrun
         )
 
-    async def setFunction(self, transactionInput: ValueOnlyTransactionInput) -> Any:
+    async def setFunction(self, transactionInput: ValueOnlyTransactionInput, isDryrun = False) -> Any:
         """Sets the function config.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
 
         Returns:
             The result of the transaction.
@@ -203,14 +206,16 @@ class Reference:
                 ref,
                 "SET_FUNCTION",
                 self._isGlobal
-            )
+            ),
+            isDryrun
         )
 
-    async def setOwner(self, transactionInput: ValueOnlyTransactionInput) -> Any:
+    async def setOwner(self, transactionInput: ValueOnlyTransactionInput, isDryrun = False) -> Any:
         """Sets the owner rule.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
             
         Returns:
             The result of the transaction.
@@ -222,14 +227,16 @@ class Reference:
                 ref,
                 "SET_OWNER",
                 self._isGlobal
-            )
+            ),
+            isDryrun
         )
 
-    async def setRule(self, transactionInput: ValueOnlyTransactionInput) -> Any:
+    async def setRule(self, transactionInput: ValueOnlyTransactionInput, isDryrun = False) -> Any:
         """Sets the write rule.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
             
         Returns:
             The result of the transaction.
@@ -241,14 +248,16 @@ class Reference:
                 ref,
                 "SET_RULE",
                 self._isGlobal
-            )
+            ),
+            isDryrun
         )
 
-    async def setValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
+    async def setValue(self, transactionInput: ValueOnlyTransactionInput, isDryrun = False) -> Any:
         """Sets the value.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
             
         Returns:
             The result of the transaction.
@@ -260,14 +269,16 @@ class Reference:
                 ref,
                 "SET_VALUE",
                 self._isGlobal
-            )
+            ),
+            isDryrun
         )
 
-    async def incrementValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
+    async def incrementValue(self, transactionInput: ValueOnlyTransactionInput, isDryrun = False) -> Any:
         """Increments the value.
 
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
             
         Returns:
             The result of the transaction.
@@ -279,14 +290,16 @@ class Reference:
                 ref,
                 "INC_VALUE",
                 self._isGlobal
-            )
+            ),
+            isDryrun
         )
 
-    async def decrementValue(self, transactionInput: ValueOnlyTransactionInput) -> Any:
+    async def decrementValue(self, transactionInput: ValueOnlyTransactionInput, isDryrun = False) -> Any:
         """Decrements the value.
         
         Args:
             transactionInput (ValueOnlyTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
             
         Returns:
             The result of the transaction.
@@ -298,14 +311,16 @@ class Reference:
                 ref,
                 "DEC_VALUE",
                 self._isGlobal
-            )
+            ),
+            isDryrun
         )
 
-    async def set(self, transactionInput: SetMultiTransactionInput) -> Any:
+    async def set(self, transactionInput: SetMultiTransactionInput, isDryrun = False) -> Any:
         """Processes the multiple set operations.
         
         Args:
             transactionInput (SetMultiTransactionInput): The transaction input object.
+            isDryrun (bool): Dryrun option.
             
         Returns:
             The result of the transaction.
@@ -314,7 +329,8 @@ class Reference:
             Reference.extendSetMultiTransactionInput(
                 transactionInput,
                 self._path,
-            )
+            ),
+            isDryrun
         )
 
     async def evalRule(self, params: EvalRuleInput) -> Any:
