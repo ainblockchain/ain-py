@@ -224,7 +224,7 @@ class Wallet:
             addr = toChecksumAddress(address)
         return await self.ain.db.ref(f"/accounts/{addr}/balance").getValue()
 
-    async def transfer(self, toAddress: str, value: int, fromAddress: str = None, nonce: int = None, gas_price: int = None):
+    async def transfer(self, toAddress: str, value: int, fromAddress: str = None, nonce: int = None, gas_price: int = None, isDryrun = False):
         """Sends a transfer transaction to the network.
 
         Args:
@@ -236,6 +236,7 @@ class Wallet:
                 Defaults to `None`.
             gas_price (int, Optional): The gas price of the transfer transaction.
                 Defaults to `None`.
+            isDryrun (bool): Dryrun option.
         
         Returns:
             The transaction result.
@@ -250,7 +251,8 @@ class Wallet:
                 value=value,
                 nonce=nonce,
                 gas_price=gas_price,
-            )
+            ),
+            isDryrun
         )
 
     def sign(self, data: str, address: str = None) -> str:
