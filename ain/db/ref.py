@@ -344,7 +344,7 @@ class Reference:
             `True`, if the params satisfy the write rule,
             `False,` if not.
         """
-        address = self._ain.wallet.getImpliedAddress(getattr(params, "address", None))
+        address = self._ain.signer.getAddress(getattr(params, "address", None))
         req = {
             "address": address,
             "ref": Reference.extendPath(self._path, getattr(params, "ref", None)),
@@ -363,7 +363,7 @@ class Reference:
         Returns:
             The owner evaluation result.
         """
-        address = self._ain.wallet.getImpliedAddress(getattr(params, "address", None))
+        address = self._ain.signer.getAddress(getattr(params, "address", None))
         req = {
             "address": address,
             "ref": Reference.extendPath(self._path, getattr(params, "ref", None)),
