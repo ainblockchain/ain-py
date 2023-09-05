@@ -35,7 +35,7 @@ class Signer(metaclass = ABCMeta):
 
 class DefaultSigner(Signer):
     """The default concrete class of Signer abstract class implemented using Wallet class.
-       When ain class is initialized, DefaultSigner is set as its signer.
+       When Ain class is initialized, DefaultSigner is set as its signer.
 
     Args:
         wallet (Wallet): The wallet to initialize with.
