@@ -5,6 +5,7 @@ from ain.net import Network
 from ain.wallet import Wallet
 from ain.types import AinOptions, TransactionInput, TransactionBody, ValueOnlyTransactionInput
 from ain.db import Database
+from ain.signer import Signer, DefaultSigner
 from ain.utils import getTimestamp, toChecksumAddress
 
 class Ain:
@@ -28,6 +29,8 @@ class Ain:
     """The `Network` instance."""
     wallet: Wallet
     """The `Wallet` instance."""
+    signer: Signer
+    """The `Signer` instance."""
 
     def __init__(self, providerUrl: str, chainId: int = 0, ainOptions: AinOptions = AinOptions()):
         self.provider = Provider(self, providerUrl)
@@ -36,6 +39,7 @@ class Ain:
         self.net = Network(self.provider)
         self.wallet = Wallet(self, self.chainId)
         self.db = Database(self, self.provider)
+        self.signer = DefaultSigner(self.wallet)
 
     def setProvider(self, providerUrl: str, chainId: int = 0):
         """Sets a new provider
@@ -49,6 +53,14 @@ class Ain:
         self.net = Network(self.provider)
         self.wallet.chainId = chainId
         self.db = Database(self, self.provider)
+
+    def setSigner(self, signer: Signer):
+        """Sets a new signer
+
+        Args:
+            signer (Signer): The signer to set.
+        """
+        self.signer = signer
 
     # TODO(kriii): Return objects typing.
 
@@ -182,7 +194,7 @@ class Ain:
             The transaction result.
         """
         txBody = await self.buildTransactionBody(transactionObject)
-        signature = self.wallet.signTransaction(
+        signature = await self.signer.signMessage(
             txBody, getattr(transactionObject, "address", None)
         )
         return await self.sendSignedTransaction(signature, txBody, isDryrun)
@@ -253,7 +265,7 @@ class Ain:
             The amount of the AIN of that address.
         """
         if account is None:
-            address = self.wallet.getImpliedAddress()
+            address = self.signer.getAddress()
         else:
             address = toChecksumAddress(account)
         return await self.db.ref(f"/deposit_accounts/consensus/{address}").getValue()
@@ -275,7 +287,7 @@ class Ain:
         if "address" in args:
             params["address"] = toChecksumAddress(args["address"])
         else:
-            params["address"] = self.wallet.getImpliedAddress()
+            params["address"] = self.signer.getAddress()
 
         if "from" in args:
             if args["from"] != "pending" and args["from"] != "committed":
@@ -295,7 +307,7 @@ class Ain:
         Returns:
             TransactionBody: The builded transaction body.
         """
-        address = self.wallet.getImpliedAddress(
+        address = self.signer.getAddress(
             getattr(transactionInput, "address", None)
         )
         operation = transactionInput.operation
@@ -324,7 +336,7 @@ class Ain:
             raise ValueError("a value should be specified.")
         if type(input.value) is not int:
             raise ValueError("value has to be a int.")
-        input.address = self.wallet.getImpliedAddress(getattr(input, "address", None))
+        input.address = self.signer.getAddress(getattr(input, "address", None))
         ref = self.db.ref(f'{path}/{input.address}').push()
         input.ref = "value"
         return ref.setValue(input)
@@ -337,7 +349,7 @@ class Ain:
             # If they're not, they default to un-nonced (nonce = -1).
             txBody.nonce = -1
             
-        signature = self.wallet.signTransaction(
+        signature = await self.signer.signMessage(
             txBody, getattr(transactionObject, "address", None)
         )
         return {"signature": signature, "tx_body": txBody}
