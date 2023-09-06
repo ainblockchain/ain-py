@@ -25,6 +25,7 @@ class Signer(metaclass = ABCMeta):
            If the address is not given, the default address of the signer is used.
 
         Args:
+            message (Any): The message to sign.
             address (str, Optional): The address of the account to sign the message with.
 
         Returns:
@@ -63,6 +64,7 @@ class DefaultSigner(Signer):
            If the address is not given, the default address of the wallet is used.
 
         Args:
+            message (Any): The message to sign.
             address (str, Optional): The address of the account to sign the message with.
 
         Returns:
