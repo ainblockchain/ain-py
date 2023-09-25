@@ -5,7 +5,8 @@ from ain.net import Network
 from ain.wallet import Wallet
 from ain.types import AinOptions, TransactionInput, TransactionBody, ValueOnlyTransactionInput
 from ain.db import Database
-from ain.signer import Signer, DefaultSigner
+from ain.signer import Signer
+from ain.signer.default_signer import DefaultSigner
 from ain.utils import getTimestamp, toChecksumAddress
 
 class Ain:
