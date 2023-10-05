@@ -1,4 +1,3 @@
-import asyncio
 from typing import List, Any, Union
 from ain.provider import Provider
 from ain.net import Network
@@ -40,7 +39,7 @@ class Ain:
         self.net = Network(self.provider)
         self.wallet = Wallet(self, self.chainId)
         self.db = Database(self, self.provider)
-        self.signer = DefaultSigner(self.wallet)
+        self.signer = DefaultSigner(self.wallet, self.provider)
 
     def setProvider(self, providerUrl: str, chainId: int = 0):
         """Sets a new provider
@@ -154,9 +153,7 @@ class Ain:
         Returns:
             The transaction with the given transaction hash.
         """
-        return await self.provider.send(
-            "ain_getTransactionByHash", {"hash": transactionHash}
-        )
+        return await self.provider.send("ain_getTransactionByHash", {"hash": transactionHash})
 
     async def getStateUsage(self, appName: str) -> Any:
         """Gets a state usage with the given app name.
@@ -167,9 +164,7 @@ class Ain:
         Returns:
             The state usage with the given app name.
         """
-        return await self.provider.send(
-            "ain_getStateUsage", {"app_name": appName}
-        )
+        return await self.provider.send("ain_getStateUsage", {"app_name": appName})
 
     async def validateAppName(self, appName: str) -> Any:
         """Validate a given app name.
@@ -180,58 +175,43 @@ class Ain:
         Returns:
             The validity of the given app name.
         """
-        return await self.provider.send(
-            "ain_validateAppName", {"app_name": appName}
-        )
+        return await self.provider.send("ain_validateAppName", {"app_name": appName})
 
     async def sendTransaction(self, transactionObject: TransactionInput, isDryrun = False) -> Any:
-        """Signs and sends the transaction to the network.
+        """Signs and sends a transaction to the network.
 
         Args:
-            transactionObject (TransactionInput): The transaction.
-            isDryrun (bool): Dryrun option.
+            transactionObject (TransactionInput): The transaction input object.
+            isDryrun (bool): The dryrun option.
 
         Returns:
-            The transaction result.
+            The return value of the blockchain API.
         """
-        txBody = await self.buildTransactionBody(transactionObject)
-        signature = await self.signer.signMessage(
-            txBody, getattr(transactionObject, "address", None)
-        )
-        return await self.sendSignedTransaction(signature, txBody, isDryrun)
+        return await self.signer.sendTransaction(transactionObject, isDryrun)
 
     async def sendSignedTransaction(self, signature: str, txBody: TransactionBody, isDryrun = False) -> Any:
         """Sends a signed transaction to the network.
 
         Args:
-            signature (str): The signature of the transaction.
+            signature (str): The signature.
             txBody (TransactionBody): The transaction body.
-            isDryrun (bool): Dryrun option.
+            isDryrun (bool): The dryrun option.
 
         Returns:
-            The transaction result.
+            The return value of the blockchain API.
         """
-        method = "ain_sendSignedTransactionDryrun" if isDryrun == True else "ain_sendSignedTransaction"
-        return await self.provider.send(method, {"signature": signature, "tx_body": txBody}
-        )
+        return await self.signer.sendSignedTransaction(signature, txBody, isDryrun)
 
     async def sendTransactionBatch(self, transactionObjects: List[TransactionInput]) -> List[Any]:
-        """Sends a signed transactions to the network.
+        """Signs and sends multiple transactions in a batch to the network.
 
         Args:
-            transactionObjects (List[TransactionInput]): The list of the transactions.
+            transactionObjects (List[TransactionInput]): The list of the transaction input objects.
         
         Returns:
-            The transaction results.
+            The return value of the blockchain API.
         """
-        txListCoroutines = []
-        for txInput in transactionObjects:
-            txListCoroutines.append(self.__buildSignedTransaction(txInput))
-        
-        txList = await asyncio.gather(*txListCoroutines)
-        return await self.provider.send(
-            "ain_sendSignedTransactionBatch", {"tx_list": txList}
-        )
+        return await self.signer.sendTransactionBatch(transactionObjects)
         
     def depositConsensusStake(self, input: ValueOnlyTransactionInput) -> Any:
         """Sends a transaction that deposits AIN for consensus staking.
@@ -271,64 +251,6 @@ class Ain:
             address = toChecksumAddress(account)
         return await self.db.ref(f"/deposit_accounts/consensus/{address}").getValue()
 
-    async def getNonce(self, args: dict) -> Any:
-        """Gets a current transaction count of account, which is the nonce of the account.
-
-        Args:
-            args (dict): May contain a string 'address' and a string 'from' values.
-                The 'address' indicates the address of the account to get the
-                nonce of, and the 'from' indicates where to get the nonce from.
-                It could be either the pending transaction pool ("pending") or
-                the committed blocks ("committed"). The default value is "committed".
-        
-        Returns:
-            The nonce of the account.
-        """
-        params = dict(args)
-        if "address" in args:
-            params["address"] = toChecksumAddress(args["address"])
-        else:
-            params["address"] = self.signer.getAddress()
-
-        if "from" in args:
-            if args["from"] != "pending" and args["from"] != "committed":
-                raise ValueError("'from' should be either 'pending' or 'committed'")
-
-        ret = await self.provider.send("ain_getNonce", params)
-        return ret
-
-    async def buildTransactionBody(
-        self, transactionInput: TransactionInput
-    ) -> TransactionBody:
-        """Builds a transaction body from the transaction input.
-
-        Args:
-            transactionInput (TransactionInput): The transaction input.
-        
-        Returns:
-            TransactionBody: The builded transaction body.
-        """
-        address = self.signer.getAddress(
-            getattr(transactionInput, "address", None)
-        )
-        operation = transactionInput.operation
-        parent_tx_hash = getattr(transactionInput, "parent_tx_hash", None)
-        nonce = getattr(transactionInput, "nonce", None)
-        if nonce is None:
-            nonce = await self.getNonce({"address": address, "from": "pending"})
-        timestamp = getattr(transactionInput, "timestamp", getTimestamp())
-        gas_price = getattr(transactionInput, "gas_price", 0)
-        billing = getattr(transactionInput, "billing", None)
-
-        return TransactionBody(
-            operation=operation,
-            parent_tx_hash=parent_tx_hash,
-            nonce=nonce,
-            timestamp=timestamp,
-            gas_price=gas_price,
-            billing=billing,
-        )
-
     def __stakeFunction(self, path: str, input: ValueOnlyTransactionInput) -> Any:
         """A base function for all staking related database changes. It builds a
         deposit/withdraw transaction and sends the transaction by calling sendTransaction().
@@ -341,16 +263,3 @@ class Ain:
         ref = self.db.ref(f'{path}/{input.address}').push()
         input.ref = "value"
         return ref.setValue(input)
-
-    async def __buildSignedTransaction(self, transactionObject: TransactionInput) -> dict:
-        """Returns a builded transaction with the signature"""
-        txBody = await self.buildTransactionBody(transactionObject)
-        if not hasattr(transactionObject, "nonce"):
-            # Batch transactions' nonces should be specified.
-            # If they're not, they default to un-nonced (nonce = -1).
-            txBody.nonce = -1
-            
-        signature = await self.signer.signMessage(
-            txBody, getattr(transactionObject, "address", None)
-        )
-        return {"signature": signature, "tx_body": txBody}
