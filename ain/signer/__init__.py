@@ -1,6 +1,6 @@
 from abc import *
-from typing import Any
-from ain.wallet import Wallet
+from typing import List, Any
+from ain.types import TransactionInput, TransactionBody
 
 class Signer(metaclass = ABCMeta):
     """An abstract class for signing messages and transactions.
@@ -8,11 +8,11 @@ class Signer(metaclass = ABCMeta):
     
     @abstractmethod
     def getAddress(self, address: str = None) -> str:
-        """Return the checksum address to sign messages with.
-           If the address is not given, the default address of the signer is used.
+        """Gets an account's checksum address.
+           If the address is not given, the default account of the signer is used.
 
         Args:
-            address (str, Optional): The address of the account to sign messages with.
+            address (str, Optional): The address of the account.
 
         Returns:
             str: The checksum address.
@@ -21,56 +21,53 @@ class Signer(metaclass = ABCMeta):
 
     @abstractmethod
     async def signMessage(self, message: Any, address: str = None) -> str:
-        """Signs a message with the private key of the given address.
-           If the address is not given, the default address of the signer is used.
+        """Signs a message using an account.
+           If an address is not given, the default account of the signer is used.
 
         Args:
             message (Any): The message to sign.
-            address (str, Optional): The address of the account to sign the message with.
+            address (str, Optional): The address of the account.
 
         Returns:
-            str: The signature of the message.
+            str: The signature.
         """
         pass
 
-
-class DefaultSigner(Signer):
-    """The default concrete class of Signer abstract class implemented using Wallet class.
-       When Ain class is initialized, DefaultSigner is set as its signer.
-
-    Args:
-        wallet (Wallet): The wallet to initialize with.
-    """
-    
-    wallet: Wallet
-
-    def __init__(self, wallet: Wallet):
-        self.wallet = wallet
-
-    def getAddress(self, address: str = None) -> str:
-        """Return the checksum address to sign messages with.
-           If the address is not given, the default address of the wallet is used.
+    @abstractmethod
+    async def sendTransaction(self, transactionObject: TransactionInput, isDryrun = False) -> Any:
+        """Signs and sends a transaction to the network.
 
         Args:
-            address (str, Optional): The address of the account to sign messages with.
+            transactionObject (TransactionInput): The transaction input object.
+            isDryrun (bool): The dryrun option.
 
         Returns:
-            str: The checksum address.
+            The return value of the blockchain API.
         """
-        return self.wallet.getImpliedAddress(address)
+        pass
 
-    async def signMessage(self, message: Any, address: str = None) -> str:
-        """Signs a message with the private key of the given address.
-           If the address is not given, the default address of the wallet is used.
+    @abstractmethod
+    async def sendTransactionBatch(self, transactionObjects: List[TransactionInput]) -> List[Any]:
+        """Signs and sends multiple transactions in a batch to the network.
 
         Args:
-            message (Any): The message to sign.
-            address (str, Optional): The address of the account to sign the message with.
+            transactionObjects (List[TransactionInput]): The list of the transaction input objects.
+        
+        Returns:
+            The return value of the blockchain API.
+        """
+        pass
+
+    @abstractmethod
+    async def sendSignedTransaction(self, signature: str, txBody: TransactionBody, isDryrun = False) -> Any:
+        """Sends a signed transaction to the network.
+
+        Args:
+            signature (str): The signature.
+            txBody (TransactionBody): The transaction body.
+            isDryrun (bool): The dryrun option.
 
         Returns:
-            str: The signature of the message.
+            The return value of the blockchain API.
         """
-        if type(message) is str:
-            return self.wallet.sign(message, address)
-        else:
-            return self.wallet.signTransaction(message, address)
+        pass
