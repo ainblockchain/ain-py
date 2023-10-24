@@ -224,12 +224,12 @@ class Wallet:
             addr = toChecksumAddress(address)
         return await self.ain.db.ref(f"/accounts/{addr}/balance").getValue()
 
-    async def transfer(self, toAddress: str, value: int, fromAddress: str = None, nonce: int = None, gas_price: int = None, isDryrun = False):
+    async def transfer(self, toAddress: str, value: float, fromAddress: str = None, nonce: int = None, gas_price: int = None, isDryrun = False):
         """Sends a transfer transaction to the network.
 
         Args:
             toAddress (str): The AIN blockchain address that wants to transfer AIN to.
-            value (int): The amount of the transferring AIN.
+            value (float): The amount of the transferring AIN.
             fromAddress (str, Optional): The AIN blockchain address that wants to transfer AIN from.
                 Defaults to `None`, transfer from the default account of the current wallet.
             nonce (int, Optional): The nonce of the transfer transaction.
