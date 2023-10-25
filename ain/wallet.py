@@ -270,6 +270,8 @@ class Wallet:
         """
         fromAddr = self.getImpliedAddress(fromAddress)
         toAddr = toChecksumAddress(toAddress)
+        if not value > 0 :
+            raise ValueError('Non-positive transfer value.')
         decimalCount = Wallet.countDecimals(value)
         if decimalCount > MAX_TRANSFERABLE_DECIMALS :
             raise ValueError(f'Transfer value of more than {MAX_TRANSFERABLE_DECIMALS} decimals.')

@@ -232,6 +232,32 @@ class TestWallet(TestCase):
         self.assertEqual(balanceBefore - 100, balanceAfter)
 
     @asyncTest
+    async def testTransferWithAZeroValue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, 0, nonce=-1)  # zero value
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Non-positive transfer value.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
+    async def testTransferWithANegativeValue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, -0.1, nonce=-1)  # negative value
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Non-positive transfer value.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
     async def testTransferWithAValueOfUpTo6Decimals(self):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
