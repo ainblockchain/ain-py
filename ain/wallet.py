@@ -23,6 +23,8 @@ from ain.utils.v3keystore import V3Keystore, V3KeystoreOptions
 if TYPE_CHECKING:
     from ain.ain import Ain
 
+MAX_TRANSFERABLE_DECIMALS = 6;  # The maximum decimals of transferable values
+
 class Wallet:
     """Class for the AIN Blockchain wallet."""
 
@@ -268,6 +270,9 @@ class Wallet:
         """
         fromAddr = self.getImpliedAddress(fromAddress)
         toAddr = toChecksumAddress(toAddress)
+        decimalCount = Wallet.countDecimals(value)
+        if decimalCount > MAX_TRANSFERABLE_DECIMALS :
+            raise ValueError(f'Transfer value of more than {MAX_TRANSFERABLE_DECIMALS} decimals.')
         transferRef = self.ain.db.ref(f"/transfer/{fromAddr}/{toAddr}").push()
         return await transferRef.setValue(
             ValueOnlyTransactionInput(

@@ -231,6 +231,28 @@ class TestWallet(TestCase):
         balanceAfter = await ain.wallet.getBalance()
         self.assertEqual(balanceBefore - 100, balanceAfter)
 
+    @asyncTest
+    async def testTransferWithAValueOfUpTo6Decimals(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        await ain.wallet.transfer(transferAddress, 0.0001, nonce=-1)  # of 4 decimals
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore - 0.0001, balanceAfter)
+
+    @asyncTest
+    async def testTransferWithAValueOfMoreThan6Decimals(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, 0.0000001, nonce=-1)  # of 7 decimals
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Transfer value of more than 6 decimals.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
     def testChainId(self):
         ain = Ain(testNode, 0)
         ain.wallet.addAndSetDefaultAccount(accountSk)
