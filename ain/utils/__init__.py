@@ -45,7 +45,8 @@ def encodeVarInt(number: int) -> bytes:
 SIGNED_MESSAGE_PREFIX = "AINetwork Signed Message:\n"
 SIGNED_MESSAGE_PREFIX_BYTES = bytes(SIGNED_MESSAGE_PREFIX, "utf-8")
 SIGNED_MESSAGE_PREFIX_LENGTH = encodeVarInt(len(SIGNED_MESSAGE_PREFIX))
-AIN_HD_DERIVATION_PATH = "m/44'/412'/0'/0/"
+# TODO(platfowner): Migrate to Ethereum HD derivation path 'm/44'/60'/0'/0/'.
+AIN_HD_DERIVATION_PATH = "m/44'/412'/0'/0/"  # The hardware wallet derivation path of AIN
 
 def getTimestamp() -> int:
     """Gets the current unix timestamp.

@@ -4,6 +4,7 @@ import re
 from unittest import TestCase
 from snapshottest import TestCase as SnapshotTestCase
 from ain.ain import Ain
+from ain.ain import Wallet
 from ain.provider import JSON_RPC_ENDPOINT
 from ain.utils import *
 from ain.utils.v3keystore import *
@@ -65,6 +66,69 @@ class TestNetwork(TestCase):
         self.assertEqual(res["result"], True)
 
 class TestWallet(TestCase):
+    def testCountDecimals(self):
+        self.assertEqual(Wallet.countDecimals(0), 0)  # '0'
+        self.assertEqual(Wallet.countDecimals(1), 0)  # '1'
+        self.assertEqual(Wallet.countDecimals(10), 0)  # '10'
+        self.assertEqual(Wallet.countDecimals(100), 0)  # '100'
+        self.assertEqual(Wallet.countDecimals(1000), 0)  # '1000'
+        self.assertEqual(Wallet.countDecimals(10000), 0)  # '10000'
+        self.assertEqual(Wallet.countDecimals(100000), 0)  # '100000'
+        self.assertEqual(Wallet.countDecimals(1000000), 0)  # '1000000'
+        self.assertEqual(Wallet.countDecimals(10000000), 0)  # '10000000'
+        self.assertEqual(Wallet.countDecimals(100000000), 0)  # '100000000'
+        self.assertEqual(Wallet.countDecimals(1000000000), 0)  # '1000000000'
+        self.assertEqual(Wallet.countDecimals(1234567890), 0)  # '1234567890'
+        self.assertEqual(Wallet.countDecimals(-1), 0)  # '-1'
+        self.assertEqual(Wallet.countDecimals(-1000000000), 0)  # '-1000000000'
+        self.assertEqual(Wallet.countDecimals(11), 0)  # '11'
+        self.assertEqual(Wallet.countDecimals(101), 0)  # '101'
+        self.assertEqual(Wallet.countDecimals(1001), 0)  # '1001'
+        self.assertEqual(Wallet.countDecimals(10001), 0)  # '10001'
+        self.assertEqual(Wallet.countDecimals(100001), 0)  # '100001'
+        self.assertEqual(Wallet.countDecimals(1000001), 0)  # '1000001'
+        self.assertEqual(Wallet.countDecimals(10000001), 0)  # '10000001'
+        self.assertEqual(Wallet.countDecimals(100000001), 0)  # '100000001'
+        self.assertEqual(Wallet.countDecimals(1000000001), 0)  # '1000000001'
+        self.assertEqual(Wallet.countDecimals(-11), 0)  # '-11'
+        self.assertEqual(Wallet.countDecimals(-1000000001), 0)  # '-1000000001'
+        self.assertEqual(Wallet.countDecimals(0.1), 1)  # '0.1'
+        self.assertEqual(Wallet.countDecimals(0.01), 2)  # '0.01'
+        self.assertEqual(Wallet.countDecimals(0.001), 3)  # '0.001'
+        self.assertEqual(Wallet.countDecimals(0.0001), 4)  # '0.0001'
+        self.assertEqual(Wallet.countDecimals(0.00001), 5)  # '1e-05'
+        self.assertEqual(Wallet.countDecimals(0.000001), 6)  # '1e-06'
+        self.assertEqual(Wallet.countDecimals(0.0000001), 7)  # '1e-07'
+        self.assertEqual(Wallet.countDecimals(0.00000001), 8)  # '1e-08'
+        self.assertEqual(Wallet.countDecimals(0.000000001), 9)  # '1e-09'
+        self.assertEqual(Wallet.countDecimals(0.0000000001), 10)  # '1e-10'
+        self.assertEqual(Wallet.countDecimals(-0.1), 1)  # '-0.1'
+        self.assertEqual(Wallet.countDecimals(-0.0000000001), 10)  # '-1e-10'
+        self.assertEqual(Wallet.countDecimals(1.2), 1)  # '1.2'
+        self.assertEqual(Wallet.countDecimals(0.12), 2)  # '0.12'
+        self.assertEqual(Wallet.countDecimals(0.012), 3)  # '0.012'
+        self.assertEqual(Wallet.countDecimals(0.0012), 4)  # '0.0012'
+        self.assertEqual(Wallet.countDecimals(0.00012), 5)  # '0.00012'
+        self.assertEqual(Wallet.countDecimals(0.000012), 6)  # '1.2e-05'
+        self.assertEqual(Wallet.countDecimals(0.0000012), 7)  # '1.2e-06'
+        self.assertEqual(Wallet.countDecimals(0.00000012), 8)  # '1.2e-07'
+        self.assertEqual(Wallet.countDecimals(0.000000012), 9)  # '1.2e-08'
+        self.assertEqual(Wallet.countDecimals(0.0000000012), 10)  # '1.2e-09'
+        self.assertEqual(Wallet.countDecimals(0.00000000012), 11)  # '1.2e-10'
+        self.assertEqual(Wallet.countDecimals(-1.2), 1)  # '-1.2'
+        self.assertEqual(Wallet.countDecimals(-0.00000000012), 11)  # '-1.2e-10'
+        self.assertEqual(Wallet.countDecimals(1.03), 2)  # '1.03'
+        self.assertEqual(Wallet.countDecimals(1.003), 3)  # '1.003'
+        self.assertEqual(Wallet.countDecimals(1.0003), 4)  # '1.0003'
+        self.assertEqual(Wallet.countDecimals(1.00003), 5)  # '1.00003'
+        self.assertEqual(Wallet.countDecimals(1.000003), 6)  # '1.000003'
+        self.assertEqual(Wallet.countDecimals(1.0000003), 7)  # '1.0000003'
+        self.assertEqual(Wallet.countDecimals(1.00000003), 8)  # '1.00000003'
+        self.assertEqual(Wallet.countDecimals(1.000000003), 9)  # '1.000000003'
+        self.assertEqual(Wallet.countDecimals(1.0000000003), 10)  # '1.0000000003'
+        self.assertEqual(Wallet.countDecimals(-1.03), 2)  # '-1.03'
+        self.assertEqual(Wallet.countDecimals(-1.0000000003), 10)  # '-1.0000000003'
+
     def testCreateAccount(self):
         ain = Ain(testNode)
         ain.wallet.create(2)
@@ -166,6 +230,54 @@ class TestWallet(TestCase):
         await ain.wallet.transfer(transferAddress, 100, nonce=-1)
         balanceAfter = await ain.wallet.getBalance()
         self.assertEqual(balanceBefore - 100, balanceAfter)
+
+    @asyncTest
+    async def testTransferWithAZeroValue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, 0, nonce=-1)  # zero value
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Non-positive transfer value.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
+    async def testTransferWithANegativeValue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, -0.1, nonce=-1)  # negative value
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Non-positive transfer value.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
+    async def testTransferWithAValueOfUpTo6Decimals(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        await ain.wallet.transfer(transferAddress, 0.0001, nonce=-1)  # of 4 decimals
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore - 0.0001, balanceAfter)
+
+    @asyncTest
+    async def testTransferWithAValueOfMoreThan6Decimals(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, 0.0000001, nonce=-1)  # of 7 decimals
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Transfer value of more than 6 decimals.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
 
     def testChainId(self):
         ain = Ain(testNode, 0)
