@@ -1,6 +1,7 @@
 from unittest import TestCase
 from ain.utils import *
 from ain.utils.v3keystore import *
+from ain.types import SetOperation, TransactionBody
 from .data import (
     address,
     pk,
@@ -35,6 +36,21 @@ class TestKeccak(TestCase):
         r = "22ae1937ff93ec72c4d46ff3e854661e3363440acd6f6e4adf8f1a8978382251"
         hash = keccak(msg)
         self.assertEqual(hash.hex(), r)
+
+class TestToJsonString(TestCase):
+    def testToJsonString(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=100,
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":100},"timestamp":123}')
 
 class TestByteToHex(TestCase):
     def testByteToHex(self):

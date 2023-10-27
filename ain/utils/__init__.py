@@ -212,6 +212,23 @@ def keccak(input: Any, bits: int = 256) -> bytes:
     k.update(inputBytes)
     return k.digest()
 
+def toJsonString(obj: Any) -> str:
+    """Serializes the given object to a JSON string.
+
+    Args:
+        obj (Any): The given object to serialize.
+
+    Returns:
+        str: The result of the serialization.
+    """
+    serialized = json.dumps(
+        obj.__dict__,
+        default=lambda o: o.__dict__,
+        separators=(",", ":"),
+        sort_keys=True
+    )
+    return serialized
+
 def hashTransaction(transaction: Union[TransactionBody, str]) -> bytes:
     """Creates the Keccak-256 hash of the transaction body.
 
@@ -223,12 +240,7 @@ def hashTransaction(transaction: Union[TransactionBody, str]) -> bytes:
         bytes: The Keccak hash of the transaction.
     """
     if type(transaction) is TransactionBody:
-        transaction = json.dumps(
-            transaction.__dict__,
-            default=lambda o: o.__dict__,
-            separators=(",", ":"),
-            sort_keys=True
-        )
+        transaction = toJsonString(transaction)
     return keccak(keccak(transaction))
 
 def hashMessage(message: Any) -> bytes:
