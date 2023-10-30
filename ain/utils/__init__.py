@@ -1,6 +1,6 @@
 import re
 import math
-import json
+import simplejson
 import time
 from typing import Any, Union
 from secrets import token_bytes
@@ -235,6 +235,31 @@ def countDecimals(value: float) -> int:
             return len(parts[1])
         return 0
 
+def replaceFloat(matchObj):
+    """Generates a replacement string for the given Match object.
+
+    Args:
+        matchObj(Any): The Match object.
+
+    Returns:
+        str: The replacement string.
+    """
+    value = float(matchObj.group(0))
+    decimals = countDecimals(value)
+    return (f'%.{decimals}f') % value
+
+# NOTE(platfowner): This resolves float decimal issues (see https://github.com/ainblockchain/ain-py/issues/31).
+def toJsLikeFloats(serialized: str) -> str:
+    """Reformats float numbers to JavaScript-like formats.
+
+    Args:
+        serialized(str): The string to be reformatted.
+
+    Returns:
+        str: The reformatted string.
+    """
+    return re.sub(r'(\d+\.{0,1}\d*e-0[56]{1,1})', replaceFloat, serialized)
+
 def toJsonString(obj: Any) -> str:
     """Serializes the given object to a JSON string.
 
@@ -244,13 +269,13 @@ def toJsonString(obj: Any) -> str:
     Returns:
         str: The result of the serialization.
     """
-    serialized = json.dumps(
+    serialized = simplejson.dumps(
         obj.__dict__,
         default=lambda o: o.__dict__,
         separators=(",", ":"),
         sort_keys=True
     )
-    return serialized
+    return toJsLikeFloats(serialized)
 
 def hashTransaction(transaction: Union[TransactionBody, str]) -> bytes:
     """Creates the Keccak-256 hash of the transaction body.
