@@ -1,4 +1,5 @@
 import re
+import math
 import json
 import time
 from typing import Any, Union
@@ -211,6 +212,28 @@ def keccak(input: Any, bits: int = 256) -> bytes:
     k = _keccak.new(digest_bits=bits)
     k.update(inputBytes)
     return k.digest()
+
+def countDecimals(value: float) -> int:
+    """Counts the given number's decimals.
+
+    Args:
+        value(float): The number.
+
+    Returns:
+        int: The decimal count.
+    """
+    valueString = str(value)
+    if math.floor(value) == value :
+        return 0
+    p = re.compile(r'^-{0,1}(\d+\.{0,1}\d*)e-(\d+)$')
+    matches = p.findall(valueString)
+    if len(matches) > 0 and len(matches[0]) == 2:
+        return int(matches[0][1]) + countDecimals(float(matches[0][0]))
+    else :
+        parts = valueString.split('.')
+        if len(parts) >= 2 :
+            return len(parts[1])
+        return 0
 
 def toJsonString(obj: Any) -> str:
     """Serializes the given object to a JSON string.
