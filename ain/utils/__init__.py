@@ -1,5 +1,6 @@
 import re
-import json
+import math
+import simplejson
 import time
 from typing import Any, Union
 from secrets import token_bytes
@@ -212,6 +213,70 @@ def keccak(input: Any, bits: int = 256) -> bytes:
     k.update(inputBytes)
     return k.digest()
 
+def countDecimals(value: float) -> int:
+    """Counts the given number's decimals.
+
+    Args:
+        value(float): The number.
+
+    Returns:
+        int: The decimal count.
+    """
+    valueString = str(value)
+    if math.floor(value) == value :
+        return 0
+    p = re.compile(r'^-{0,1}(\d+\.{0,1}\d*)e-(\d+)$')
+    matches = p.findall(valueString)
+    if len(matches) > 0 and len(matches[0]) == 2:
+        return int(matches[0][1]) + countDecimals(float(matches[0][0]))
+    else :
+        parts = valueString.split('.')
+        if len(parts) >= 2 :
+            return len(parts[1])
+        return 0
+
+def replaceFloat(matchObj):
+    """Generates a replacement string for the given Match object.
+
+    Args:
+        matchObj(Any): The Match object.
+
+    Returns:
+        str: The replacement string.
+    """
+    value = float(matchObj.group(0))
+    decimals = countDecimals(value)
+    return (f'%.{decimals}f') % value
+
+# NOTE(platfowner): This resolves float decimal issues (see https://github.com/ainblockchain/ain-py/issues/31).
+def toJsLikeFloats(serialized: str) -> str:
+    """Reformats float numbers to JavaScript-like formats.
+
+    Args:
+        serialized(str): The string to be reformatted.
+
+    Returns:
+        str: The reformatted string.
+    """
+    return re.sub(r'(\d+\.{0,1}\d*e-0[56]{1,1})', replaceFloat, serialized)
+
+def toJsonString(obj: Any) -> str:
+    """Serializes the given object to a JSON string.
+
+    Args:
+        obj (Any): The given object to serialize.
+
+    Returns:
+        str: The result of the serialization.
+    """
+    serialized = simplejson.dumps(
+        obj.__dict__,
+        default=lambda o: o.__dict__,
+        separators=(",", ":"),
+        sort_keys=True
+    )
+    return toJsLikeFloats(serialized)
+
 def hashTransaction(transaction: Union[TransactionBody, str]) -> bytes:
     """Creates the Keccak-256 hash of the transaction body.
 
@@ -223,12 +288,7 @@ def hashTransaction(transaction: Union[TransactionBody, str]) -> bytes:
         bytes: The Keccak hash of the transaction.
     """
     if type(transaction) is TransactionBody:
-        transaction = json.dumps(
-            transaction.__dict__,
-            default=lambda o: o.__dict__,
-            separators=(",", ":"),
-            sort_keys=True
-        )
+        transaction = toJsonString(transaction)
     return keccak(keccak(transaction))
 
 def hashMessage(message: Any) -> bytes:

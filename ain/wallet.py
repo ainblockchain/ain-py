@@ -11,6 +11,7 @@ from ain.utils import (
     privateToAddress,
     toBytes,
     toChecksumAddress,
+    countDecimals,
     bytesToHex,
     pubToAddress,
     ecSignMessage,
@@ -61,29 +62,6 @@ class Wallet:
         if checksummed not in self.accounts:
             return ''
         return self.accounts[checksummed].public_key
-
-    @staticmethod
-    def countDecimals(value: float) -> int:
-        """Counts the given number's decimals.
-
-        Args:
-            value(float): The number.
-
-        Returns:
-            int: The decimal count.
-        """
-        valueString = str(value)
-        if math.floor(value) == value :
-            return 0
-        p = re.compile(r'^-{0,1}(\d*\.{0,1}\d*)e-(\d+)$')
-        matches = p.findall(valueString)
-        if len(matches) > 0 and len(matches[0]) == 2:
-            return int(matches[0][1]) + Wallet.countDecimals(float(matches[0][0]))
-        else :
-            parts = valueString.split('.')
-            if len(parts) >= 2 :
-                return len(parts[1])
-            return 0
 
     def create(self, numberOfAccounts: int):
         """Creates `numberOfAccounts` new accounts, and adds them to the wallet.
@@ -272,7 +250,7 @@ class Wallet:
         toAddr = toChecksumAddress(toAddress)
         if not value > 0 :
             raise ValueError('Non-positive transfer value.')
-        decimalCount = Wallet.countDecimals(value)
+        decimalCount = countDecimals(value)
         if decimalCount > MAX_TRANSFERABLE_DECIMALS :
             raise ValueError(f'Transfer value of more than {MAX_TRANSFERABLE_DECIMALS} decimals.')
         transferRef = self.ain.db.ref(f"/transfer/{fromAddr}/{toAddr}").push()
