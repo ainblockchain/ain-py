@@ -1,6 +1,7 @@
 from unittest import TestCase
 from ain.utils import *
 from ain.utils.v3keystore import *
+from ain.types import SetOperation, TransactionBody
 from .data import (
     address,
     pk,
@@ -35,6 +36,248 @@ class TestKeccak(TestCase):
         r = "22ae1937ff93ec72c4d46ff3e854661e3363440acd6f6e4adf8f1a8978382251"
         hash = keccak(msg)
         self.assertEqual(hash.hex(), r)
+
+class TestCountDecimals(TestCase):
+    def testCountDecimals(self):
+        self.assertEqual(countDecimals(0), 0)  # '0'
+        self.assertEqual(countDecimals(1), 0)  # '1'
+        self.assertEqual(countDecimals(10), 0)  # '10'
+        self.assertEqual(countDecimals(100), 0)  # '100'
+        self.assertEqual(countDecimals(1000), 0)  # '1000'
+        self.assertEqual(countDecimals(10000), 0)  # '10000'
+        self.assertEqual(countDecimals(100000), 0)  # '100000'
+        self.assertEqual(countDecimals(1000000), 0)  # '1000000'
+        self.assertEqual(countDecimals(10000000), 0)  # '10000000'
+        self.assertEqual(countDecimals(100000000), 0)  # '100000000'
+        self.assertEqual(countDecimals(1000000000), 0)  # '1000000000'
+        self.assertEqual(countDecimals(1234567890), 0)  # '1234567890'
+        self.assertEqual(countDecimals(-1), 0)  # '-1'
+        self.assertEqual(countDecimals(-1000000000), 0)  # '-1000000000'
+        self.assertEqual(countDecimals(11), 0)  # '11'
+        self.assertEqual(countDecimals(101), 0)  # '101'
+        self.assertEqual(countDecimals(1001), 0)  # '1001'
+        self.assertEqual(countDecimals(10001), 0)  # '10001'
+        self.assertEqual(countDecimals(100001), 0)  # '100001'
+        self.assertEqual(countDecimals(1000001), 0)  # '1000001'
+        self.assertEqual(countDecimals(10000001), 0)  # '10000001'
+        self.assertEqual(countDecimals(100000001), 0)  # '100000001'
+        self.assertEqual(countDecimals(1000000001), 0)  # '1000000001'
+        self.assertEqual(countDecimals(-11), 0)  # '-11'
+        self.assertEqual(countDecimals(-1000000001), 0)  # '-1000000001'
+        self.assertEqual(countDecimals(0.1), 1)  # '0.1'
+        self.assertEqual(countDecimals(0.01), 2)  # '0.01'
+        self.assertEqual(countDecimals(0.001), 3)  # '0.001'
+        self.assertEqual(countDecimals(0.0001), 4)  # '0.0001'
+        self.assertEqual(countDecimals(0.00001), 5)  # '1e-05'
+        self.assertEqual(countDecimals(0.000001), 6)  # '1e-06'
+        self.assertEqual(countDecimals(0.0000001), 7)  # '1e-07'
+        self.assertEqual(countDecimals(0.00000001), 8)  # '1e-08'
+        self.assertEqual(countDecimals(0.000000001), 9)  # '1e-09'
+        self.assertEqual(countDecimals(0.0000000001), 10)  # '1e-10'
+        self.assertEqual(countDecimals(-0.1), 1)  # '-0.1'
+        self.assertEqual(countDecimals(-0.0000000001), 10)  # '-1e-10'
+        self.assertEqual(countDecimals(1.2), 1)  # '1.2'
+        self.assertEqual(countDecimals(0.12), 2)  # '0.12'
+        self.assertEqual(countDecimals(0.012), 3)  # '0.012'
+        self.assertEqual(countDecimals(0.0012), 4)  # '0.0012'
+        self.assertEqual(countDecimals(0.00012), 5)  # '0.00012'
+        self.assertEqual(countDecimals(0.000012), 6)  # '1.2e-05'
+        self.assertEqual(countDecimals(0.0000012), 7)  # '1.2e-06'
+        self.assertEqual(countDecimals(0.00000012), 8)  # '1.2e-07'
+        self.assertEqual(countDecimals(0.000000012), 9)  # '1.2e-08'
+        self.assertEqual(countDecimals(0.0000000012), 10)  # '1.2e-09'
+        self.assertEqual(countDecimals(0.00000000012), 11)  # '1.2e-10'
+        self.assertEqual(countDecimals(-1.2), 1)  # '-1.2'
+        self.assertEqual(countDecimals(-0.00000000012), 11)  # '-1.2e-10'
+        self.assertEqual(countDecimals(1.03), 2)  # '1.03'
+        self.assertEqual(countDecimals(1.003), 3)  # '1.003'
+        self.assertEqual(countDecimals(1.0003), 4)  # '1.0003'
+        self.assertEqual(countDecimals(1.00003), 5)  # '1.00003'
+        self.assertEqual(countDecimals(1.000003), 6)  # '1.000003'
+        self.assertEqual(countDecimals(1.0000003), 7)  # '1.0000003'
+        self.assertEqual(countDecimals(1.00000003), 8)  # '1.00000003'
+        self.assertEqual(countDecimals(1.000000003), 9)  # '1.000000003'
+        self.assertEqual(countDecimals(1.0000000003), 10)  # '1.0000000003'
+        self.assertEqual(countDecimals(-1.03), 2)  # '-1.03'
+        self.assertEqual(countDecimals(-1.0000000003), 10)  # '-1.0000000003'
+
+class TestToJsLikeFloats(TestCase):
+    def testToJsLikeFloats(self):
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.0001},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.0001},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1e-05},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.00001},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1e-06},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.000001},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1e-07},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1e-07},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.00012},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.00012},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1.2e-05},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.000012},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1.2e-06},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.0000012},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1.2e-07},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1.2e-07},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.0001},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.0001},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1e-05},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.00001},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1e-06},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.000001},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1e-07},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1e-07},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.00012},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.00012},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1.2e-05},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.000012},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1.2e-06},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.0000012},"timestamp":123}')
+        self.assertEqual(
+            toJsLikeFloats('{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1.2e-07},"timestamp":123}'),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1.2e-07},"timestamp":123}')
+
+class TestToJsonString(TestCase):
+    def testToJsonString(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=100,
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":100},"timestamp":123}')
+
+    def testToJsonStringWithFloatValueWithoutExponent(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=1.000003,  # '1.000003'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1.000003},"timestamp":123}')
+
+    def testToJsonStringWithFloatValueWithExponent4(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=0.00012,  # '0.00012'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.00012},"timestamp":123}')  # 0.00012
+
+    def testToJsonStringWithFloatValueWithExponent5(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=0.000012,  # '1.2e-05'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.000012},"timestamp":123}')  # 0.000012
+
+    def testToJsonStringWithFloatValueWithExponent6(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=0.0000012,  # '1.2e-06'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":0.0000012},"timestamp":123}')  # 0.0000012
+
+    def testToJsonStringWithFloatValueWithExponent7(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=0.00000012,  # '1.2e-07'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":1.2e-07},"timestamp":123}')  # 1.2e-07
+
+    def testToJsonStringWithNegativeFloatValueWithExponent5(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=-0.000012,  # '-1.2e-05'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.000012},"timestamp":123}')  # -0.000012
+
+    def testToJsonStringWithNegativeFloatValueWithExponent6(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=-0.0000012,  # '-1.2e-06'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-0.0000012},"timestamp":123}')  # -0.0000012
+
+    def testToJsonStringWithNegativeFloatValueWithExponent7(self):
+        txBody = TransactionBody(
+            operation=SetOperation(
+                ref="/afan",
+                value=-0.00000012,  # '-1.2e-07'
+                type="SET_VALUE",
+            ),
+            nonce=10,
+            timestamp=123,
+        )
+        self.assertEqual(
+            toJsonString(txBody),
+            '{"nonce":10,"operation":{"ref":"/afan","type":"SET_VALUE","value":-1.2e-07},"timestamp":123}')  # -1.2e-07
 
 class TestByteToHex(TestCase):
     def testByteToHex(self):

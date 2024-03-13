@@ -1,3 +1,5 @@
+import re
+import math
 from typing import TYPE_CHECKING, Any, List, Optional, Union
 from ain.account import Account, Accounts
 from ain.types import (
@@ -9,6 +11,7 @@ from ain.utils import (
     privateToAddress,
     toBytes,
     toChecksumAddress,
+    countDecimals,
     bytesToHex,
     pubToAddress,
     ecSignMessage,
@@ -20,6 +23,8 @@ from ain.utils.v3keystore import V3Keystore, V3KeystoreOptions
 
 if TYPE_CHECKING:
     from ain.ain import Ain
+
+MAX_TRANSFERABLE_DECIMALS = 6;  # The maximum decimals of transferable values
 
 class Wallet:
     """Class for the AIN Blockchain wallet."""
@@ -224,24 +229,30 @@ class Wallet:
             addr = toChecksumAddress(address)
         return await self.ain.db.ref(f"/accounts/{addr}/balance").getValue()
 
-    async def transfer(self, toAddress: str, value: int, fromAddress: str = None, nonce: int = None, gas_price: int = None):
+    async def transfer(self, toAddress: str, value: float, fromAddress: str = None, nonce: int = None, gas_price: int = None, isDryrun = False):
         """Sends a transfer transaction to the network.
 
         Args:
             toAddress (str): The AIN blockchain address that wants to transfer AIN to.
-            value (int): The amount of the transferring AIN.
+            value (float): The amount of the transferring AIN.
             fromAddress (str, Optional): The AIN blockchain address that wants to transfer AIN from.
                 Defaults to `None`, transfer from the default account of the current wallet.
             nonce (int, Optional): The nonce of the transfer transaction.
                 Defaults to `None`.
             gas_price (int, Optional): The gas price of the transfer transaction.
                 Defaults to `None`.
+            isDryrun (bool): Dryrun option.
         
         Returns:
             The transaction result.
         """
         fromAddr = self.getImpliedAddress(fromAddress)
         toAddr = toChecksumAddress(toAddress)
+        if not value > 0 :
+            raise ValueError('Non-positive transfer value.')
+        decimalCount = countDecimals(value)
+        if decimalCount > MAX_TRANSFERABLE_DECIMALS :
+            raise ValueError(f'Transfer value of more than {MAX_TRANSFERABLE_DECIMALS} decimals.')
         transferRef = self.ain.db.ref(f"/transfer/{fromAddr}/{toAddr}").push()
         return await transferRef.setValue(
             ValueOnlyTransactionInput(
@@ -250,7 +261,8 @@ class Wallet:
                 value=value,
                 nonce=nonce,
                 gas_price=gas_price,
-            )
+            ),
+            isDryrun
         )
 
     def sign(self, data: str, address: str = None) -> str:

@@ -4,6 +4,7 @@ import re
 from unittest import TestCase
 from snapshottest import TestCase as SnapshotTestCase
 from ain.ain import Ain
+from ain.ain import Wallet
 from ain.provider import JSON_RPC_ENDPOINT
 from ain.utils import *
 from ain.utils.v3keystore import *
@@ -150,6 +151,15 @@ class TestWallet(TestCase):
         self.assertGreaterEqual(await ain.wallet.getBalance(), 0)
 
     @asyncTest
+    async def testTransferIsDryrunTrue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        await ain.wallet.transfer(transferAddress, 100, nonce=-1, isDryrun=True)  # isDryrun = True
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
     async def testTransfer(self):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
@@ -157,6 +167,54 @@ class TestWallet(TestCase):
         await ain.wallet.transfer(transferAddress, 100, nonce=-1)
         balanceAfter = await ain.wallet.getBalance()
         self.assertEqual(balanceBefore - 100, balanceAfter)
+
+    @asyncTest
+    async def testTransferWithAZeroValue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, 0, nonce=-1)  # zero value
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Non-positive transfer value.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
+    async def testTransferWithANegativeValue(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, -0.1, nonce=-1)  # negative value
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Non-positive transfer value.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
+
+    @asyncTest
+    async def testTransferWithAValueOfUpTo6Decimals(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        await ain.wallet.transfer(transferAddress, 0.000001, nonce=-1)  # of 6 decimals
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore - 0.000001, balanceAfter)
+
+    @asyncTest
+    async def testTransferWithAValueOfMoreThan6Decimals(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        balanceBefore = await ain.wallet.getBalance()
+        try:
+            await ain.wallet.transfer(transferAddress, 0.0000001, nonce=-1)  # of 7 decimals
+            self.fail('should not happen')
+        except ValueError as e:
+            self.assertEqual(str(e), 'Transfer value of more than 6 decimals.')
+        balanceAfter = await ain.wallet.getBalance()
+        self.assertEqual(balanceBefore, balanceAfter)  # NOT changed!
 
     def testChainId(self):
         ain = Ain(testNode, 0)
@@ -264,6 +322,32 @@ class TestCore(TestCase):
         self.assertTrue(raised)
 
     @asyncTest
+    async def test00SendTransactionIsDryrunTrue(self):
+        op = SetOperation(
+            type="SET_OWNER",
+            ref=f"/apps/test{PY_VERSION}",
+            value={
+                ".owner": {
+                    "owners": {
+                        "*": {
+                            "write_owner": True,
+                            "write_rule": True,
+                            "write_function": True,
+                            "branch_owner": True
+                        }
+                    }
+                }
+            }
+        )
+        res = await self.ain.sendTransaction(TransactionInput(operation=op), True)  # isDryrun = True
+        self.assertEqual(res["result"]["code"], 0)
+        targetTxHash = res["tx_hash"]
+        self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
+
+        tx = await self.ain.getTransaction(targetTxHash)
+        self.assertIsNone(tx)  # should be None
+
+    @asyncTest
     async def test00SendTransaction(self):
         op = SetOperation(
             type="SET_OWNER",
@@ -288,6 +372,40 @@ class TestCore(TestCase):
 
         tx = await self.ain.getTransaction(targetTxHash)
         self.assertDictEqual(tx["transaction"]["tx_body"]["operation"], op.__dict__)
+
+    @asyncTest
+    async def test00SendSignedTransactionIsDryrunTrue(self):
+        tx = TransactionBody(
+            nonce=-1,
+            gas_price=500,
+            timestamp=getTimestamp(),
+            operation=SetOperation(
+                type="SET_OWNER",
+                ref=f"/apps/{APP_NAME}{PY_VERSION}",
+                value={
+                    ".owner": {
+                        "owners": {
+                            "*": {
+                                "write_owner": True,
+                                "write_rule": True,
+                                "write_function": True,
+                                "branch_owner": True
+                            }
+                        }
+                    }
+                }
+            )
+        )
+
+        sig = self.ain.wallet.signTransaction(tx)
+        res = await self.ain.sendSignedTransaction(sig, tx, True)  # isDryrun = True
+        targetTxHash = res["tx_hash"]
+        self.assertFalse("code" in res)
+        self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
+        self.assertEqual(res["result"]["code"], 0)
+
+        tx = await self.ain.getTransaction(targetTxHash)
+        self.assertIsNone(tx)  # should be None
 
     @asyncTest
     async def test00SendSignedTransaction(self):
@@ -489,6 +607,44 @@ class TestDatabase(SnapshotTestCase):
         self.assertEqual(self.ain.db.ref(self.allowedPath).path, "/" + self.allowedPath)
     
     @asyncTest
+    async def test00SetOwnerIsDryrunTrue(self):
+        res = await self.ain.db.ref(self.allowedPath).setOwner(ValueOnlyTransactionInput(
+            value={
+                ".owner": {
+                    "owners": {
+                        "*": {
+                            "write_owner": True,
+                            "write_rule": True,
+                            "write_function": True,
+                            "branch_owner": True
+                        }
+                    }
+                }
+            }
+        ),
+        True)
+        self.assertEqual(res["result"]["code"], 0)
+        self.assertEqual(res["result"]["is_dryrun"], True)
+
+        fail = await self.ain.db.ref("/consensus").setOwner(ValueOnlyTransactionInput(
+            value={
+                ".owner": {
+                    "owners": {
+                        "*": {
+                            "write_owner": True,
+                            "write_rule": True,
+                            "write_function": True,
+                            "branch_owner": True
+                        }
+                    }
+                }
+            }
+        ),
+        True)
+        self.assertEqual(fail["result"]["code"], 12501)
+        self.assertEqual(fail["result"]["is_dryrun"], True)
+
+    @asyncTest
     async def test00SetOwner(self):
         res = await self.ain.db.ref(self.allowedPath).setOwner(ValueOnlyTransactionInput(
             value={
@@ -523,6 +679,24 @@ class TestDatabase(SnapshotTestCase):
         self.assertEqual(fail["result"]["code"], 12501)
 
     @asyncTest
+    async def test00SetRuleIsDryrunTrue(self):
+        res = await self.ain.db.ref(self.allowedPath).setRule(ValueOnlyTransactionInput(
+            value={ ".rule": { "write": "true" } }
+        ),
+        True)
+        self.assertEqual(res["result"]["code"], 0)
+        self.assertEqual(res["result"]["is_dryrun"], True)
+
+    @asyncTest
+    async def test00SetRuleIsDryrunTrue(self):
+        res = await self.ain.db.ref(self.allowedPath).setRule(ValueOnlyTransactionInput(
+            value={ ".rule": { "write": "true" } }
+        ),
+        True)
+        self.assertEqual(res["result"]["code"], 0)
+        self.assertEqual(res["result"]["is_dryrun"], True)
+
+    @asyncTest
     async def test00SetRule(self):
         res = await self.ain.db.ref(self.allowedPath).setRule(ValueOnlyTransactionInput(
             value={ ".rule": { "write": "true" } }
@@ -530,11 +704,37 @@ class TestDatabase(SnapshotTestCase):
         self.assertEqual(res["result"]["code"], 0)
 
     @asyncTest
+    async def test00SetValueIsDryrunTrue(self):
+        res = await self.ain.db.ref(f"{self.allowedPath}/username").setValue(ValueOnlyTransactionInput(
+            value="test_user"
+        ),
+        True)
+        self.assertEqual(res["result"]["code"], 0)
+        self.assertEqual(res["result"]["is_dryrun"], True)
+
+    @asyncTest
     async def test00SetValue(self):
         res = await self.ain.db.ref(f"{self.allowedPath}/username").setValue(ValueOnlyTransactionInput(
             value="test_user"
         ))
         self.assertEqual(res["result"]["code"], 0)
+
+    @asyncTest
+    async def test00SetFunctionIsDryrunTrue(self):
+        res = await self.ain.db.ref(self.allowedPath).setFunction(ValueOnlyTransactionInput(
+            value={
+                ".function": {
+                    "0xFUNCTION_HASH": {
+                        "function_url": "https://events.ainetwork.ai/trigger",
+                        "function_id": "0xFUNCTION_HASH",
+                        "function_type": "REST"
+                    }
+                }
+            }
+        ),
+        True)
+        self.assertEqual(res["result"]["code"], 0)
+        self.assertEqual(res["result"]["is_dryrun"], True)
 
     @asyncTest
     async def test00SetFunction(self):
@@ -550,6 +750,37 @@ class TestDatabase(SnapshotTestCase):
             }
         ))
         self.assertEqual(res["result"]["code"], 0)
+
+    @asyncTest
+    async def test00SetIsDryrunTrue(self):
+        res = await self.ain.db.ref(self.allowedPath).set(SetMultiTransactionInput(
+            op_list=[
+                SetOperation(
+                    type="SET_RULE",
+                    ref="can/write/",
+                    value={ ".rule": { "write": "true" } }
+                ),
+                SetOperation(
+                    type="SET_RULE",
+                    ref="cannot/write",
+                    value={ ".rule": { "write": "false" } }
+                ),
+                SetOperation(
+                    type="INC_VALUE",
+                    ref="can/write/",
+                    value=5
+                ),
+                SetOperation(
+                    type="DEC_VALUE",
+                    ref="can/write",
+                    value=10
+                )
+            ],
+            nonce=-1
+        ),
+        True)
+        self.assertEqual(len(res["result"]["result_list"].keys()), 4)
+        self.assertEqual(res["result"]["is_dryrun"], True)
 
     @asyncTest
     async def test00Set(self):
@@ -632,6 +863,12 @@ class TestDatabase(SnapshotTestCase):
         self.matchSnapshot(await self.ain.db.ref().getValue(self.allowedPath, GetOptions(include_tree_info=True)))
         getWithVersion = await self.ain.db.ref().getValue(self.allowedPath, GetOptions(include_version=True))
         self.assertTrue("#version" in getWithVersion)
+
+    @asyncTest
+    async def test02DeleteValueIsDryrunTrue(self):
+        res = await self.ain.db.ref(f"{self.allowedPath}/can/write").deleteValue(isDryrun=True)
+        self.assertEqual(res["result"]["code"], 0)
+        self.assertEqual(res["result"]["is_dryrun"], True)
 
     @asyncTest
     async def test02DeleteValue(self):
