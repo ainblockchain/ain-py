@@ -450,3 +450,16 @@ class MatchInput:
             self.ref = ref
         if is_global is not None:
             self.is_global = is_global
+
+class StateInfoInput:
+    """Class for the state information input."""
+
+    ref: Optional[str]
+    """The path that you want to query with."""
+
+    def __init__(
+        self,
+        ref: str = None,
+    ):
+        if ref is not None:
+            self.ref = ref
