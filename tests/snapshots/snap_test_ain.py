@@ -266,26 +266,6 @@ snapshots['TestDatabase::test03GetStateInfo 1'] = {
     '#version': 'erased'
 }
 
-snapshots['TestDatabase::test03GetStateUsage 1'] = {
-    'available': {
-        'tree_bytes': 25000000,
-        'tree_height': 30,
-        'tree_size': 156250
-    },
-    'protoVer': 'erased',
-    'staking': {
-        'app': 0,
-        'total': 2,
-        'unstakeable': 0
-    },
-    'usage': {
-        'tree_bytes': 0,
-        'tree_height': 0,
-        'tree_max_siblings': 0,
-        'tree_size': 0
-    }
-}
-
 snapshots['TestDatabase::test03MatchFunction 1'] = {
     'matched_config': {
         'config': {

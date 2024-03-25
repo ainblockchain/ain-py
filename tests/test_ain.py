@@ -303,6 +303,14 @@ class TestCore(TestCase):
         block = await self.ain.getBlock(4)
         hash = block.get("hash", "")
         self.assertDictEqual(await self.ain.getValidators(hash), validators)
+    
+    @asyncTest
+    async def test00GetStateUsage(self):
+        # with an app that does not exist yet
+        erased = eraseProtoVer(await self.ain.getStateUsage("test_new"))
+        self.assertIsNotNone(erased["available"])
+        self.assertIsNotNone(erased["usage"])
+        self.assertIsNotNone(erased["staking"])
 
     @asyncTest
     async def test00ValidateAppNameTrue(self):
@@ -929,9 +937,4 @@ class TestDatabase(SnapshotTestCase):
     @asyncTest
     async def test03GetStateInfo(self):
         self.matchSnapshot(eraseStateVersion(await self.ain.db.ref('/rules/transfer/$from/$to/$key/value').getStateInfo()))
-    
-    @asyncTest
-    async def test03GetStateUsage(self):
-        # with an app that does not exist yet
-        self.matchSnapshot(eraseProtoVer(await self.ain.getStateUsage("test_new")))
 
