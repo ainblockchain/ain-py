@@ -26,6 +26,8 @@ from .util import (
     getRequest,
     postRequest,
     waitUntilTxFinalized,
+    eraseProtoVer,
+    eraseStateVersion,
 )
 
 TX_PATTERN = re.compile("0x[0-9a-fA-F]{64}")
@@ -926,5 +928,10 @@ class TestDatabase(SnapshotTestCase):
 
     @asyncTest
     async def test03GetStateInfo(self):
-        self.matchSnapshot(await self.ain.db.ref('/rules/transfer/$from/$to/$key/value').getStateInfo())
+        self.matchSnapshot(eraseStateVersion(await self.ain.db.ref('/rules/transfer/$from/$to/$key/value').getStateInfo()))
     
+    @asyncTest
+    async def test03GetStateUsage(self):
+        # with an app that does not exist yet
+        self.matchSnapshot(eraseProtoVer(await self.ain.getStateUsage("test_new")))
+
