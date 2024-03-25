@@ -256,6 +256,16 @@ snapshots['TestDatabase::test03EvalRuleTrue 1'] = {
 
 snapshots['TestDatabase::test03GetProofHash 1'] = '0x88496dfee3566db91f487aa4cbf69a0c42a3e2a5d0a65bfd4897d699e8734785'
 
+snapshots['TestDatabase::test03GetStateInfo 1'] = {
+    '#num_children': 1,
+    '#state_ph': '0x985a1f057d5047b1dee392127eb776571fbbe79da7ae6114f8f8f18c4f786135',
+    '#tree_bytes': 1840,
+    '#tree_height': 2,
+    '#tree_max_siblings': 1,
+    '#tree_size': 3,
+    '#version': 'POOL:0:1:1711333198584:0'
+}
+
 snapshots['TestDatabase::test03MatchFunction 1'] = {
     'matched_config': {
         'config': {

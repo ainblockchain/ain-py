@@ -923,4 +923,8 @@ class TestDatabase(SnapshotTestCase):
     @asyncTest
     async def test03GetProofHash(self):
         self.matchSnapshot(await self.ain.db.ref('/values/blockchain_params').getProofHash())
+
+    @asyncTest
+    async def test03GetStateInfo(self):
+        self.matchSnapshot(await self.ain.db.ref('/rules/transfer/$from/$to/$key/value').getStateInfo())
     

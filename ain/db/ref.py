@@ -442,6 +442,20 @@ class Reference:
             ref = Reference.extendPath(ref, getattr(params, "ref", None))
         return await self._ain.provider.send("ain_getProofHash", {"ref": ref})
 
+    async def getStateInfo(self, params: StateInfoInput = None) -> Any:
+        """Fetches the state information of a global blockchain state path.
+
+        Args:
+            params (StateProofInput): The state info input object.
+            
+        Returns:
+            The return value of the blockchain API.
+        """
+        ref = self._path
+        if params is not None and hasattr(params, "ref"):
+            ref = Reference.extendPath(ref, getattr(params, "ref", None))
+        return await self._ain.provider.send("ain_getStateInfo", {"ref": ref})
+
     @staticmethod
     def buildGetRequest(type: GetOperationType, ref: str, options: GetOptions = None) -> dict:
         """Builds a get request.
