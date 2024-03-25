@@ -418,7 +418,7 @@ class Reference:
         """Fetches the state proof of a global blockchain state path.
 
         Args:
-            params (MatchInput): The state info input object.
+            params (StateProofInput): The state info input object.
             
         Returns:
             The return value of the blockchain API.
@@ -427,6 +427,20 @@ class Reference:
         if params is not None and hasattr(params, "ref"):
             ref = Reference.extendPath(ref, getattr(params, "ref", None))
         return await self._ain.provider.send("ain_getStateProof", {"ref": ref})
+
+    async def getProofHash(self, params: StateInfoInput = None) -> Any:
+        """Fetches the proof hash of a global blockchain state path.
+
+        Args:
+            params (StateProofInput): The state info input object.
+            
+        Returns:
+            The return value of the blockchain API.
+        """
+        ref = self._path
+        if params is not None and hasattr(params, "ref"):
+            ref = Reference.extendPath(ref, getattr(params, "ref", None))
+        return await self._ain.provider.send("ain_getProofHash", {"ref": ref})
 
     @staticmethod
     def buildGetRequest(type: GetOperationType, ref: str, options: GetOptions = None) -> dict:

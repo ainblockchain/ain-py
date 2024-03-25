@@ -254,6 +254,8 @@ snapshots['TestDatabase::test03EvalRuleTrue 1'] = {
     }
 }
 
+snapshots['TestDatabase::test03GetProofHash 1'] = '0x88496dfee3566db91f487aa4cbf69a0c42a3e2a5d0a65bfd4897d699e8734785'
+
 snapshots['TestDatabase::test03MatchFunction 1'] = {
     'matched_config': {
         'config': {

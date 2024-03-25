@@ -914,3 +914,13 @@ class TestDatabase(SnapshotTestCase):
     async def test03GetStateProof(self):
         self.assertIsNotNone(await self.ain.db.ref('/values/blockchain_params').getStateProof())
     
+    @asyncTest
+    async def test03GetStateProofWithInput(self):
+        self.assertIsNotNone(await self.ain.db.ref('/values/blockchain_params').getStateProof(StateInfoInput(
+            ref="resource"
+        )))
+
+    @asyncTest
+    async def test03GetProofHash(self):
+        self.matchSnapshot(await self.ain.db.ref('/values/blockchain_params').getProofHash())
+    
