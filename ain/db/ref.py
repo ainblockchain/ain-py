@@ -418,7 +418,7 @@ class Reference:
         """Fetches the state proof of a global blockchain state path.
 
         Args:
-            params (StateProofInput): The state info input object.
+            params (StateInfoInput): The state info input object.
             
         Returns:
             The return value of the blockchain API.
@@ -432,7 +432,7 @@ class Reference:
         """Fetches the proof hash of a global blockchain state path.
 
         Args:
-            params (StateProofInput): The state info input object.
+            params (StateInfoInput): The state info input object.
             
         Returns:
             The return value of the blockchain API.
@@ -446,7 +446,7 @@ class Reference:
         """Fetches the state information of a global blockchain state path.
 
         Args:
-            params (StateProofInput): The state info input object.
+            params (StateInfoInput): The state info input object.
             
         Returns:
             The return value of the blockchain API.
