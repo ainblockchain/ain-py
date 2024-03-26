@@ -26,6 +26,8 @@ from .util import (
     getRequest,
     postRequest,
     waitUntilTxFinalized,
+    eraseProtoVer,
+    eraseStateVersion,
 )
 
 TX_PATTERN = re.compile("0x[0-9a-fA-F]{64}")
@@ -301,6 +303,14 @@ class TestCore(TestCase):
         block = await self.ain.getBlock(4)
         hash = block.get("hash", "")
         self.assertDictEqual(await self.ain.getValidators(hash), validators)
+    
+    @asyncTest
+    async def test00GetStateUsage(self):
+        # with an app that does not exist yet
+        erased = eraseProtoVer(await self.ain.getStateUsage("test_new"))
+        self.assertIsNotNone(erased["available"])
+        self.assertIsNotNone(erased["usage"])
+        self.assertIsNotNone(erased["staking"])
 
     @asyncTest
     async def test00ValidateAppNameTrue(self):
@@ -910,3 +920,21 @@ class TestDatabase(SnapshotTestCase):
     async def test03MatchOwner(self):
         self.matchSnapshot(await self.ain.db.ref(self.allowedPath).matchOwner())
     
+    @asyncTest
+    async def test03GetStateProof(self):
+        self.assertIsNotNone(await self.ain.db.ref('/values/blockchain_params').getStateProof())
+    
+    @asyncTest
+    async def test03GetStateProofWithInput(self):
+        self.assertIsNotNone(await self.ain.db.ref('/values/blockchain_params').getStateProof(StateInfoInput(
+            ref="resource"
+        )))
+
+    @asyncTest
+    async def test03GetProofHash(self):
+        self.matchSnapshot(await self.ain.db.ref('/values/blockchain_params').getProofHash())
+
+    @asyncTest
+    async def test03GetStateInfo(self):
+        self.matchSnapshot(eraseStateVersion(await self.ain.db.ref('/rules/transfer/$from/$to/$key/value').getStateInfo()))
+

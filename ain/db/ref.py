@@ -12,6 +12,7 @@ from ain.types import (
     EvalRuleInput,
     EvalOwnerInput,
     MatchInput,
+    StateInfoInput,
     GetOptions,
 )
 from ain.db.push_id import PushId
@@ -412,6 +413,48 @@ class Reference:
         if params is not None and hasattr(params, "ref"):
             ref = Reference.extendPath(ref, getattr(params, "ref", None))
         return await self._ain.provider.send("ain_matchOwner", {"ref": ref})
+
+    async def getStateProof(self, params: StateInfoInput = None) -> Any:
+        """Fetches the state proof of a global blockchain state path.
+
+        Args:
+            params (StateInfoInput): The state info input object.
+            
+        Returns:
+            The return value of the blockchain API.
+        """
+        ref = self._path
+        if params is not None and hasattr(params, "ref"):
+            ref = Reference.extendPath(ref, getattr(params, "ref", None))
+        return await self._ain.provider.send("ain_getStateProof", {"ref": ref})
+
+    async def getProofHash(self, params: StateInfoInput = None) -> Any:
+        """Fetches the proof hash of a global blockchain state path.
+
+        Args:
+            params (StateInfoInput): The state info input object.
+            
+        Returns:
+            The return value of the blockchain API.
+        """
+        ref = self._path
+        if params is not None and hasattr(params, "ref"):
+            ref = Reference.extendPath(ref, getattr(params, "ref", None))
+        return await self._ain.provider.send("ain_getProofHash", {"ref": ref})
+
+    async def getStateInfo(self, params: StateInfoInput = None) -> Any:
+        """Fetches the state information of a global blockchain state path.
+
+        Args:
+            params (StateInfoInput): The state info input object.
+            
+        Returns:
+            The return value of the blockchain API.
+        """
+        ref = self._path
+        if params is not None and hasattr(params, "ref"):
+            ref = Reference.extendPath(ref, getattr(params, "ref", None))
+        return await self._ain.provider.send("ain_getStateInfo", {"ref": ref})
 
     @staticmethod
     def buildGetRequest(type: GetOperationType, ref: str, options: GetOptions = None) -> dict:
