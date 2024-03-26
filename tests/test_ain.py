@@ -160,6 +160,12 @@ class TestWallet(TestCase):
         self.assertGreaterEqual(await ain.wallet.getBalance(), 0)
 
     @asyncTest
+    async def testGetNonce(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        self.assertEqual(await ain.wallet.getNonce(), 0)
+
+    @asyncTest
     async def testTransferIsDryrunTrue(self):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
