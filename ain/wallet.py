@@ -221,13 +221,65 @@ class Wallet:
                 If `address` is `None` and default account is not set, raises `ValueError`.
 
         Returns:
-            str: The AIN balance of the given account.
+            int: The AIN balance of the given account.
         """
         if address is None:
             addr = self.getImpliedAddress()
         else:
             addr = toChecksumAddress(address)
         return await self.ain.db.ref(f"/accounts/{addr}/balance").getValue()
+
+    async def getNonce(self, address: str = None, source: str = None) -> int:
+        """Fetches an account's nonce value, which is the current transaction count of the account.
+
+        Args:
+            address (str, Optional): The address of the account.
+                If `address` is `None`, it uses the default account address. Defaults to `None`.
+                If `address` is `None` and default account is not set, raises `ValueError`.
+            source (str, Optional): The source of the data.
+                It could be either the pending transaction pool ("pending") or
+                the committed blocks ("committed"). The default value is "committed".
+
+        Returns:
+            int: The nonce of the given account.
+        """
+        if address is None:
+            addr = self.getImpliedAddress()
+        else:
+            addr = toChecksumAddress(address)
+        return await self.ain.provider.send(
+            "ain_getNonce",
+            {
+                "address": addr,
+                "from": source,
+            },
+        )
+
+    async def getTimestamp(self, address: str = None, source: str = None) -> int:
+        """Fetches an account's timestamp value, which is the timestamp of the last transaction signed by the account with nonce = -2.
+
+        Args:
+            address (str, Optional): The address of the account.
+                If `address` is `None`, it uses the default account address. Defaults to `None`.
+                If `address` is `None` and default account is not set, raises `ValueError`.
+            source (str, Optional): The source of the data.
+                It could be either the pending transaction pool ("pending") or
+                the committed blocks ("committed"). The default value is "committed".
+
+        Returns:
+            int: The timestamp of the given account.
+        """
+        if address is None:
+            addr = self.getImpliedAddress()
+        else:
+            addr = toChecksumAddress(address)
+        return await self.ain.provider.send(
+            "ain_getTimestamp",
+            {
+                "address": addr,
+                "from": source,
+            },
+        )
 
     async def transfer(self, toAddress: str, value: float, fromAddress: str = None, nonce: int = None, gas_price: int = None, isDryrun = False):
         """Sends a transfer transaction to the network.

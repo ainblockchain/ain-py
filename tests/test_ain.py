@@ -67,6 +67,13 @@ class TestNetwork(TestCase):
         self.assertEqual(res["code"], 0)
         self.assertEqual(res["result"], True)
 
+class TestProvider(TestCase):
+    @asyncTest
+    async def testGetAddress(self):
+        ain = Ain(testNode)
+        res = await ain.provider.getAddress()
+        self.assertIsNotNone(res)
+
 class TestWallet(TestCase):
     def testCreateAccount(self):
         ain = Ain(testNode)
@@ -151,6 +158,18 @@ class TestWallet(TestCase):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
         self.assertGreaterEqual(await ain.wallet.getBalance(), 0)
+
+    @asyncTest
+    async def testGetNonce(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        self.assertEqual(await ain.wallet.getNonce(), 0)
+
+    @asyncTest
+    async def testGetTimestamp(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        self.assertEqual(await ain.wallet.getTimestamp(), 0)
 
     @asyncTest
     async def testTransferIsDryrunTrue(self):
