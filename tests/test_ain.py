@@ -67,6 +67,13 @@ class TestNetwork(TestCase):
         self.assertEqual(res["code"], 0)
         self.assertEqual(res["result"], True)
 
+class TestProvider(TestCase):
+    @asyncTest
+    async def testGetAddress(self):
+        ain = Ain(testNode)
+        res = await ain.provider.getAddress()
+        self.assertIsNotNone(res)
+
 class TestWallet(TestCase):
     def testCreateAccount(self):
         ain = Ain(testNode)
