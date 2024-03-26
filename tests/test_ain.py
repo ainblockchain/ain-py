@@ -166,6 +166,12 @@ class TestWallet(TestCase):
         self.assertEqual(await ain.wallet.getNonce(), 0)
 
     @asyncTest
+    async def testGetTimestamp(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        self.assertEqual(await ain.wallet.getTimestamp(), 0)
+
+    @asyncTest
     async def testTransferIsDryrunTrue(self):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
