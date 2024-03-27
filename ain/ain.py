@@ -192,6 +192,23 @@ class Ain:
                 "index": index
             })
 
+    async def getTransactionByBlockNumberAndIndex(self, blockNumber: int, index: int) -> Any:
+        """Fetches a transaction's information with a block number and an index.
+
+        Args:
+            blockHash (int): The block number.
+            index (int): The transaction index in the block
+
+        Returns:
+            The transaction with the given parameter values.
+        """
+        return await self.provider.send(
+            "ain_getTransactionByBlockNumberAndIndex",
+            {
+                "block_number": blockNumber,
+                "index": index
+            })
+
     async def getStateUsage(self, appName: str) -> Any:
         """Gets a state usage with the given app name.
 

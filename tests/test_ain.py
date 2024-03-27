@@ -627,6 +627,12 @@ class TestCore(TestCase):
     #    res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
     #    self.assertIsNotNone(res)
 
+    @asyncTest
+    async def test01GetTransactionByBlockNumberAndIndex(self):
+        genesisBlockNumber = 0
+        res = await self.ain.getTransactionByBlockNumberAndIndex(genesisBlockNumber, 0)
+        self.assertIsNotNone(res)
+
 class TestDatabase(SnapshotTestCase):
     ain: Ain
     defaultAddr: str
