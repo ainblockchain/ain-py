@@ -164,7 +164,7 @@ class Ain:
         """
         return await self.provider.send("ain_getTransactionPoolSizeUtilization", {})
 
-    async def getTransaction(self, transactionHash: str) -> Any:
+    async def getTransactionByHash(self, transactionHash: str) -> Any:
         """Gets a transaction with the given transaction hash.
 
         Args:
