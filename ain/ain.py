@@ -144,7 +144,27 @@ class Ain:
         else:
             raise TypeError("blockHashOrBlockNumber has invalid type")
 
-    async def getTransaction(self, transactionHash: str) -> Any:
+    async def getPendingTransactions(self) -> Any:
+        """Fetches pending transactions.
+
+        Args:
+
+        Returns:
+            The pending transactions.
+        """
+        return await self.provider.send("ain_getPendingTransactions", {})
+
+    async def getTransactionPoolSizeUtilization(self) -> Any:
+        """Fetches transaction pool size utilization.
+
+        Args:
+
+        Returns:
+            The transaction pool size utilization.
+        """
+        return await self.provider.send("ain_getTransactionPoolSizeUtilization", {})
+
+    async def getTransactionByHash(self, transactionHash: str) -> Any:
         """Gets a transaction with the given transaction hash.
 
         Args:
@@ -154,6 +174,40 @@ class Ain:
             The transaction with the given transaction hash.
         """
         return await self.provider.send("ain_getTransactionByHash", {"hash": transactionHash})
+
+    async def getTransactionByBlockHashAndIndex(self, blockHash: str, index: int) -> Any:
+        """Fetches a transaction's information with a block hash and an index.
+
+        Args:
+            blockHash (str): The block hash.
+            index (int): The transaction index in the block
+
+        Returns:
+            The transaction with the given parameter values.
+        """
+        return await self.provider.send(
+            "ain_getTransactionByBlockHashAndIndex",
+            {
+                "block_hash": blockHash,
+                "index": index
+            })
+
+    async def getTransactionByBlockNumberAndIndex(self, blockNumber: int, index: int) -> Any:
+        """Fetches a transaction's information with a block number and an index.
+
+        Args:
+            blockHash (int): The block number.
+            index (int): The transaction index in the block
+
+        Returns:
+            The transaction with the given parameter values.
+        """
+        return await self.provider.send(
+            "ain_getTransactionByBlockNumberAndIndex",
+            {
+                "block_number": blockNumber,
+                "index": index
+            })
 
     async def getStateUsage(self, appName: str) -> Any:
         """Gets a state usage with the given app name.
