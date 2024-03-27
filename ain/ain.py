@@ -154,6 +154,16 @@ class Ain:
         """
         return await self.provider.send("ain_getPendingTransactions", {})
 
+    async def getTransactionPoolSizeUtilization(self) -> Any:
+        """Fetches transaction pool size utilization.
+
+        Args:
+
+        Returns:
+            The transaction pool size utilization.
+        """
+        return await self.provider.send("ain_getTransactionPoolSizeUtilization", {})
+
     async def getTransaction(self, transactionHash: str) -> Any:
         """Gets a transaction with the given transaction hash.
 

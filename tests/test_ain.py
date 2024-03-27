@@ -614,6 +614,11 @@ class TestCore(TestCase):
         res = await self.ain.getPendingTransactions()
         self.assertIsNotNone(res)
 
+    @asyncTest
+    async def test02GetTransactionPoolSizeUtilization(self):
+        res = await self.ain.getTransactionPoolSizeUtilization()
+        self.assertIsNotNone(res)
+
 class TestDatabase(SnapshotTestCase):
     ain: Ain
     defaultAddr: str
