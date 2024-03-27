@@ -609,6 +609,11 @@ class TestCore(TestCase):
             raised = True
         self.assertTrue(raised)
 
+    @asyncTest
+    async def test02GetPendingTransactions(self):
+        res = await self.ain.getPendingTransactions()
+        self.assertIsNotNone(res)
+
 class TestDatabase(SnapshotTestCase):
     ain: Ain
     defaultAddr: str

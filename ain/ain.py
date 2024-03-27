@@ -144,6 +144,16 @@ class Ain:
         else:
             raise TypeError("blockHashOrBlockNumber has invalid type")
 
+    async def getPendingTransactions(self) -> Any:
+        """Fetches pending transactions.
+
+        Args:
+
+        Returns:
+            The pending transactions.
+        """
+        return await self.provider.send("ain_getPendingTransactions", {})
+
     async def getTransaction(self, transactionHash: str) -> Any:
         """Gets a transaction with the given transaction hash.
 
