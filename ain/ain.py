@@ -175,6 +175,23 @@ class Ain:
         """
         return await self.provider.send("ain_getTransactionByHash", {"hash": transactionHash})
 
+    async def getTransactionByBlockHashAndIndex(self, blockHash: str, index: int) -> Any:
+        """Fetches a transaction's information with a block hash and an index.
+
+        Args:
+            blockHash (str): The block hash.
+            index (int): The transaction index in the block
+
+        Returns:
+            The transaction with the given parameter values.
+        """
+        return await self.provider.send(
+            "ain_getTransactionByBlockHashAndIndex",
+            {
+                "block_hash": blockHash,
+                "index": index
+            })
+
     async def getStateUsage(self, appName: str) -> Any:
         """Gets a state usage with the given app name.
 
