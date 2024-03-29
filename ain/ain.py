@@ -138,7 +138,7 @@ class Ain:
         self,
         begin: int,
         end: int,
-    ) -> Any:
+    ) -> List[Any]:
         """"Fetches blocks with a block number range.
 
         Args:
@@ -160,7 +160,7 @@ class Ain:
         self,
         begin: int,
         end: int,
-    ) -> Any:
+    ) -> List[Any]:
         """Fetches block headers with a block number range.
 
         Args:
@@ -175,6 +175,25 @@ class Ain:
             {
                 "from": begin,
                 "to": end,
+            },
+        )
+
+    async def getBlockTransactionCountByNumber(
+        self,
+        blockNumber: int,
+    ) -> int:
+        """Fetches block transaction count with a block number.
+
+        Args:
+            blockNumber (int): The block number.
+        
+        Returns:
+            The block transaction count.
+        """
+        return await self.provider.send(
+            "ain_getBlockTransactionCountByNumber",
+            {
+                "number": blockNumber,
             },
         )
 

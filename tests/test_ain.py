@@ -360,6 +360,14 @@ class TestCore(TestCase):
         self.assertEqual(blockList[1]["number"], lastBlockNumber)
 
     @asyncTest
+    async def test00GetBlockTransactionCountByNumber(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        txCount = await self.ain.getBlockTransactionCountByNumber(lastBlockNumber)
+        self.assertIsNotNone(txCount)
+
+    @asyncTest
     async def test00GetProposer(self):
         proposer = await self.ain.getProposer(1)
         block = await self.ain.getBlockByNumber(1)
