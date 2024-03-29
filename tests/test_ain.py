@@ -685,13 +685,12 @@ class TestCore(TestCase):
         res = await self.ain.getTransactionPoolSizeUtilization()
         self.assertIsNotNone(res)
 
-    # TODO(platfowner): Uncomment this once getBlockByNumber() is available.
-    #@asyncTest
-    #async def test01GetTransactionByBlockHashAndIndex(self):
-    #    genesisBlockNumber = 0
-    #    genesisBlock = await self.ain.getBlockByNumber(genesisBlockNumber)
-    #    res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
-    #    self.assertIsNotNone(res)
+    @asyncTest
+    async def test01GetTransactionByBlockHashAndIndex(self):
+        genesisBlockNumber = 0
+        genesisBlock = await self.ain.getBlockByNumber(genesisBlockNumber)
+        res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
+        self.assertIsNotNone(res)
 
     @asyncTest
     async def test01GetTransactionByBlockNumberAndIndex(self):
