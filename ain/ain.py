@@ -76,6 +76,18 @@ class Ain:
             "ain_getLastBlock", {}
         )
 
+    async def getLastBlockNumber(self) -> int:
+        """Fetches the last block number.
+
+        Args:
+
+        Returns:
+            The last block number.
+        """
+        return await self.provider.send(
+            "ain_getLastBlockNumber", {}
+        )
+
     async def getBlock(
         self,
         blockHashOrBlockNumber: Union[str, int],

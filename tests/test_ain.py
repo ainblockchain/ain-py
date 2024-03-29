@@ -313,6 +313,11 @@ class TestCore(TestCase):
         self.assertGreater(number, 0)
 
     @asyncTest
+    async def test00GetLastBlockNumber(self):
+        number = await self.ain.getLastBlockNumber()
+        self.assertGreater(number, 0)
+
+    @asyncTest
     async def test00GetBlock(self):
         block = await self.ain.getBlock(3)
         hash = block.get("hash", "")
