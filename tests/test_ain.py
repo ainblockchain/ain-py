@@ -368,6 +368,14 @@ class TestCore(TestCase):
         self.assertIsNotNone(txCount)
 
     @asyncTest
+    async def test00GetBlockTransactionCountByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        txCount = await self.ain.getBlockTransactionCountByHash(lastBlock["hash"])
+        self.assertIsNotNone(txCount)
+
+    @asyncTest
     async def test00GetProposer(self):
         proposer = await self.ain.getProposer(1)
         block = await self.ain.getBlockByNumber(1)

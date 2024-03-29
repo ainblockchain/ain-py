@@ -197,6 +197,25 @@ class Ain:
             },
         )
 
+    async def getBlockTransactionCountByHash(
+        self,
+        blockHash: str,
+    ) -> int:
+        """Fetches block transaction count with a block hash.
+
+        Args:
+            blockNumber (int): The block number.
+        
+        Returns:
+            The block transaction count.
+        """
+        return await self.provider.send(
+            "ain_getBlockTransactionCountByHash",
+            {
+                "hash": blockHash,
+            },
+        )
+
     async def getProposer(
         self,
         blockHashOrBlockNumber: Union[str, int],
