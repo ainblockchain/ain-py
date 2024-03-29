@@ -318,22 +318,36 @@ class TestCore(TestCase):
         self.assertGreater(number, 0)
 
     @asyncTest
-    async def test00GetBlock(self):
-        block = await self.ain.getBlock(3)
-        hash = block.get("hash", "")
-        self.assertDictEqual(await self.ain.getBlock(hash), block)
+    async def test00GetBlockByNumber(self):
+        lastBlock = await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        block = await self.ain.getBlockByNumber(lastBlock["number"])
+        self.assertIsNotNone(block)
+        self.assertEqual(block["number"], lastBlock["number"])
+        self.assertEqual(block["hash"], lastBlock["hash"])
+
+    @asyncTest
+    async def test00GetBlockByHash(self):
+        lastBlock = await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        block = await self.ain.getBlockByHash(lastBlock["hash"])
+        self.assertIsNotNone(block)
+        self.assertEqual(block["number"], lastBlock["number"])
+        self.assertEqual(block["hash"], lastBlock["hash"])
 
     @asyncTest
     async def test00GetProposer(self):
         proposer = await self.ain.getProposer(1)
-        block = await self.ain.getBlock(1)
+        block = await self.ain.getBlockByNumber(1)
         hash = block.get("hash", "")
         self.assertEqual(await self.ain.getProposer(hash), proposer)
 
     @asyncTest
     async def test00GetValidators(self):
         validators = await self.ain.getValidators(4)
-        block = await self.ain.getBlock(4)
+        block = await self.ain.getBlockByNumber(4)
         hash = block.get("hash", "")
         self.assertDictEqual(await self.ain.getValidators(hash), validators)
     
