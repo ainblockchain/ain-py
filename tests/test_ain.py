@@ -373,7 +373,7 @@ class TestCore(TestCase):
         targetTxHash = res["tx_hash"]
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
 
-        tx = await self.ain.getTransaction(targetTxHash)
+        tx = await self.ain.getTransactionByHash(targetTxHash)
         self.assertIsNone(tx)  # should be None
 
     @asyncTest
@@ -399,7 +399,7 @@ class TestCore(TestCase):
         targetTxHash = res["tx_hash"]
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
 
-        tx = await self.ain.getTransaction(targetTxHash)
+        tx = await self.ain.getTransactionByHash(targetTxHash)
         self.assertDictEqual(tx["transaction"]["tx_body"]["operation"], op.__dict__)
 
     @asyncTest
@@ -433,7 +433,7 @@ class TestCore(TestCase):
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
         self.assertEqual(res["result"]["code"], 0)
 
-        tx = await self.ain.getTransaction(targetTxHash)
+        tx = await self.ain.getTransactionByHash(targetTxHash)
         self.assertIsNone(tx)  # should be None
 
     @asyncTest
@@ -608,6 +608,30 @@ class TestCore(TestCase):
             self.assertEqual(e.message, "Invalid batch transaction format.")
             raised = True
         self.assertTrue(raised)
+
+    @asyncTest
+    async def test01GetPendingTransactions(self):
+        res = await self.ain.getPendingTransactions()
+        self.assertIsNotNone(res)
+
+    @asyncTest
+    async def test01GetTransactionPoolSizeUtilization(self):
+        res = await self.ain.getTransactionPoolSizeUtilization()
+        self.assertIsNotNone(res)
+
+    # TODO(platfowner): Uncomment this once getBlockByNumber() is available.
+    #@asyncTest
+    #async def test01GetTransactionByBlockHashAndIndex(self):
+    #    genesisBlockNumber = 0
+    #    genesisBlock = await self.ain.getBlockByNumber(genesisBlockNumber)
+    #    res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
+    #    self.assertIsNotNone(res)
+
+    @asyncTest
+    async def test01GetTransactionByBlockNumberAndIndex(self):
+        genesisBlockNumber = 0
+        res = await self.ain.getTransactionByBlockNumberAndIndex(genesisBlockNumber, 0)
+        self.assertIsNotNone(res)
 
 class TestDatabase(SnapshotTestCase):
     ain: Ain
