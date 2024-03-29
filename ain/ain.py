@@ -156,6 +156,28 @@ class Ain:
             },
         )
 
+    async def getBlockHeadersList(
+        self,
+        begin: int,
+        end: int,
+    ) -> Any:
+        """Fetches block headers with a block number range.
+
+        Args:
+            begin (int): The begining block number (inclusive).
+            end (int): The ending block number (exclusive).
+        
+        Returns:
+            The block headers list.
+        """
+        return await self.provider.send(
+            "ain_getBlockHeadersList",
+            {
+                "from": begin,
+                "to": end,
+            },
+        )
+
     async def getProposer(
         self,
         blockHashOrBlockNumber: Union[str, int],

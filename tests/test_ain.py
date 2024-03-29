@@ -349,6 +349,17 @@ class TestCore(TestCase):
         self.assertEqual(blockList[1]["number"], lastBlockNumber)
 
     @asyncTest
+    async def test00GetBlockHeadersList(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        blockList = await self.ain.getBlockHeadersList(lastBlockNumber - 1, lastBlockNumber + 1)
+        self.assertIsNotNone(blockList)
+        self.assertEqual(len(blockList), 2)
+        self.assertEqual(blockList[0]["number"], lastBlockNumber - 1)
+        self.assertEqual(blockList[1]["number"], lastBlockNumber)
+
+    @asyncTest
     async def test00GetProposer(self):
         proposer = await self.ain.getProposer(1)
         block = await self.ain.getBlockByNumber(1)
