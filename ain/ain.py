@@ -134,6 +134,28 @@ class Ain:
             },
         )
 
+    async def getBlockList(
+        self,
+        begin: int,
+        end: int,
+    ) -> Any:
+        """"Fetches blocks with a block number range.
+
+        Args:
+            begin (int): The begining block number (inclusive).
+            end (int): The ending block number (exclusive).
+        
+        Returns:
+            The block list.
+        """
+        return await self.provider.send(
+            "ain_getBlockList",
+            {
+                "from": begin,
+                "to": end,
+            },
+        )
+
     async def getProposer(
         self,
         blockHashOrBlockNumber: Union[str, int],
