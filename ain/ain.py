@@ -64,6 +64,18 @@ class Ain:
 
     # TODO(kriii): Return objects typing.
 
+    async def getLastBlock(self) -> Any:
+        """Fetches the last block.
+
+        Args:
+
+        Returns:
+            The last block.
+        """
+        return await self.provider.send(
+            "ain_getLastBlock", {}
+        )
+
     async def getBlock(
         self,
         blockHashOrBlockNumber: Union[str, int],

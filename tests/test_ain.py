@@ -304,6 +304,15 @@ class TestCore(TestCase):
         await waitUntilTxFinalized(testNode, createApps["result"]["tx_hash"])
 
     @asyncTest
+    async def test00GetLastBlock(self):
+        block = await self.ain.getLastBlock()
+        self.assertIsNotNone(block)
+        hash = block.get("hash", "")
+        self.assertIsNotNone(hash)
+        number = block.get("number", 0)
+        self.assertGreater(number, 0)
+
+    @asyncTest
     async def test00GetBlock(self):
         block = await self.ain.getBlock(3)
         hash = block.get("hash", "")
