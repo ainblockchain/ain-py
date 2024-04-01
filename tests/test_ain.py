@@ -304,22 +304,88 @@ class TestCore(TestCase):
         await waitUntilTxFinalized(testNode, createApps["result"]["tx_hash"])
 
     @asyncTest
-    async def test00GetBlock(self):
-        block = await self.ain.getBlock(3)
+    async def test00GetLastBlock(self):
+        block = await self.ain.getLastBlock()
+        self.assertIsNotNone(block)
         hash = block.get("hash", "")
-        self.assertDictEqual(await self.ain.getBlock(hash), block)
+        self.assertIsNotNone(hash)
+        number = block.get("number", 0)
+        self.assertGreater(number, 0)
+
+    @asyncTest
+    async def test00GetLastBlockNumber(self):
+        number = await self.ain.getLastBlockNumber()
+        self.assertGreater(number, 0)
+
+    @asyncTest
+    async def test00GetBlockByNumber(self):
+        lastBlock = await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        block = await self.ain.getBlockByNumber(lastBlock["number"])
+        self.assertIsNotNone(block)
+        self.assertEqual(block["number"], lastBlock["number"])
+        self.assertEqual(block["hash"], lastBlock["hash"])
+
+    @asyncTest
+    async def test00GetBlockByHash(self):
+        lastBlock = await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        block = await self.ain.getBlockByHash(lastBlock["hash"])
+        self.assertIsNotNone(block)
+        self.assertEqual(block["number"], lastBlock["number"])
+        self.assertEqual(block["hash"], lastBlock["hash"])
+
+    @asyncTest
+    async def test00GetBlockList(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        blockList = await self.ain.getBlockList(lastBlockNumber - 1, lastBlockNumber + 1)
+        self.assertIsNotNone(blockList)
+        self.assertEqual(len(blockList), 2)
+        self.assertEqual(blockList[0]["number"], lastBlockNumber - 1)
+        self.assertEqual(blockList[1]["number"], lastBlockNumber)
+
+    @asyncTest
+    async def test00GetBlockHeadersList(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        blockList = await self.ain.getBlockHeadersList(lastBlockNumber - 1, lastBlockNumber + 1)
+        self.assertIsNotNone(blockList)
+        self.assertEqual(len(blockList), 2)
+        self.assertEqual(blockList[0]["number"], lastBlockNumber - 1)
+        self.assertEqual(blockList[1]["number"], lastBlockNumber)
+
+    @asyncTest
+    async def test00GetBlockTransactionCountByNumber(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        txCount = await self.ain.getBlockTransactionCountByNumber(lastBlockNumber)
+        self.assertIsNotNone(txCount)
+
+    @asyncTest
+    async def test00GetBlockTransactionCountByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        txCount = await self.ain.getBlockTransactionCountByHash(lastBlock["hash"])
+        self.assertIsNotNone(txCount)
 
     @asyncTest
     async def test00GetProposer(self):
         proposer = await self.ain.getProposer(1)
-        block = await self.ain.getBlock(1)
+        block = await self.ain.getBlockByNumber(1)
         hash = block.get("hash", "")
         self.assertEqual(await self.ain.getProposer(hash), proposer)
 
     @asyncTest
     async def test00GetValidators(self):
         validators = await self.ain.getValidators(4)
-        block = await self.ain.getBlock(4)
+        block = await self.ain.getBlockByNumber(4)
         hash = block.get("hash", "")
         self.assertDictEqual(await self.ain.getValidators(hash), validators)
     
@@ -619,13 +685,12 @@ class TestCore(TestCase):
         res = await self.ain.getTransactionPoolSizeUtilization()
         self.assertIsNotNone(res)
 
-    # TODO(platfowner): Uncomment this once getBlockByNumber() is available.
-    #@asyncTest
-    #async def test01GetTransactionByBlockHashAndIndex(self):
-    #    genesisBlockNumber = 0
-    #    genesisBlock = await self.ain.getBlockByNumber(genesisBlockNumber)
-    #    res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
-    #    self.assertIsNotNone(res)
+    @asyncTest
+    async def test01GetTransactionByBlockHashAndIndex(self):
+        genesisBlockNumber = 0
+        genesisBlock = await self.ain.getBlockByNumber(genesisBlockNumber)
+        res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
+        self.assertIsNotNone(res)
 
     @asyncTest
     async def test01GetTransactionByBlockNumberAndIndex(self):
