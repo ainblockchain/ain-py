@@ -290,7 +290,7 @@ class Ain:
         """Fetches the block proproser's address of a block with a block hash.
 
         Args:
-            blockHash (str]): The block hash.
+            blockHash (str): The block hash.
 
         Returns:
             The address of the proposer of the given block.
