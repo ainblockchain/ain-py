@@ -376,19 +376,45 @@ class TestCore(TestCase):
         self.assertIsNotNone(txCount)
 
     @asyncTest
-    async def test00GetProposer(self):
-        proposer = await self.ain.getProposer(1)
-        block = await self.ain.getBlockByNumber(1)
-        hash = block.get("hash", "")
-        self.assertEqual(await self.ain.getProposer(hash), proposer)
+    async def test00GetValidatorInfo(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["proposer"])
+        validatorInfo = await self.ain.getValidatorInfo(lastBlock["proposer"])
+        self.assertIsNotNone(validatorInfo)
 
     @asyncTest
-    async def test00GetValidators(self):
-        validators = await self.ain.getValidators(4)
-        block = await self.ain.getBlockByNumber(4)
-        hash = block.get("hash", "")
-        self.assertDictEqual(await self.ain.getValidators(hash), validators)
+    async def test00GetValidatorsByNumber(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        validators = await self.ain.getValidatorsByNumber(lastBlock["number"])
+        self.assertDictEqual(validators, lastBlock["validators"])
     
+    @asyncTest
+    async def test00GetValidatorsByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        validators = await self.ain.getValidatorsByHash(lastBlock["hash"])
+        self.assertDictEqual(validators, lastBlock["validators"])
+    
+    @asyncTest
+    async def test00GetProposerByNumber(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        proposer = await self.ain.getProposerByNumber(lastBlock["number"])
+        self.assertEqual(proposer, lastBlock["proposer"])
+    
+    @asyncTest
+    async def test00GetProposerByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        proposer = await self.ain.getProposerByHash(lastBlock["hash"])
+        self.assertEqual(proposer, lastBlock["proposer"])
+
     @asyncTest
     async def test00GetStateUsage(self):
         # with an app that does not exist yet
