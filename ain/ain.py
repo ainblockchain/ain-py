@@ -235,29 +235,6 @@ class Ain:
             },
         )
 
-    async def getProposer(
-        self,
-        blockHashOrBlockNumber: Union[str, int],
-    ) -> Any:
-        """Gets an address of the proposer of the given block.
-
-        Args:
-            blockHashOrBlockNumber (Union[str, int]): The block hash or the block number.
-
-        Returns:
-            The address of the proposer of the given block.
-        """
-        if type(blockHashOrBlockNumber) is str:
-            return await self.provider.send(
-                "ain_getProposerByHash", {"hash": blockHashOrBlockNumber}
-            )
-        elif type(blockHashOrBlockNumber) is int:
-            return await self.provider.send(
-                "ain_getProposerByNumber", {"number": blockHashOrBlockNumber}
-            )
-        else:
-            raise TypeError("blockHashOrBlockNumber has invalid type")
-
     async def getValidatorsByNumber(
         self,
         blockNumber: int,
@@ -268,7 +245,7 @@ class Ain:
             blockNumber (int): The block number.
             
         Returns:
-            The list of validators for the block of the given block number.
+            The list of validators of the given block.
         """
         return await self.provider.send(
             "ain_getValidatorsByNumber", {"number": blockNumber}
@@ -284,10 +261,42 @@ class Ain:
             blockHash (str): The block hash.
             
         Returns:
-            The list of validators for the block of the given block hash.
+            The list of validators of the given block.
         """
         return await self.provider.send(
             "ain_getValidatorsByHash", {"hash": blockHash}
+        )
+
+    async def getProposerByNumber(
+        self,
+        blockNumber: int,
+    ) -> str:
+        """Fetches the block proproser's address of a block with a block number.
+
+        Args:
+            blockNumber (int): The block number.
+
+        Returns:
+            The address of the proposer of the given block.
+        """
+        return await self.provider.send(
+            "ain_getProposerByNumber", {"number": blockNumber}
+        )
+
+    async def getProposerByHash(
+        self,
+        blockHash: str,
+    ) -> str:
+        """Fetches the block proproser's address of a block with a block hash.
+
+        Args:
+            blockHash (str]): The block hash.
+
+        Returns:
+            The address of the proposer of the given block.
+        """
+        return await self.provider.send(
+            "ain_getProposerByHash", {"hash": blockHash}
         )
 
     async def getPendingTransactions(self) -> Any:

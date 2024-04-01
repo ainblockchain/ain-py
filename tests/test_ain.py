@@ -384,13 +384,6 @@ class TestCore(TestCase):
         self.assertIsNotNone(validatorInfo)
 
     @asyncTest
-    async def test00GetProposer(self):
-        proposer = await self.ain.getProposer(1)
-        block = await self.ain.getBlockByNumber(1)
-        hash = block.get("hash", "")
-        self.assertEqual(await self.ain.getProposer(hash), proposer)
-
-    @asyncTest
     async def test00GetValidatorsByNumber(self):
         lastBlock= await self.ain.getLastBlock()
         self.assertIsNotNone(lastBlock)
@@ -406,6 +399,22 @@ class TestCore(TestCase):
         validators = await self.ain.getValidatorsByHash(lastBlock["hash"])
         self.assertDictEqual(validators, lastBlock["validators"])
     
+    @asyncTest
+    async def test00GetProposerByNumber(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        proposer = await self.ain.getProposerByNumber(lastBlock["number"])
+        self.assertEqual(proposer, lastBlock["proposer"])
+    
+    @asyncTest
+    async def test00GetProposerByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        proposer = await self.ain.getProposerByHash(lastBlock["hash"])
+        self.assertEqual(proposer, lastBlock["proposer"])
+
     @asyncTest
     async def test00GetStateUsage(self):
         # with an app that does not exist yet
