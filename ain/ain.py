@@ -258,28 +258,37 @@ class Ain:
         else:
             raise TypeError("blockHashOrBlockNumber has invalid type")
 
-    async def getValidators(
+    async def getValidatorsByNumber(
         self,
-        blockHashOrBlockNumber: Union[str, int],
+        blockNumber: int,
     ) -> Any:
-        """Gets the list of validators for a given block
+        """Fetches the validator list of a block with a block number.
 
         Args:
-            blockHashOrBlockNumber (Union[str, int]): The block hash or the block number.
+            blockNumber (int): The block number.
             
         Returns:
-            The list of validators for a given block.
+            The list of validators for the block of the given block number.
         """
-        if type(blockHashOrBlockNumber) is str:
-            return await self.provider.send(
-                "ain_getValidatorsByHash", {"hash": blockHashOrBlockNumber}
-            )
-        elif type(blockHashOrBlockNumber) is int:
-            return await self.provider.send(
-                "ain_getValidatorsByNumber", {"number": blockHashOrBlockNumber}
-            )
-        else:
-            raise TypeError("blockHashOrBlockNumber has invalid type")
+        return await self.provider.send(
+            "ain_getValidatorsByNumber", {"number": blockNumber}
+        )
+
+    async def getValidatorsByHash(
+        self,
+        blockHash: str,
+    ) -> Any:
+        """Fetches the validator list of a block with a block hash.
+
+        Args:
+            blockHash (str): The block hash.
+            
+        Returns:
+            The list of validators for the block of the given block hash.
+        """
+        return await self.provider.send(
+            "ain_getValidatorsByHash", {"hash": blockHash}
+        )
 
     async def getPendingTransactions(self) -> Any:
         """Fetches pending transactions.

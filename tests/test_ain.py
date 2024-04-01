@@ -391,11 +391,20 @@ class TestCore(TestCase):
         self.assertEqual(await self.ain.getProposer(hash), proposer)
 
     @asyncTest
-    async def test00GetValidators(self):
-        validators = await self.ain.getValidators(4)
-        block = await self.ain.getBlockByNumber(4)
-        hash = block.get("hash", "")
-        self.assertDictEqual(await self.ain.getValidators(hash), validators)
+    async def test00GetValidatorsByNumber(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        validators = await self.ain.getValidatorsByNumber(lastBlock["number"])
+        self.assertDictEqual(validators, lastBlock["validators"])
+    
+    @asyncTest
+    async def test00GetValidatorsByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        validators = await self.ain.getValidatorsByHash(lastBlock["hash"])
+        self.assertDictEqual(validators, lastBlock["validators"])
     
     @asyncTest
     async def test00GetStateUsage(self):
