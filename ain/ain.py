@@ -119,7 +119,7 @@ class Ain:
         """Gets a block with the given block hash.
 
         Args:
-            blockHash (str]): The block hash.
+            blockHash (str): The block hash.
             returnTransactionObjects (bool): If `True`, returns the full transaction objects.
                 If `False`, returns only the transaction hashes. Default to `False`.
         
@@ -204,7 +204,7 @@ class Ain:
         """Fetches block transaction count with a block hash.
 
         Args:
-            blockNumber (int): The block number.
+            blockHash (str): The block hash.
         
         Returns:
             The block transaction count.
@@ -213,6 +213,25 @@ class Ain:
             "ain_getBlockTransactionCountByHash",
             {
                 "hash": blockHash,
+            },
+        )
+
+    async def getValidatorInfo(
+        self,
+        address: str,
+    ) -> Any:
+        """Fetches the information of the given validator address.
+
+        Args:
+            address (str): The block number.
+        
+        Returns:
+            The validator information.
+        """
+        return await self.provider.send(
+            "ain_getValidatorInfo",
+            {
+                "address": address,
             },
         )
 

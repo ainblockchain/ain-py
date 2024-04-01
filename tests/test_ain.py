@@ -376,6 +376,14 @@ class TestCore(TestCase):
         self.assertIsNotNone(txCount)
 
     @asyncTest
+    async def test00GetValidatorInfo(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["proposer"])
+        validatorInfo = await self.ain.getValidatorInfo(lastBlock["proposer"])
+        self.assertIsNotNone(validatorInfo)
+
+    @asyncTest
     async def test00GetProposer(self):
         proposer = await self.ain.getProposer(1)
         block = await self.ain.getBlockByNumber(1)
