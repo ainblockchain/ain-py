@@ -21,6 +21,10 @@ class Network:
         """Returns the id of the network the node is connected to."""
         return await self.provider.send("net_getNetworkId")
 
+    async def getChainId(self):
+        """Fetches the ID of the chain the blokchain node is validating."""
+        return await self.provider.send("net_getChainId")
+
     async def checkProtocolVersion(self):
         """Checks the protocol version."""
         return await self.provider.send("ain_checkProtocolVersion")
