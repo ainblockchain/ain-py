@@ -76,6 +76,11 @@ class TestNetwork(TestCase):
         self.assertEqual(await ain.net.isSyncing(), False)
     
     @asyncTest
+    async def testGetPeerCount(self):
+        ain = Ain(testNode)
+        self.assertGreater(await ain.net.getPeerCount(), 0)
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)
