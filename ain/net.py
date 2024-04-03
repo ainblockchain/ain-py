@@ -13,12 +13,8 @@ class Network:
         self.provider = provider
         self.protoVer = BLOCKCHAIN_PROTOCOL_VERSION
 
-    async def isListening(self):
-        """Returns whether the node is listening for network connections."""
-        return await self.provider.send("net_listening")
-    
     async def getNetworkId(self):
-        """Returns the id of the network the node is connected to."""
+        """Fetches the ID of the network the blokchain node is connected to."""
         return await self.provider.send("net_getNetworkId")
 
     async def getChainId(self):
@@ -28,6 +24,10 @@ class Network:
     async def isListening(self):
         """Checks whether the blockchain node is listening for network connections."""
         return await self.provider.send("net_listening")
+
+    async def isSyncing(self):
+        """Checks whether the blockchain node is syncing with the network or not."""
+        return await self.provider.send("net_syncing")
 
     async def checkProtocolVersion(self):
         """Checks the protocol version."""

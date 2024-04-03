@@ -71,6 +71,11 @@ class TestNetwork(TestCase):
         self.assertEqual(await ain.net.isListening(), True)
     
     @asyncTest
+    async def testIsSyncing(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.isSyncing(), False)
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)
