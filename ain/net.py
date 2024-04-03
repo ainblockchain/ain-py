@@ -25,6 +25,10 @@ class Network:
         """Fetches the ID of the chain the blokchain node is validating."""
         return await self.provider.send("net_getChainId")
 
+    async def isListening(self):
+        """Checks whether the blockchain node is listening for network connections."""
+        return await self.provider.send("net_listening")
+
     async def checkProtocolVersion(self):
         """Checks the protocol version."""
         return await self.provider.send("ain_checkProtocolVersion")
