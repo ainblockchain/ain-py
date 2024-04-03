@@ -38,6 +38,10 @@ class Network:
         """Fetches the consensus status of the network."""
         return await self.provider.send("net_consensusStatus")
 
+    async def getRawConsensusStatus(self) -> Any:
+        """Fetches the consensus status raw data of the network."""
+        return await self.provider.send("net_rawConsensusStatus")
+
     async def checkProtocolVersion(self) -> bool:
         """Checks the protocol version."""
         return await self.provider.send("ain_checkProtocolVersion")

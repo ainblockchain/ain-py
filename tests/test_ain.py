@@ -88,6 +88,14 @@ class TestNetwork(TestCase):
         self.assertEqual(status["state"], "RUNNING")
     
     @asyncTest
+    async def testGetRawConsensusStatus(self):
+        ain = Ain(testNode)
+        status = await ain.net.getRawConsensusStatus()
+        self.assertIsNotNone(status)
+        self.assertIsNotNone(status["consensus"])
+        self.assertEqual(status["consensus"]["state"], "RUNNING")
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)
