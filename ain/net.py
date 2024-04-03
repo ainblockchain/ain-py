@@ -34,6 +34,10 @@ class Network:
         """Fetches the number of the peers the blockchain node is connected to."""
         return await self.provider.send("net_peerCount")
 
+    async def getConsensusStatus(self) -> Any:
+        """Fetches the consensus status of the network."""
+        return await self.provider.send("net_consensusStatus")
+
     async def checkProtocolVersion(self) -> bool:
         """Checks the protocol version."""
         return await self.provider.send("ain_checkProtocolVersion")
