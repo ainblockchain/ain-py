@@ -56,6 +56,11 @@ class TestNetwork(TestCase):
         self.assertEqual(ain.provider.apiEndPoint, noTrailingSlash + "/" + JSON_RPC_ENDPOINT)
 
     @asyncTest
+    async def testGetNetworkId(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.getNetworkId(), 0)
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)
