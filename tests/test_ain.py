@@ -56,6 +56,46 @@ class TestNetwork(TestCase):
         self.assertEqual(ain.provider.apiEndPoint, noTrailingSlash + "/" + JSON_RPC_ENDPOINT)
 
     @asyncTest
+    async def testGetNetworkId(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.getNetworkId(), 0)
+    
+    @asyncTest
+    async def testGetChainId(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.getChainId(), 0)
+    
+    @asyncTest
+    async def testIsListening(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.isListening(), True)
+    
+    @asyncTest
+    async def testIsSyncing(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.isSyncing(), False)
+    
+    @asyncTest
+    async def testGetPeerCount(self):
+        ain = Ain(testNode)
+        self.assertGreater(await ain.net.getPeerCount(), 0)
+    
+    @asyncTest
+    async def testGetConsensusStatus(self):
+        ain = Ain(testNode)
+        status = await ain.net.getConsensusStatus()
+        self.assertIsNotNone(status)
+        self.assertEqual(status["state"], "RUNNING")
+    
+    @asyncTest
+    async def testGetRawConsensusStatus(self):
+        ain = Ain(testNode)
+        status = await ain.net.getRawConsensusStatus()
+        self.assertIsNotNone(status)
+        self.assertIsNotNone(status["consensus"])
+        self.assertEqual(status["consensus"]["state"], "RUNNING")
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)
