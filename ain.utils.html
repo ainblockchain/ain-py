@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ain.utils package &mdash; ain-py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -72,6 +74,7 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.addHexPrefix"><code class="docutils literal notranslate"><span class="pre">addHexPrefix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.areSameAddresses"><code class="docutils literal notranslate"><span class="pre">areSameAddresses()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.bytesToHex"><code class="docutils literal notranslate"><span class="pre">bytesToHex()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.countDecimals"><code class="docutils literal notranslate"><span class="pre">countDecimals()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.decryptWithPrivateKey"><code class="docutils literal notranslate"><span class="pre">decryptWithPrivateKey()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecRecoverPub"><code class="docutils literal notranslate"><span class="pre">ecRecoverPub()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.ecSignHash"><code class="docutils literal notranslate"><span class="pre">ecSignHash()</span></code></a></li>
@@ -95,9 +98,12 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.privateToAddress"><code class="docutils literal notranslate"><span class="pre">privateToAddress()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.privateToPublic"><code class="docutils literal notranslate"><span class="pre">privateToPublic()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.pubToAddress"><code class="docutils literal notranslate"><span class="pre">pubToAddress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.replaceFloat"><code class="docutils literal notranslate"><span class="pre">replaceFloat()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.stripHexPrefix"><code class="docutils literal notranslate"><span class="pre">stripHexPrefix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.toBytes"><code class="docutils literal notranslate"><span class="pre">toBytes()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ain.utils.toChecksumAddress"><code class="docutils literal notranslate"><span class="pre">toChecksumAddress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.toJsLikeFloats"><code class="docutils literal notranslate"><span class="pre">toJsLikeFloats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ain.utils.toJsonString"><code class="docutils literal notranslate"><span class="pre">toJsonString()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -196,6 +202,23 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.countDecimals">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">countDecimals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.utils.countDecimals" title="Link to this definition"></a></dt>
+<dd><p>Counts the given number’s decimals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – The number.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decimal count.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -668,6 +691,23 @@ Defaults to <cite>False</cite>.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.replaceFloat">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">replaceFloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matchObj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ain.utils.replaceFloat" title="Link to this definition"></a></dt>
+<dd><p>Generates a replacement string for the given Match object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>matchObj</strong> (<em>Any</em>) – The Match object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The replacement string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ain.utils.stripHexPrefix">
 <span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">stripHexPrefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.stripHexPrefix" title="Link to this definition"></a></dt>
 <dd><p>Strips <cite>0x</cite> from the given string, if that is hex prefixed.</p>
@@ -719,6 +759,40 @@ If <cite>address</cite> isn’t valid, raises <cite>ValueError</cite>.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The checksummed address.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.toJsLikeFloats">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">toJsLikeFloats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serialized</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.toJsLikeFloats" title="Link to this definition"></a></dt>
+<dd><p>Reformats float numbers to JavaScript-like formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>serialized</strong> (<em>str</em>) – The string to be reformatted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reformatted string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ain.utils.toJsonString">
+<span class="sig-prename descclassname"><span class="pre">ain.utils.</span></span><span class="sig-name descname"><span class="pre">toJsonString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.utils.toJsonString" title="Link to this definition"></a></dt>
+<dd><p>Serializes the given object to a JSON string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj</strong> (<em>Any</em>) – The given object to serialize.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the serialization.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>

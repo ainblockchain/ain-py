@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ain.net module &mdash; ain-py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -118,44 +120,68 @@ READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerH
 <p>Class for the AIN Blockchain network status checker.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.checkProtocolVersion">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkProtocolVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.checkProtocolVersion" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkProtocolVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.net.Network.checkProtocolVersion" title="Link to this definition"></a></dt>
 <dd><p>Checks the protocol version.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getChainId">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getChainId</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.net.Network.getChainId" title="Link to this definition"></a></dt>
+<dd><p>Fetches the ID of the chain the blokchain node is validating.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getConsensusStatus">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getConsensusStatus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.net.Network.getConsensusStatus" title="Link to this definition"></a></dt>
+<dd><p>Fetches the consensus status of the network.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.getEventHandlerNetworkInfo">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getEventHandlerNetworkInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getEventHandlerNetworkInfo" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getEventHandlerNetworkInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.net.Network.getEventHandlerNetworkInfo" title="Link to this definition"></a></dt>
 <dd><p>Returns the event handler network information.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.getNetworkId">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getNetworkId</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getNetworkId" title="Link to this definition"></a></dt>
-<dd><p>Returns the id of the network the node is connected to.</p>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getNetworkId</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.net.Network.getNetworkId" title="Link to this definition"></a></dt>
+<dd><p>Fetches the ID of the network the blokchain node is connected to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getPeerCandidateInfo">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getPeerCandidateInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.net.Network.getPeerCandidateInfo" title="Link to this definition"></a></dt>
+<dd><p>Fetches the peer candidate information of the blockchain node.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.getPeerCount">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getPeerCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getPeerCount" title="Link to this definition"></a></dt>
-<dd><p>Returns the number of peers the provider node is connected to.</p>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getPeerCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ain.net.Network.getPeerCount" title="Link to this definition"></a></dt>
+<dd><p>Fetches the number of the peers the blockchain node is connected to.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.getProtocolVersion">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getProtocolVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.getProtocolVersion" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getProtocolVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ain.net.Network.getProtocolVersion" title="Link to this definition"></a></dt>
 <dd><p>Returns the protocol version of the node.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ain.net.Network.getRawConsensusStatus">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getRawConsensusStatus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.net.Network.getRawConsensusStatus" title="Link to this definition"></a></dt>
+<dd><p>Fetches the consensus status raw data of the network.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.isListening">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isListening</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.isListening" title="Link to this definition"></a></dt>
-<dd><p>Returns whether the node is listening for network connections.</p>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isListening</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.net.Network.isListening" title="Link to this definition"></a></dt>
+<dd><p>Checks whether the blockchain node is listening for network connections.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.net.Network.isSyncing">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isSyncing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ain.net.Network.isSyncing" title="Link to this definition"></a></dt>
-<dd><p>Returns whether the node is syncing with the network or not.</p>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isSyncing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#ain.net.Network.isSyncing" title="Link to this definition"></a></dt>
+<dd><p>Checks whether the blockchain node is syncing with the network or not.</p>
 </dd></dl>
 
 <dl class="py attribute">

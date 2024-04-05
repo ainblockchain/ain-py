@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ain.db.ref module &mdash; ain-py  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -137,11 +139,14 @@ Defaults to no options.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.decrementValue">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decrementValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.decrementValue" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decrementValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.decrementValue" title="Link to this definition"></a></dt>
 <dd><p>Decrements the value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -151,12 +156,15 @@ Defaults to no options.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.deleteValue">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.deleteValue" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deleteValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.deleteValue" title="Link to this definition"></a></dt>
 <dd><p>Deletes the value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.
-Any value given will be overwritten with null.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.
+Any value given will be overwritten with null.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -310,6 +318,20 @@ Defaults to no options.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ain.db.ref.Reference.getProofHash">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getProofHash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.StateInfoInput" title="ain.types.StateInfoInput"><span class="pre">StateInfoInput</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.getProofHash" title="Link to this definition"></a></dt>
+<dd><p>Fetches the proof hash of a global blockchain state path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference internal" href="ain.types.html#ain.types.StateInfoInput" title="ain.types.StateInfoInput"><em>StateInfoInput</em></a>) – The state info input object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The return value of the blockchain API.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.getRule">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.GetOptions" title="ain.types.GetOptions"><span class="pre">GetOptions</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.getRule" title="Link to this definition"></a></dt>
 <dd><p>Gets a rule at the <cite>path</cite>.</p>
@@ -324,6 +346,34 @@ Defaults to no options.</p></li>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The rule at the <cite>path</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.db.ref.Reference.getStateInfo">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getStateInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.StateInfoInput" title="ain.types.StateInfoInput"><span class="pre">StateInfoInput</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.getStateInfo" title="Link to this definition"></a></dt>
+<dd><p>Fetches the state information of a global blockchain state path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference internal" href="ain.types.html#ain.types.StateInfoInput" title="ain.types.StateInfoInput"><em>StateInfoInput</em></a>) – The state info input object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The return value of the blockchain API.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ain.db.ref.Reference.getStateProof">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getStateProof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.StateInfoInput" title="ain.types.StateInfoInput"><span class="pre">StateInfoInput</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.getStateProof" title="Link to this definition"></a></dt>
+<dd><p>Fetches the state proof of a global blockchain state path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference internal" href="ain.types.html#ain.types.StateInfoInput" title="ain.types.StateInfoInput"><em>StateInfoInput</em></a>) – The state info input object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The return value of the blockchain API.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -349,11 +399,14 @@ Defaults to no options.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.incrementValue">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">incrementValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.incrementValue" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">incrementValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.incrementValue" title="Link to this definition"></a></dt>
 <dd><p>Increments the value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -451,11 +504,14 @@ So doesn’t set any values on the AIN Blockchain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.set">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.SetMultiTransactionInput" title="ain.types.SetMultiTransactionInput"><span class="pre">SetMultiTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.set" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.SetMultiTransactionInput" title="ain.types.SetMultiTransactionInput"><span class="pre">SetMultiTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.set" title="Link to this definition"></a></dt>
 <dd><p>Processes the multiple set operations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.SetMultiTransactionInput" title="ain.types.SetMultiTransactionInput"><em>SetMultiTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.SetMultiTransactionInput" title="ain.types.SetMultiTransactionInput"><em>SetMultiTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -465,11 +521,14 @@ So doesn’t set any values on the AIN Blockchain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setFunction">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setFunction" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setFunction" title="Link to this definition"></a></dt>
 <dd><p>Sets the function config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -490,11 +549,14 @@ So doesn’t set any values on the AIN Blockchain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setOwner">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setOwner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setOwner" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setOwner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setOwner" title="Link to this definition"></a></dt>
 <dd><p>Sets the owner rule.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -504,11 +566,14 @@ So doesn’t set any values on the AIN Blockchain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setRule">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setRule" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setRule" title="Link to this definition"></a></dt>
 <dd><p>Sets the write rule.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
@@ -518,11 +583,14 @@ So doesn’t set any values on the AIN Blockchain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ain.db.ref.Reference.setValue">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setValue" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactionInput</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><span class="pre">ValueOnlyTransactionInput</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">isDryrun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ain.db.ref.Reference.setValue" title="Link to this definition"></a></dt>
 <dd><p>Sets the value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transactionInput</strong> (<a class="reference internal" href="ain.types.html#ain.types.ValueOnlyTransactionInput" title="ain.types.ValueOnlyTransactionInput"><em>ValueOnlyTransactionInput</em></a>) – The transaction input object.</p></li>
+<li><p><strong>isDryrun</strong> (<em>bool</em>) – Dryrun option.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result of the transaction.</p>
