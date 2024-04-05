@@ -1,3 +1,4 @@
+from typing import Any
 import aiohttp
 import json
 from urllib.parse import urlparse, urljoin
@@ -26,6 +27,16 @@ class Provider:
             raise ValueError("Invalid endpoint received.")
         self.endPoint = parsed.geturl()
         self.apiEndPoint = urljoin(self.endPoint, JSON_RPC_ENDPOINT)
+
+    async def getAddress(self) -> str:
+        """Fetches the blockchain node's address.
+
+        Args:
+            
+        Returns:
+            The return value of the blockchain API.
+        """
+        return await self.send("ain_getAddress", {})
 
     async def send(self, rpcMethod: str, params: dict = {}):
         """Creates the JSON-RPC payload and sends it to the node.

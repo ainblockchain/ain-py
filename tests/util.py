@@ -39,3 +39,7 @@ async def waitUntilTxFinalized(testNode: str, txHash: str) -> bool:
 def eraseProtoVer(ret: dict):
     ret["protoVer"] = "erased"
     return ret
+
+def eraseStateVersion(ret: dict):
+    ret["#version"] = "erased"
+    return ret

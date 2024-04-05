@@ -64,87 +64,262 @@ class Ain:
 
     # TODO(kriii): Return objects typing.
 
-    async def getBlock(
-        self,
-        blockHashOrBlockNumber: Union[str, int],
-        returnTransactionObjects: bool = False,
-    ) -> Any:
-        """Gets a block with the given hash or block number.
+    async def getLastBlock(self) -> Any:
+        """Fetches the last block.
 
         Args:
-            blockHashOrBlockNumber (Union[str, int]): The block hash or the block number.
+
+        Returns:
+            The last block.
+        """
+        return await self.provider.send(
+            "ain_getLastBlock", {}
+        )
+
+    async def getLastBlockNumber(self) -> int:
+        """Fetches the last block number.
+
+        Args:
+
+        Returns:
+            The last block number.
+        """
+        return await self.provider.send(
+            "ain_getLastBlockNumber", {}
+        )
+
+    async def getBlockByNumber(
+        self,
+        blockNumber: int,
+        returnTransactionObjects: bool = False,
+    ) -> Any:
+        """Gets a block with the given block number.
+
+        Args:
+            blockNumber (int): The block number.
             returnTransactionObjects (bool): If `True`, returns the full transaction objects.
                 If `False`, returns only the transaction hashes. Default to `False`.
         
         Returns:
-            The block with the given hash or block number.
+            The block with the given block number.
         """
-        if type(blockHashOrBlockNumber) is str:
-            return await self.provider.send(
-                "ain_getBlockByHash",
-                {
-                    "getFullTransactions": returnTransactionObjects,
-                    "hash": blockHashOrBlockNumber,
-                },
-            )
-        elif type(blockHashOrBlockNumber) is int:
-            return await self.provider.send(
-                "ain_getBlockByNumber",
-                {
-                    "getFullTransactions": returnTransactionObjects,
-                    "number": blockHashOrBlockNumber,
-                },
-            )
-        else:
-            raise TypeError("blockHashOrBlockNumber has invalid type")
+        return await self.provider.send(
+            "ain_getBlockByNumber",
+            {
+                "getFullTransactions": returnTransactionObjects,
+                "number": blockNumber,
+            },
+        )
 
-    async def getProposer(
+    async def getBlockByHash(
         self,
-        blockHashOrBlockNumber: Union[str, int],
+        blockHash: str,
+        returnTransactionObjects: bool = False,
     ) -> Any:
-        """Gets an address of the proposer of the given block.
+        """Gets a block with the given block hash.
 
         Args:
-            blockHashOrBlockNumber (Union[str, int]): The block hash or the block number.
+            blockHash (str): The block hash.
+            returnTransactionObjects (bool): If `True`, returns the full transaction objects.
+                If `False`, returns only the transaction hashes. Default to `False`.
+        
+        Returns:
+            The block with the given block hash.
+        """
+        return await self.provider.send(
+            "ain_getBlockByHash",
+            {
+                "getFullTransactions": returnTransactionObjects,
+                "hash": blockHash,
+            },
+        )
+
+    async def getBlockList(
+        self,
+        begin: int,
+        end: int,
+    ) -> List[Any]:
+        """"Fetches blocks with a block number range.
+
+        Args:
+            begin (int): The begining block number (inclusive).
+            end (int): The ending block number (exclusive).
+        
+        Returns:
+            The block list.
+        """
+        return await self.provider.send(
+            "ain_getBlockList",
+            {
+                "from": begin,
+                "to": end,
+            },
+        )
+
+    async def getBlockHeadersList(
+        self,
+        begin: int,
+        end: int,
+    ) -> List[Any]:
+        """Fetches block headers with a block number range.
+
+        Args:
+            begin (int): The begining block number (inclusive).
+            end (int): The ending block number (exclusive).
+        
+        Returns:
+            The block headers list.
+        """
+        return await self.provider.send(
+            "ain_getBlockHeadersList",
+            {
+                "from": begin,
+                "to": end,
+            },
+        )
+
+    async def getBlockTransactionCountByNumber(
+        self,
+        blockNumber: int,
+    ) -> int:
+        """Fetches block transaction count with a block number.
+
+        Args:
+            blockNumber (int): The block number.
+        
+        Returns:
+            The block transaction count.
+        """
+        return await self.provider.send(
+            "ain_getBlockTransactionCountByNumber",
+            {
+                "number": blockNumber,
+            },
+        )
+
+    async def getBlockTransactionCountByHash(
+        self,
+        blockHash: str,
+    ) -> int:
+        """Fetches block transaction count with a block hash.
+
+        Args:
+            blockHash (str): The block hash.
+        
+        Returns:
+            The block transaction count.
+        """
+        return await self.provider.send(
+            "ain_getBlockTransactionCountByHash",
+            {
+                "hash": blockHash,
+            },
+        )
+
+    async def getValidatorInfo(
+        self,
+        address: str,
+    ) -> Any:
+        """Fetches the information of the given validator address.
+
+        Args:
+            address (str): The block number.
+        
+        Returns:
+            The validator information.
+        """
+        return await self.provider.send(
+            "ain_getValidatorInfo",
+            {
+                "address": address,
+            },
+        )
+
+    async def getValidatorsByNumber(
+        self,
+        blockNumber: int,
+    ) -> Any:
+        """Fetches the validator list of a block with a block number.
+
+        Args:
+            blockNumber (int): The block number.
+            
+        Returns:
+            The list of validators of the given block.
+        """
+        return await self.provider.send(
+            "ain_getValidatorsByNumber", {"number": blockNumber}
+        )
+
+    async def getValidatorsByHash(
+        self,
+        blockHash: str,
+    ) -> Any:
+        """Fetches the validator list of a block with a block hash.
+
+        Args:
+            blockHash (str): The block hash.
+            
+        Returns:
+            The list of validators of the given block.
+        """
+        return await self.provider.send(
+            "ain_getValidatorsByHash", {"hash": blockHash}
+        )
+
+    async def getProposerByNumber(
+        self,
+        blockNumber: int,
+    ) -> str:
+        """Fetches the block proproser's address of a block with a block number.
+
+        Args:
+            blockNumber (int): The block number.
 
         Returns:
             The address of the proposer of the given block.
         """
-        if type(blockHashOrBlockNumber) is str:
-            return await self.provider.send(
-                "ain_getProposerByHash", {"hash": blockHashOrBlockNumber}
-            )
-        elif type(blockHashOrBlockNumber) is int:
-            return await self.provider.send(
-                "ain_getProposerByNumber", {"number": blockHashOrBlockNumber}
-            )
-        else:
-            raise TypeError("blockHashOrBlockNumber has invalid type")
+        return await self.provider.send(
+            "ain_getProposerByNumber", {"number": blockNumber}
+        )
 
-    async def getValidators(
+    async def getProposerByHash(
         self,
-        blockHashOrBlockNumber: Union[str, int],
-    ) -> Any:
-        """Gets the list of validators for a given block
+        blockHash: str,
+    ) -> str:
+        """Fetches the block proproser's address of a block with a block hash.
 
         Args:
-            blockHashOrBlockNumber (Union[str, int]): The block hash or the block number.
-            
-        Returns:
-            The list of validators for a given block.
-        """
-        if type(blockHashOrBlockNumber) is str:
-            return await self.provider.send(
-                "ain_getValidatorsByHash", {"hash": blockHashOrBlockNumber}
-            )
-        elif type(blockHashOrBlockNumber) is int:
-            return await self.provider.send(
-                "ain_getValidatorsByNumber", {"number": blockHashOrBlockNumber}
-            )
-        else:
-            raise TypeError("blockHashOrBlockNumber has invalid type")
+            blockHash (str): The block hash.
 
-    async def getTransaction(self, transactionHash: str) -> Any:
+        Returns:
+            The address of the proposer of the given block.
+        """
+        return await self.provider.send(
+            "ain_getProposerByHash", {"hash": blockHash}
+        )
+
+    async def getPendingTransactions(self) -> Any:
+        """Fetches pending transactions.
+
+        Args:
+
+        Returns:
+            The pending transactions.
+        """
+        return await self.provider.send("ain_getPendingTransactions", {})
+
+    async def getTransactionPoolSizeUtilization(self) -> Any:
+        """Fetches transaction pool size utilization.
+
+        Args:
+
+        Returns:
+            The transaction pool size utilization.
+        """
+        return await self.provider.send("ain_getTransactionPoolSizeUtilization", {})
+
+    async def getTransactionByHash(self, transactionHash: str) -> Any:
         """Gets a transaction with the given transaction hash.
 
         Args:
@@ -154,6 +329,40 @@ class Ain:
             The transaction with the given transaction hash.
         """
         return await self.provider.send("ain_getTransactionByHash", {"hash": transactionHash})
+
+    async def getTransactionByBlockHashAndIndex(self, blockHash: str, index: int) -> Any:
+        """Fetches a transaction's information with a block hash and an index.
+
+        Args:
+            blockHash (str): The block hash.
+            index (int): The transaction index in the block
+
+        Returns:
+            The transaction with the given parameter values.
+        """
+        return await self.provider.send(
+            "ain_getTransactionByBlockHashAndIndex",
+            {
+                "block_hash": blockHash,
+                "index": index
+            })
+
+    async def getTransactionByBlockNumberAndIndex(self, blockNumber: int, index: int) -> Any:
+        """Fetches a transaction's information with a block number and an index.
+
+        Args:
+            blockHash (int): The block number.
+            index (int): The transaction index in the block
+
+        Returns:
+            The transaction with the given parameter values.
+        """
+        return await self.provider.send(
+            "ain_getTransactionByBlockNumberAndIndex",
+            {
+                "block_number": blockNumber,
+                "index": index
+            })
 
     async def getStateUsage(self, appName: str) -> Any:
         """Gets a state usage with the given app name.

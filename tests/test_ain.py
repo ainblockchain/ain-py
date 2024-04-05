@@ -26,6 +26,8 @@ from .util import (
     getRequest,
     postRequest,
     waitUntilTxFinalized,
+    eraseProtoVer,
+    eraseStateVersion,
 )
 
 TX_PATTERN = re.compile("0x[0-9a-fA-F]{64}")
@@ -54,6 +56,55 @@ class TestNetwork(TestCase):
         self.assertEqual(ain.provider.apiEndPoint, noTrailingSlash + "/" + JSON_RPC_ENDPOINT)
 
     @asyncTest
+    async def testGetNetworkId(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.getNetworkId(), 0)
+    
+    @asyncTest
+    async def testGetChainId(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.getChainId(), 0)
+    
+    @asyncTest
+    async def testIsListening(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.isListening(), True)
+    
+    @asyncTest
+    async def testIsSyncing(self):
+        ain = Ain(testNode)
+        self.assertEqual(await ain.net.isSyncing(), False)
+    
+    @asyncTest
+    async def testGetPeerCount(self):
+        ain = Ain(testNode)
+        self.assertGreater(await ain.net.getPeerCount(), 0)
+    
+    @asyncTest
+    async def testGetConsensusStatus(self):
+        ain = Ain(testNode)
+        status = await ain.net.getConsensusStatus()
+        self.assertIsNotNone(status)
+        self.assertEqual(status["state"], "RUNNING")
+    
+    @asyncTest
+    async def testGetRawConsensusStatus(self):
+        ain = Ain(testNode)
+        status = await ain.net.getRawConsensusStatus()
+        self.assertIsNotNone(status)
+        self.assertIsNotNone(status["consensus"])
+        self.assertEqual(status["consensus"]["state"], "RUNNING")
+    
+    @asyncTest
+    async def testGetPeerCandidateInfo(self):
+        ain = Ain(testNode)
+        info = await ain.net.getPeerCandidateInfo()
+        self.assertIsNotNone(info)
+        self.assertIsNotNone(info["address"])
+        self.assertEqual(info["isAvailableForConnection"], True)
+        self.assertIsNotNone(info["peerCandidateJsonRpcUrlList"])
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)
@@ -64,6 +115,13 @@ class TestNetwork(TestCase):
         res = await ain.net.checkProtocolVersion()
         self.assertEqual(res["code"], 0)
         self.assertEqual(res["result"], True)
+
+class TestProvider(TestCase):
+    @asyncTest
+    async def testGetAddress(self):
+        ain = Ain(testNode)
+        res = await ain.provider.getAddress()
+        self.assertIsNotNone(res)
 
 class TestWallet(TestCase):
     def testCreateAccount(self):
@@ -149,6 +207,18 @@ class TestWallet(TestCase):
         ain = Ain(testNode)
         ain.wallet.addAndSetDefaultAccount(accountSk)
         self.assertGreaterEqual(await ain.wallet.getBalance(), 0)
+
+    @asyncTest
+    async def testGetNonce(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        self.assertEqual(await ain.wallet.getNonce(), 0)
+
+    @asyncTest
+    async def testGetTimestamp(self):
+        ain = Ain(testNode)
+        ain.wallet.addAndSetDefaultAccount(accountSk)
+        self.assertEqual(await ain.wallet.getTimestamp(), 0)
 
     @asyncTest
     async def testTransferIsDryrunTrue(self):
@@ -283,24 +353,124 @@ class TestCore(TestCase):
         await waitUntilTxFinalized(testNode, createApps["result"]["tx_hash"])
 
     @asyncTest
-    async def test00GetBlock(self):
-        block = await self.ain.getBlock(3)
+    async def test00GetLastBlock(self):
+        block = await self.ain.getLastBlock()
+        self.assertIsNotNone(block)
         hash = block.get("hash", "")
-        self.assertDictEqual(await self.ain.getBlock(hash), block)
+        self.assertIsNotNone(hash)
+        number = block.get("number", 0)
+        self.assertGreater(number, 0)
 
     @asyncTest
-    async def test00GetProposer(self):
-        proposer = await self.ain.getProposer(1)
-        block = await self.ain.getBlock(1)
-        hash = block.get("hash", "")
-        self.assertEqual(await self.ain.getProposer(hash), proposer)
+    async def test00GetLastBlockNumber(self):
+        number = await self.ain.getLastBlockNumber()
+        self.assertGreater(number, 0)
 
     @asyncTest
-    async def test00GetValidators(self):
-        validators = await self.ain.getValidators(4)
-        block = await self.ain.getBlock(4)
-        hash = block.get("hash", "")
-        self.assertDictEqual(await self.ain.getValidators(hash), validators)
+    async def test00GetBlockByNumber(self):
+        lastBlock = await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        block = await self.ain.getBlockByNumber(lastBlock["number"])
+        self.assertIsNotNone(block)
+        self.assertEqual(block["number"], lastBlock["number"])
+        self.assertEqual(block["hash"], lastBlock["hash"])
+
+    @asyncTest
+    async def test00GetBlockByHash(self):
+        lastBlock = await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        block = await self.ain.getBlockByHash(lastBlock["hash"])
+        self.assertIsNotNone(block)
+        self.assertEqual(block["number"], lastBlock["number"])
+        self.assertEqual(block["hash"], lastBlock["hash"])
+
+    @asyncTest
+    async def test00GetBlockList(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        blockList = await self.ain.getBlockList(lastBlockNumber - 1, lastBlockNumber + 1)
+        self.assertIsNotNone(blockList)
+        self.assertEqual(len(blockList), 2)
+        self.assertEqual(blockList[0]["number"], lastBlockNumber - 1)
+        self.assertEqual(blockList[1]["number"], lastBlockNumber)
+
+    @asyncTest
+    async def test00GetBlockHeadersList(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        blockList = await self.ain.getBlockHeadersList(lastBlockNumber - 1, lastBlockNumber + 1)
+        self.assertIsNotNone(blockList)
+        self.assertEqual(len(blockList), 2)
+        self.assertEqual(blockList[0]["number"], lastBlockNumber - 1)
+        self.assertEqual(blockList[1]["number"], lastBlockNumber)
+
+    @asyncTest
+    async def test00GetBlockTransactionCountByNumber(self):
+        lastBlockNumber = await self.ain.getLastBlockNumber()
+        self.assertIsNotNone(lastBlockNumber)
+        self.assertGreaterEqual(lastBlockNumber, 0)
+        txCount = await self.ain.getBlockTransactionCountByNumber(lastBlockNumber)
+        self.assertIsNotNone(txCount)
+
+    @asyncTest
+    async def test00GetBlockTransactionCountByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        txCount = await self.ain.getBlockTransactionCountByHash(lastBlock["hash"])
+        self.assertIsNotNone(txCount)
+
+    @asyncTest
+    async def test00GetValidatorInfo(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["proposer"])
+        validatorInfo = await self.ain.getValidatorInfo(lastBlock["proposer"])
+        self.assertIsNotNone(validatorInfo)
+
+    @asyncTest
+    async def test00GetValidatorsByNumber(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        validators = await self.ain.getValidatorsByNumber(lastBlock["number"])
+        self.assertDictEqual(validators, lastBlock["validators"])
+    
+    @asyncTest
+    async def test00GetValidatorsByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        validators = await self.ain.getValidatorsByHash(lastBlock["hash"])
+        self.assertDictEqual(validators, lastBlock["validators"])
+    
+    @asyncTest
+    async def test00GetProposerByNumber(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["number"])
+        proposer = await self.ain.getProposerByNumber(lastBlock["number"])
+        self.assertEqual(proposer, lastBlock["proposer"])
+    
+    @asyncTest
+    async def test00GetProposerByHash(self):
+        lastBlock= await self.ain.getLastBlock()
+        self.assertIsNotNone(lastBlock)
+        self.assertIsNotNone(lastBlock["hash"])
+        proposer = await self.ain.getProposerByHash(lastBlock["hash"])
+        self.assertEqual(proposer, lastBlock["proposer"])
+
+    @asyncTest
+    async def test00GetStateUsage(self):
+        # with an app that does not exist yet
+        erased = eraseProtoVer(await self.ain.getStateUsage("test_new"))
+        self.assertIsNotNone(erased["available"])
+        self.assertIsNotNone(erased["usage"])
+        self.assertIsNotNone(erased["staking"])
 
     @asyncTest
     async def test00ValidateAppNameTrue(self):
@@ -344,7 +514,7 @@ class TestCore(TestCase):
         targetTxHash = res["tx_hash"]
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
 
-        tx = await self.ain.getTransaction(targetTxHash)
+        tx = await self.ain.getTransactionByHash(targetTxHash)
         self.assertIsNone(tx)  # should be None
 
     @asyncTest
@@ -370,7 +540,7 @@ class TestCore(TestCase):
         targetTxHash = res["tx_hash"]
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
 
-        tx = await self.ain.getTransaction(targetTxHash)
+        tx = await self.ain.getTransactionByHash(targetTxHash)
         self.assertDictEqual(tx["transaction"]["tx_body"]["operation"], op.__dict__)
 
     @asyncTest
@@ -404,7 +574,7 @@ class TestCore(TestCase):
         self.assertTrue(TX_PATTERN.fullmatch(targetTxHash) is not None)
         self.assertEqual(res["result"]["code"], 0)
 
-        tx = await self.ain.getTransaction(targetTxHash)
+        tx = await self.ain.getTransactionByHash(targetTxHash)
         self.assertIsNone(tx)  # should be None
 
     @asyncTest
@@ -579,6 +749,29 @@ class TestCore(TestCase):
             self.assertEqual(e.message, "Invalid batch transaction format.")
             raised = True
         self.assertTrue(raised)
+
+    @asyncTest
+    async def test01GetPendingTransactions(self):
+        res = await self.ain.getPendingTransactions()
+        self.assertIsNotNone(res)
+
+    @asyncTest
+    async def test01GetTransactionPoolSizeUtilization(self):
+        res = await self.ain.getTransactionPoolSizeUtilization()
+        self.assertIsNotNone(res)
+
+    @asyncTest
+    async def test01GetTransactionByBlockHashAndIndex(self):
+        genesisBlockNumber = 0
+        genesisBlock = await self.ain.getBlockByNumber(genesisBlockNumber)
+        res = await self.ain.getTransactionByBlockHashAndIndex(genesisBlock["hash"], 0)
+        self.assertIsNotNone(res)
+
+    @asyncTest
+    async def test01GetTransactionByBlockNumberAndIndex(self):
+        genesisBlockNumber = 0
+        res = await self.ain.getTransactionByBlockNumberAndIndex(genesisBlockNumber, 0)
+        self.assertIsNotNone(res)
 
 class TestDatabase(SnapshotTestCase):
     ain: Ain
@@ -910,3 +1103,21 @@ class TestDatabase(SnapshotTestCase):
     async def test03MatchOwner(self):
         self.matchSnapshot(await self.ain.db.ref(self.allowedPath).matchOwner())
     
+    @asyncTest
+    async def test03GetStateProof(self):
+        self.assertIsNotNone(await self.ain.db.ref('/values/blockchain_params').getStateProof())
+    
+    @asyncTest
+    async def test03GetStateProofWithInput(self):
+        self.assertIsNotNone(await self.ain.db.ref('/values/blockchain_params').getStateProof(StateInfoInput(
+            ref="resource"
+        )))
+
+    @asyncTest
+    async def test03GetProofHash(self):
+        self.matchSnapshot(await self.ain.db.ref('/values/blockchain_params').getProofHash())
+
+    @asyncTest
+    async def test03GetStateInfo(self):
+        self.matchSnapshot(eraseStateVersion(await self.ain.db.ref('/rules/transfer/$from/$to/$key/value').getStateInfo()))
+
