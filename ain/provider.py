@@ -28,7 +28,7 @@ class Provider:
         self.endPoint = parsed.geturl()
         self.apiEndPoint = urljoin(self.endPoint, JSON_RPC_ENDPOINT)
 
-    async def getAddress(self) -> Any:
+    async def getAddress(self) -> str:
         """Fetches the blockchain node's address.
 
         Args:

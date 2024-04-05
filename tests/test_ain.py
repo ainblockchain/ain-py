@@ -96,6 +96,15 @@ class TestNetwork(TestCase):
         self.assertEqual(status["consensus"]["state"], "RUNNING")
     
     @asyncTest
+    async def testGetPeerCandidateInfo(self):
+        ain = Ain(testNode)
+        info = await ain.net.getPeerCandidateInfo()
+        self.assertIsNotNone(info)
+        self.assertIsNotNone(info["address"])
+        self.assertEqual(info["isAvailableForConnection"], True)
+        self.assertIsNotNone(info["peerCandidateJsonRpcUrlList"])
+    
+    @asyncTest
     async def testGetProtocolVersion(self):
         ain = Ain(testNode)
         self.assertNotEqual(await ain.net.getProtocolVersion(), None)

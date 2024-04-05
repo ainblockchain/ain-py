@@ -42,6 +42,10 @@ class Network:
         """Fetches the consensus status raw data of the network."""
         return await self.provider.send("net_rawConsensusStatus")
 
+    async def getPeerCandidateInfo(self) -> Any:
+        """Fetches the peer candidate information of the blockchain node."""
+        return await self.provider.send("p2p_getPeerCandidateInfo")
+
     async def checkProtocolVersion(self) -> bool:
         """Checks the protocol version."""
         return await self.provider.send("ain_checkProtocolVersion")
