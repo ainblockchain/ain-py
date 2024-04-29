@@ -5,7 +5,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 requirements = [
-    "typing-extensions==4.7.1",
+    "typing-extensions",
     "pycryptodome==3.18.0",
     "coincurve==18.0.0",
     "aiohttp[speedups]==3.8.5",
