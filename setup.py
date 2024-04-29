@@ -5,7 +5,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 requirements = [
-    "typing-extensions==4.7.1",
+    "typing-extensions",
     "pycryptodome==3.18.0",
     "coincurve==18.0.0",
     "aiohttp[speedups]==3.8.5",
@@ -44,6 +44,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/ainblockchain/ain-py",
-    version="1.2.0",
+    version="1.2.1",
     zip_safe=False,
 )
