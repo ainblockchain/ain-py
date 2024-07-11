@@ -34,14 +34,15 @@ class Account:
         self.address = privateToAddress(privateKeyBytes)
 
     @classmethod
-    def fromMnemonic(cls, mnemonic: str, index: int = 0):
+    def fromMnemonic(cls, mnemonic: str, index: int = 0, chain: str = "AIN"):
         """Inits an `Account` with the given mnemonic.
 
         Args:
             mnemonic (str): The mnemonic of account.
             index (int): The index of account. Defaults to 0.
+            chain (str): The chain to use the derivation path of. Defaults to "AIN".
         """
-        return cls(mnemonicToPrivatekey(mnemonic, index))
+        return cls(mnemonicToPrivatekey(mnemonic, index, chain))
 
     @classmethod
     def create(cls, entropy: str = None):
