@@ -46,8 +46,11 @@ def encodeVarInt(number: int) -> bytes:
 SIGNED_MESSAGE_PREFIX = "AINetwork Signed Message:\n"
 SIGNED_MESSAGE_PREFIX_BYTES = bytes(SIGNED_MESSAGE_PREFIX, "utf-8")
 SIGNED_MESSAGE_PREFIX_LENGTH = encodeVarInt(len(SIGNED_MESSAGE_PREFIX))
-# TODO(platfowner): Migrate to Ethereum HD derivation path 'm/44'/60'/0'/0/'.
-AIN_HD_DERIVATION_PATH = "m/44'/412'/0'/0/"  # The hardware wallet derivation path of AIN
+# NOTE(platfowner): In AI Network, we decided to use both Ethereum Network's
+#                   derivation path ("m/44'/60'/0'/0/") and
+#                   its own ("m/44'/412'/0'/0/").
+AIN_HD_DERIVATION_PATH = "m/44'/412'/0'/0/"
+ETH_HD_DERIVATION_PATH = "m/44'/60'/0'/0/"
 
 def getTimestamp() -> int:
     """Gets the current unix timestamp.
@@ -530,12 +533,13 @@ def generateMnemonic() -> str:
     """
     return Mnemonic("english").generate()
 
-def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
+def mnemonicToPrivatekey(mnemonic: str, index: int = 0, chain: str = "AIN") -> bytes:
     """Returns an private key with the given mnemonic.
 
     Args:
         mnemonic (str): The mnemonic of account.
         index (int): The index of account. Defaults to 0.
+        chain (str): The chain to use the derivation path of. Defaults to "AIN".
 
     Returns:
         bytes: The private key with the given mnemonic.
@@ -548,7 +552,8 @@ def mnemonicToPrivatekey(mnemonic: str, index: int = 0) -> bytes:
     
     seed = Mnemonic.to_seed(mnemonic)
     bip32 = BIP32.from_seed(seed)
-    path = AIN_HD_DERIVATION_PATH + f"{index}"
+    prefix = AIN_HD_DERIVATION_PATH if chain == "AIN" else ETH_HD_DERIVATION_PATH
+    path = prefix + f"{index}"
     return bip32.get_privkey_from_path(path)
 
 # NOTE(kriii): Referenced https://github.com/bitchan/eccrypto/blob/master/index.js#L195-L258
