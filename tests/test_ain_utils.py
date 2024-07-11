@@ -7,7 +7,8 @@ from .data import (
     pk,
     sk,
     mnemonic,
-    mnemonicPrivateKey,
+    mnemonicPrivateKeyAin,
+    mnemonicPrivateKeyEth,
     checksumAddresses,
     message,
     correctSignature,
@@ -477,9 +478,13 @@ class TestEcVerifySig(TestCase):
     def testEcVerifySigDifferentMessage(self):
         self.assertFalse(ecVerifySig("Hello World", correctSignature, address))
 
-class TestMnemonicToPrivatekey(TestCase):
-    def testMnemonicToPrivatekey(self):
-        self.assertEqual(mnemonicToPrivatekey(mnemonic), mnemonicPrivateKey)
+class TestMnemonicToPrivatekeyAin(TestCase):
+    def testMnemonicToPrivatekeyAin(self):
+        self.assertEqual(mnemonicToPrivatekey(mnemonic), mnemonicPrivateKeyAin)
+
+class TestMnemonicToPrivatekeyEth(TestCase):
+    def testMnemonicToPrivatekeyEth(self):
+        self.assertEqual(mnemonicToPrivatekey(mnemonic, 0, "ETH"), mnemonicPrivateKeyEth)
 
 class TestEncryption(TestCase):
     def testEncryptToDecrypt(self):
