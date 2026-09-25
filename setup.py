@@ -12,6 +12,7 @@ requirements = [
     "jsonrpcclient==4.0.3",
     "mnemonic==0.20",
     "bip32==3.4",
+    "simplejson==3.19.2",
 ]
 
 test_requirements = []
