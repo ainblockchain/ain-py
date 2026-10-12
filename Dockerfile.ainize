@@ -1,0 +1,19 @@
+# ainize build for the ain-py client library (no server of its own).
+# Stage "check": install the pinned requirements, run the offline unit tests (account + utils; the other suites
+# need a local AIN blockchain node at localhost:8081 and are not run), build the Sphinx API docs.
+# (sphinx<7.2: readthedocs-sphinx-ext breaks on newer Sphinx.)
+# Final stage: serve the generated HTML docs on $PORT.
+FROM python:3.11-slim-bookworm AS check
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+WORKDIR /src
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt "sphinx<7.2"
+COPY . .
+RUN python -m unittest -v tests.test_ain_account tests.test_ain_utils
+RUN sphinx-build -b html docs /www
+
+FROM busybox:1.36.1
+COPY --from=check /www /www
+ENV PORT=8080
+EXPOSE 8080
+CMD ["sh", "-c", "exec httpd -f -v -p 0.0.0.0:${PORT} -h /www"]
